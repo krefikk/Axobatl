@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,6 +10,15 @@ public class PlayerController : MonoBehaviour
     
     [Header("Prefabs")]
     public GameObject bulletPrefab;
+
+    [Header("Bullet Recharge")]
+    public float rechargeTime = 1;
+    float currentRechargeTime;
+    public int bulletsMax = 3;
+    int currentBullets;
+    bool isOnRecharge;
+    public Text bulletText;
+
 
     [Header("Combat")]
     float timeBetweenShoots = 0.15f;
@@ -55,6 +65,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        currentBullets = bulletsMax;
         // Initialize components
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -65,6 +76,26 @@ public class PlayerController : MonoBehaviour
         GetInputs();
         FaceMouse();
         Shoot();
+
+        bulletText.text = "Bullets Left: " + currentBullets;
+
+        if (isOnRecharge)
+        {
+            currentRechargeTime += Time.deltaTime;
+            if (currentRechargeTime >= rechargeTime)
+            {
+                currentRechargeTime = 0;
+                currentBullets += 1;
+            }
+        }
+        if (currentBullets != bulletsMax)
+        {
+            isOnRecharge = true;
+        }
+        else
+        {
+            isOnRecharge = false;
+        }
     }
 
     private void FixedUpdate()
@@ -101,9 +132,10 @@ public class PlayerController : MonoBehaviour
     {
         timeSinceLastShoot += Time.deltaTime;
         // Checks if player pressed attack button, and enough time passed since last shoot
-        if (attacking && timeSinceLastShoot >= timeBetweenShoots) 
+        if (attacking && timeSinceLastShoot >= timeBetweenShoots && currentBullets > 0) 
         {
             ShootBullet();
+            currentBullets -= 1;
             timeSinceLastShoot = 0;
         }
     }
@@ -204,3 +236,4 @@ public class PlayerController : MonoBehaviour
         return dead;
     }
 }
+
