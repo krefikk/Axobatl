@@ -27,6 +27,15 @@ public class PlayerController : MonoBehaviour
     bool attacking = false;
     bool dead = false;
     bool moving = false;
+    bool dashing = false;
+
+    [Header("Skills")]
+    bool canDash = true;
+
+    [Header("Dash")]
+    float dashSpeed = 15f;
+    float dashTime = 0.2f;
+    float dashCooldown = 1f;
 
     // Components
     Rigidbody2D rb;
@@ -60,7 +69,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (dashing) { return; } // Movement functions won't get called if player is dashing
         Move();
+        StartDash();
     }
 
     void GetInputs() 
@@ -142,6 +153,38 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
+    // --------------------------------Player Skills------------------------------------------
+    void StartDash() 
+    {
+        if (Input.GetButtonDown("Dash") && canDash) 
+        {
+            Debug.Log("Dashed");
+            StartCoroutine(Dash());
+        }
+    }
+    
+    IEnumerator Dash()
+    {
+        canDash = false;
+        dashing = true;
+        // Trigger animation
+        Vector2 direction = new Vector2(xAxis, yAxis);
+        if (direction.magnitude == 0)
+        {
+            rb.velocity = GetDirection() * dashSpeed;
+            Debug.Log("No movement");
+        }
+        else
+        {
+            direction.Normalize();
+            rb.velocity = direction * dashSpeed;
+        }
+        yield return new WaitForSeconds(dashTime);
+        dashing = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+    }
+
     // --------------------------------Getters and Setters------------------------------------------
     public Vector3 GetDirection() // Returns the player's current look direction as a vector
     {
@@ -154,5 +197,10 @@ public class PlayerController : MonoBehaviour
     public float GetRotationAngle() // Returns the player's current rotation value as "degrees"
     {
         return transform.rotation.eulerAngles.z;
+    }
+
+    public bool isDead() 
+    {
+        return dead;
     }
 }
