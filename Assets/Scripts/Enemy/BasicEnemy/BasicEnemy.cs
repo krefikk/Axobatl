@@ -13,12 +13,12 @@ public class BasicEnemy : Enemy
         // Initialize components and variables
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        maxHealth = 20;
-        health = 20;
+        maxHealth = 5;
+        health = 10;
         damage = 4;
         moveSpeed = 2f;
         canShoot = false;
-        damageRadius = 2f;
+        damageRadius = 1f;
         timeBetweenMeleeAttacks = 1.5f;
     }
 
