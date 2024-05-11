@@ -9,7 +9,7 @@ public class BulletHandler : MonoBehaviour
     float damage = 2f;
     Vector3 facingDirection;
 
-    private void Start()
+    private void Awake()
     {
         float radians = PlayerController.player.GetRotationAngle() * Mathf.Deg2Rad;
         facingDirection = new Vector3(Mathf.Cos(radians), Mathf.Sin(radians), 0);
@@ -74,6 +74,30 @@ public class BulletHandler : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void setDamage(float value) 
+    { // Modify the damage of the bullet
+        damage = value;
+    }
+
+    public float getDamage() { return damage; }
+
+    public void setDirection(Vector3 direction) 
+    {
+        facingDirection.x = direction.x;
+        facingDirection.y = direction.y;
+    }
+
+    public void setDirection(Vector2 direction)
+    {
+        facingDirection.x = direction.x;
+        facingDirection.y = direction.y;
+    }
+
+    public Vector2 getDirection()
+    {
+        return facingDirection;
     }
 
 }

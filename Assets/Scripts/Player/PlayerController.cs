@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,18 +12,14 @@ public class PlayerController : MonoBehaviour
     [Header("Prefabs")]
     public GameObject bulletPrefab;
 
-    [Header("Bullet Recharge")]
-    public float rechargeTime = 1;
-    float currentRechargeTime;
-    public int bulletsMax = 3;
-    int currentBullets;
-    bool isOnRecharge;
-    public Text bulletText;
-
-
     [Header("Combat")]
-    float timeBetweenShoots = 0.15f;
+    float timeBetweenAutomaticGunShots = 0.2f;
+    float timeBetweenRevolverShots = 0.5f;
+    float timeBetweenShotgunShots = 0.6f;
     float timeSinceLastShoot;
+
+    [Header("Gun")]
+    public int gun; // 0 represents automatic gun, 1 represents revolver, 2 represents shotgun
 
     [Header("Health")]
     float maxHealth = 20;
@@ -65,7 +62,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        currentBullets = bulletsMax;
         // Initialize components
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -76,26 +72,6 @@ public class PlayerController : MonoBehaviour
         GetInputs();
         FaceMouse();
         Shoot();
-
-        bulletText.text = "Bullets Left: " + currentBullets;
-
-        if (isOnRecharge)
-        {
-            currentRechargeTime += Time.deltaTime;
-            if (currentRechargeTime >= rechargeTime)
-            {
-                currentRechargeTime = 0;
-                currentBullets += 1;
-            }
-        }
-        if (currentBullets != bulletsMax)
-        {
-            isOnRecharge = true;
-        }
-        else
-        {
-            isOnRecharge = false;
-        }
     }
 
     private void FixedUpdate()
@@ -130,23 +106,77 @@ public class PlayerController : MonoBehaviour
 
     void Shoot() // Starts shooting
     {
-        timeSinceLastShoot += Time.deltaTime;
-        // Checks if player pressed attack button, and enough time passed since last shoot
-        if (attacking && timeSinceLastShoot >= timeBetweenShoots && currentBullets > 0) 
-        {
-            ShootBullet();
-            currentBullets -= 1;
-            timeSinceLastShoot = 0;
+        if (gun == 0) 
+        { // If gun is automatic gun
+            timeSinceLastShoot += Time.deltaTime;
+            // Checks if player pressed attack button, and enough time passed since last shoot
+            if (attacking && timeSinceLastShoot >= timeBetweenAutomaticGunShots)
+            {
+                ShootAutoGunBullet();
+                timeSinceLastShoot = 0;
+            }
+        }
+        else if (gun == 1)
+        { // If gun is revolver
+            timeSinceLastShoot += Time.deltaTime;
+            // Checks if player pressed attack button, and enough time passed since last shoot
+            if (attacking && timeSinceLastShoot >= timeBetweenRevolverShots)
+            {
+                ShootRevolverBullet();
+                timeSinceLastShoot = 0;
+            }
+        }
+        else if (gun == 2)
+        { // If gun is shotgun
+            timeSinceLastShoot += Time.deltaTime;
+            // Checks if player pressed attack button, and enough time passed since last shoot
+            if (attacking && timeSinceLastShoot >= timeBetweenShotgunShots)
+            {
+                ShootShotgunBullets();
+                timeSinceLastShoot = 0;
+            }
         }
     }
 
-    void ShootBullet() // Shoots bullet
+    void ShootAutoGunBullet() // Shoots bullet
     {
         // Creates the bullet at 2 unit ahead of player
         Vector3 bulletSpawnPos = transform.position + GetDirection() * 0.5f;
         // Creates a bullet object with the exact same direction and rotation values as player
         GameObject bulletP = Instantiate(bulletPrefab, bulletSpawnPos, Quaternion.identity);
         BulletHandler bullet = bulletP.GetComponent<BulletHandler>();
+    }
+
+    void ShootRevolverBullet() // Shoots bullet
+    {
+        // Creates the bullet at 2 unit ahead of player
+        Vector3 bulletSpawnPos = transform.position + GetDirection() * 0.5f;
+        // Creates a bullet object with the exact same direction and rotation values as player
+        GameObject bulletP = Instantiate(bulletPrefab, bulletSpawnPos, Quaternion.identity);
+        BulletHandler bullet = bulletP.GetComponent<BulletHandler>();
+        bullet.setDamage(5f);
+    }
+
+    void ShootShotgunBullets() // Shoots bullets
+    {
+        // Creates the bullet at 2 unit ahead of player
+        Vector3 bulletSpawnPos = transform.position + GetDirection() * 0.5f;
+        // Creates a bullet object with the exact same direction and rotation values as player
+        GameObject bulletP1 = Instantiate(bulletPrefab, bulletSpawnPos, Quaternion.identity);
+        GameObject bulletP2 = Instantiate(bulletPrefab, bulletSpawnPos, Quaternion.identity);
+        GameObject bulletP3 = Instantiate(bulletPrefab, bulletSpawnPos, Quaternion.identity);
+        BulletHandler bullet1 = bulletP1.GetComponent<BulletHandler>();
+        BulletHandler bullet3 = bulletP3.GetComponent<BulletHandler>();
+        float spreadAngle1 = Random.Range(-10f, 10f);
+        float spreadAngle3 = Random.Range(-10f, 10f);
+        Vector3 spreadDirection1 = Quaternion.AngleAxis(spreadAngle1, Vector3.forward) * GetDirection();
+        Vector3 spreadDirection3 = Quaternion.AngleAxis(spreadAngle3, Vector3.forward) * GetDirection();
+        spreadDirection1.z = 0;
+        spreadDirection1.Normalize();
+        spreadDirection3.z = 0;
+        spreadDirection3.Normalize();
+        bullet1.setDirection(spreadDirection1);
+        bullet3.setDirection(spreadDirection3);
     }
 
     void Die() 

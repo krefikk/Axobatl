@@ -82,7 +82,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         // If damage taken is greater than enemy's current health points, kill the enemy
-        if (damage > health)
+        if (damage >= health)
         {
             Destroy(gameObject);
             // Play some animations or sounds here
