@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     bool dead = false;
     bool moving = false;
     bool dashing = false;
+    // Attributes
+    bool mirrorArmorActivated = false;
 
     [Header("Skills")]
     bool canDash = true;
@@ -43,6 +45,14 @@ public class PlayerController : MonoBehaviour
     float dashSpeed = 15f;
     float dashTime = 0.2f;
     float dashCooldown = 1f;
+
+    [Header("Attributes")]
+    float attributeUsingTime = 0;
+
+    [Header("Mirror Armor")]
+    float mirrorArmorCooldown = 20f;
+    float mirrorArmorTime = 5f;
+    bool isMirrorArmorOnCooldown = false;
 
     // Components
     Rigidbody2D rb;
@@ -86,6 +96,12 @@ public class PlayerController : MonoBehaviour
         xAxis = Input.GetAxis("Horizontal"); // Checks if player pressed left, right or A, D
         yAxis = Input.GetAxis("Vertical"); // Checks if player pressed up, down or W, S
         attacking = Input.GetMouseButtonDown(0); // Checks if player pressed left mouse button
+
+        //------------------------------Attribute Inputs-------------------------------------
+        if (Input.GetKeyDown(KeyCode.Z) && !mirrorArmorActivated && !isMirrorArmorOnCooldown)
+        {
+            ActivateMirrorArmor();
+        }
     }
 
     void Move()
@@ -140,33 +156,40 @@ public class PlayerController : MonoBehaviour
 
     void ShootAutoGunBullet() // Shoots bullet
     {
-        // Creates the bullet at 2 unit ahead of player
-        Vector3 bulletSpawnPos = transform.position + GetDirection() * 0.5f;
-        // Creates a bullet object with the exact same direction and rotation values as player
-        GameObject bulletP = Instantiate(bulletPrefab, bulletSpawnPos, Quaternion.identity);
-        BulletHandler bullet = bulletP.GetComponent<BulletHandler>();
+        Vector3 bulletSpawnPosition = transform.position + GetDirection();
+        Vector3 bulletDirection = GetDirection();
+
+        GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
+        Bullet bullet = bulletObject.GetComponent<Bullet>();
+
+        if (bullet != null)
+        {
+            bullet.SetDirection(bulletDirection.normalized);
+            bullet.SetSpeed(10f);
+            bullet.SetDamage(2f);
+            bullet.SetParent(gameObject);
+        }
     }
 
     void ShootRevolverBullet() // Shoots bullet
     {
-        // Creates the bullet at 2 unit ahead of player
-        Vector3 bulletSpawnPos = transform.position + GetDirection() * 0.5f;
-        // Creates a bullet object with the exact same direction and rotation values as player
-        GameObject bulletP = Instantiate(bulletPrefab, bulletSpawnPos, Quaternion.identity);
-        BulletHandler bullet = bulletP.GetComponent<BulletHandler>();
-        bullet.setDamage(5f);
+        Vector3 bulletSpawnPosition = transform.position + GetDirection();
+        Vector3 bulletDirection = GetDirection();
+
+        GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
+        Bullet bullet = bulletObject.GetComponent<Bullet>();
+
+        if (bullet != null)
+        {
+            bullet.SetDirection(bulletDirection.normalized);
+            bullet.SetSpeed(10f);
+            bullet.SetDamage(5f);
+            bullet.SetParent(gameObject);
+        }
     }
 
     void ShootShotgunBullets() // Shoots bullets
     {
-        // Creates the bullet at 2 unit ahead of player
-        Vector3 bulletSpawnPos = transform.position + GetDirection() * 0.5f;
-        // Creates a bullet object with the exact same direction and rotation values as player
-        GameObject bulletP1 = Instantiate(bulletPrefab, bulletSpawnPos, Quaternion.identity);
-        GameObject bulletP2 = Instantiate(bulletPrefab, bulletSpawnPos, Quaternion.identity);
-        GameObject bulletP3 = Instantiate(bulletPrefab, bulletSpawnPos, Quaternion.identity);
-        BulletHandler bullet1 = bulletP1.GetComponent<BulletHandler>();
-        BulletHandler bullet3 = bulletP3.GetComponent<BulletHandler>();
         float spreadAngle1 = Random.Range(-10f, 10f);
         float spreadAngle3 = Random.Range(-10f, 10f);
         Vector3 spreadDirection1 = Quaternion.AngleAxis(spreadAngle1, Vector3.forward) * GetDirection();
@@ -175,11 +198,37 @@ public class PlayerController : MonoBehaviour
         spreadDirection1.Normalize();
         spreadDirection3.z = 0;
         spreadDirection3.Normalize();
-        bullet1.setDirection(spreadDirection1);
-        bullet3.setDirection(spreadDirection3);
+
+        Vector3 bulletSpawnPosition = transform.position + GetDirection();
+        Vector3 bulletDirection = GetDirection();
+
+        for (int i = 0; i < 3; i++) 
+        {
+            GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
+            Bullet bullet = bulletObject.GetComponent<Bullet>();
+
+            if (bullet != null)
+            {
+                if (i == 0)
+                {
+                    bullet.SetDirection(spreadDirection1);
+                }
+                else if (i == 2)
+                {
+                    bullet.SetDirection(spreadDirection3);
+                }
+                else 
+                {
+                    bullet.SetDirection(bulletDirection.normalized);
+                }
+                bullet.SetSpeed(10f);
+                bullet.SetDamage(2f);
+                bullet.SetParent(gameObject);
+            }
+        }
     }
 
-    void Die() 
+    public void Die() 
     {
         dead = true;
     }
@@ -246,6 +295,27 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
+
+    // --------------------------------Attributes------------------------------------------
+    IEnumerator MirrorArmor() 
+    {
+        // Set skill active
+        mirrorArmorActivated = true;
+        // Play animation
+        // Wait for skill duration
+        yield return new WaitForSeconds(mirrorArmorTime);
+        // Stop animation
+        // Set skill inactive
+        mirrorArmorActivated = false;
+        // Start cooldown
+        isMirrorArmorOnCooldown = true;
+    }
+
+    public void ActivateMirrorArmor()
+    {
+        StartCoroutine(MirrorArmor());
+    }
+
 
     // --------------------------------Getters and Setters------------------------------------------
     public Vector3 GetDirection() // Returns the player's current look direction as a vector

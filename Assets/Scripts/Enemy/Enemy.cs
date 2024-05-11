@@ -95,6 +95,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void Die() 
+    {
+        
+    }
+
     void GiveDamage()
     {
         timeSinceLastMeleeAttack += Time.deltaTime;
@@ -108,5 +113,18 @@ public class Enemy : MonoBehaviour
             
         }
         
+    }
+
+    public float GetRotationAngle() // Returns the enemy's current rotation value as "degrees"
+    {
+        return transform.rotation.eulerAngles.z;
+    }
+
+    public Vector3 GetDirection() // Returns the ENEMY'S current look direction as a vector
+    {
+        float radians = GetRotationAngle() * Mathf.Deg2Rad;
+        Vector3 facingDirection = new Vector3(Mathf.Cos(radians), Mathf.Sin(radians), 0);
+        facingDirection.Normalize();
+        return facingDirection;
     }
 }

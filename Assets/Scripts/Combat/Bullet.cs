@@ -1,0 +1,122 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Bullet : MonoBehaviour
+{
+    float speed;
+    float damage;
+    Vector3 direction;
+    GameObject parent;
+
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
+    private void Update()
+    {
+        DestroyBullet();
+    }
+
+    void Move()
+    {
+        direction.z = 0;
+        direction.Normalize();
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.position += direction * speed * Time.deltaTime;
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Unwalkable"))
+        {
+            Destroy(gameObject);
+        }
+        if (parent.CompareTag("Player") && other.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+            Enemy enemy = other.GetComponent<Enemy>();
+            Debug.Log("Hit Enemy");
+            enemy.TakeDamage(damage);
+        }
+        else if (parent.CompareTag("Enemy") && other.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+            PlayerController.player.TakeDamage(damage);
+
+        }
+    }
+
+    public static Bullet Create(Vector3 position, Quaternion rotation, Vector3 direction, float damage, float speed, GameObject parent)
+    {
+        // Instantiate a new bullet object
+        GameObject bulletObject = new GameObject("Bullet");
+        Bullet bullet = bulletObject.AddComponent<Bullet>();
+
+        // Set bullet properties
+        bullet.transform.position = position;
+        bullet.transform.rotation = rotation;
+        bullet.direction = direction;
+        bullet.parent = parent;
+        bullet.damage = damage;
+        bullet.speed = speed;
+
+        return bullet;
+    }
+
+    public bool CheckForDestroy()
+    {
+        // Checks if bullet is out of screen or hit an enemy
+        if (Vector2.Distance(parent.transform.position, transform.position) >= 10f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    void DestroyBullet()
+    {
+        if (CheckForDestroy())
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public float GetSpeed() 
+    {
+        return speed;
+    }
+    public void SetSpeed(float speed) 
+    {
+        this.speed = speed;
+    }
+    public float GetDamage() 
+    {
+        return damage;
+    }
+    public void SetDamage(float damage) 
+    {
+        this.damage = damage;
+    }
+    public Vector3 GetDirection() 
+    {
+        return direction;
+    }
+    public void SetDirection(Vector3 direction) 
+    {
+        this.direction = direction;
+    }
+    public GameObject getParent() 
+    {
+        return parent;
+    }
+    public void SetParent(GameObject parent) 
+    {
+        this.parent = parent;
+    }
+
+}

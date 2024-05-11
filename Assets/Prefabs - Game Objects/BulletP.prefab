@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 113078894537183317}
   - component: {fileID: 3650689438140458049}
   - component: {fileID: 2727212521268237440}
-  - component: {fileID: -9007678516760414575}
+  - component: {fileID: -1544438909371384415}
   m_Layer: 0
   m_Name: BulletP
   m_TagString: Untagged
@@ -159,7 +159,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-9007678516760414575
+--- !u!114 &-1544438909371384415
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,6 +168,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8022434187967284059}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db26ff22ab52a274abd0dd8b9b9cf9d3, type: 3}
+  m_Script: {fileID: 11500000, guid: f06e6713b9100364386c444f3cc0f1eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8022434187967284059}
