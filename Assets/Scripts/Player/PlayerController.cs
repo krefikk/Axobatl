@@ -25,8 +25,8 @@ public class PlayerController : MonoBehaviour
     float timeSinceLastShoot;
 
     [Header("Health")]
-    float maxHealth = 20;
-    float health = 20;
+    private float maxHealth = 20;
+    private float health = 20;
 
     [Header("Movement")]
     private float xAxis = 0;
@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        health = maxHealth;
         currentBullets = bulletsMax;
         // Initialize components
         rb = GetComponent<Rigidbody2D>();
