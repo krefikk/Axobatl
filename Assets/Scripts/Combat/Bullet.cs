@@ -8,10 +8,19 @@ public class Bullet : MonoBehaviour
     float damage;
     Vector3 direction;
     GameObject parent;
+    public bool IsBoomerang;
+    bool moveback = false;
 
     private void FixedUpdate()
     {
-        Move();
+        if (!moveback)
+        {
+            Move();
+        }
+        else
+        {
+            Backwards();
+        }
     }
 
     private void Update()
@@ -27,6 +36,16 @@ public class Bullet : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.position += direction * speed * Time.deltaTime;
     }
+
+    void Backwards()
+    {
+        direction.z = 0;
+        direction.Normalize();
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.position += direction * -speed * Time.deltaTime;
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Unwalkable"))
@@ -76,13 +95,19 @@ public class Bullet : MonoBehaviour
         {
             return false;
         }
+
     }
+
 
     void DestroyBullet()
     {
-        if (CheckForDestroy())
+        if (CheckForDestroy() && !IsBoomerang | CheckForDestroy() && moveback && Vector2.Distance(parent.transform.position, transform.position) >= 11f)
         {
             Destroy(gameObject);
+        }
+        else if (CheckForDestroy() && IsBoomerang)
+        {
+            moveback = true;
         }
     }
 
