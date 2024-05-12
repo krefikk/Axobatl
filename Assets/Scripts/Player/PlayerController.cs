@@ -47,12 +47,16 @@ public class PlayerController : MonoBehaviour
     float dashCooldown = 1f;
 
     [Header("Attributes")]
+    int attribute; // Represents which attribute player choosed: 0 represents mirror armor
     float attributeUsingTime = 0;
 
     [Header("Mirror Armor")]
     float mirrorArmorCooldown = 20f;
     float mirrorArmorTime = 5f;
     bool isMirrorArmorOnCooldown = false;
+
+    [Header("HUD")]
+    public StatBar healthBar;
 
     // Components
     Rigidbody2D rb;
@@ -82,6 +86,7 @@ public class PlayerController : MonoBehaviour
         GetInputs();
         FaceMouse();
         Shoot();
+        DisplayHealth();
     }
 
     private void FixedUpdate()
@@ -226,6 +231,11 @@ public class PlayerController : MonoBehaviour
                 bullet.SetParent(gameObject);
             }
         }
+    }
+
+    public void DisplayHealth() 
+    {
+        healthBar.current = 100 * health / maxHealth;
     }
 
     public void Die() 
