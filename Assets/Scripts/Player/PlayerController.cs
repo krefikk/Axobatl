@@ -58,9 +58,6 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     Animator anim;
 
-    [Header("Misc")]
-    public Transform cameraTransform;
-
     private void Awake()
     {
         if (player != null && player != this)
@@ -85,7 +82,6 @@ public class PlayerController : MonoBehaviour
         GetInputs();
         FaceMouse();
         Shoot();
-        UpdateCameraPosition();
     }
 
     private void FixedUpdate()
@@ -93,11 +89,6 @@ public class PlayerController : MonoBehaviour
         if (dashing) { return; } // Movement functions won't get called if player is dashing
         Move();
         StartDash();
-    }
-
-    void UpdateCameraPosition()
-    {
-        cameraTransform.position = new Vector3(transform.position.x, transform.position.y, cameraTransform.position.z);
     }
 
     void GetInputs() 
