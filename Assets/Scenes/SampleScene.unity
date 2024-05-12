@@ -446,6 +446,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8022434187967284059, guid: fbe3587d97aa62e40a36a9bdd64a853c, type: 3}
   gun: 2
   walkSpeed: 5
+  cameraTransform: {fileID: 519420032}
 --- !u!50 &1001629143
 Rigidbody2D:
   serializedVersion: 4
@@ -907,8 +908,8 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 1001629146}
   - {fileID: 1537514077}
   - {fileID: 947859491}
+  - {fileID: 519420032}

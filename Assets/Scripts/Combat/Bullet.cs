@@ -101,7 +101,11 @@ public class Bullet : MonoBehaviour
 
     void DestroyBullet()
     {
-        if (CheckForDestroy() && !IsBoomerang | CheckForDestroy() && moveback && Vector2.Distance(parent.transform.position, transform.position) >= 11f)
+        if (CheckForDestroy() && !IsBoomerang)
+        {
+            Destroy(gameObject);
+        }
+        else if (CheckForDestroy() && IsBoomerang && moveback && Vector2.Distance(parent.transform.position, transform.position) >= 11f)
         {
             Destroy(gameObject);
         }
