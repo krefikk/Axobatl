@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 { // Mother (Super) Class of All Enemies
@@ -10,16 +11,32 @@ public class Enemy : MonoBehaviour
 
     [Header("Movement")]
     public float moveSpeed;
+    NavMeshAgent agent;
 
     [Header("Combat")]
     public float damage;
     public float damageRadius; // Only for melee attacker enemies
     public float timeBetweenMeleeAttacks;
-    public float timeSinceLastMeleeAttack = 0;
+    float timeSinceLastMeleeAttack = 0;
 
     [Header("Flags")]
     public bool canShoot;
     public bool moving = false;
+
+    // Components
+    Rigidbody2D rb;
+    Animator anim;
+
+    private void Start()
+    {
+        // Initializing components
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        // Initializing AI
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+    }
 
     private void Update()
     {
@@ -37,21 +54,7 @@ public class Enemy : MonoBehaviour
 
     void MoveToPlayer() // For melee enemies which tries to reach the player to kill them
     {
-        Vector2 direction = PlayerController.player.transform.position - transform.position;
-        direction.Normalize();
-        FaceToDirection(direction); // Faces enemy to the player
-        Vector3 movement = direction * moveSpeed * Time.deltaTime;
-        transform.position += movement;
-        // moving animation and maybe sound
-
-        if (movement.magnitude > 0)
-        {
-            moving = true;
-        }
-        else
-        {
-            moving = false;
-        }
+        agent.SetDestination(PlayerController.player.transform.position);
     }
 
     void FaceToPosition(Vector3 pos) // Faces enemy to desired position
