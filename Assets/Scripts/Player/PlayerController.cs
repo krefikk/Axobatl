@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     float timeSinceLastShoot;
 
     [Header("Gun")]
-    public int gun; // 0 represents automatic gun, 1 represents revolver, 2 represents shotgun
+    protected int gun = 0; // 0 represents automatic gun, 1 represents revolver, 2 represents shotgun
 
     [Header("Health")]
     private float maxHealth = 20;
@@ -344,6 +344,11 @@ public class PlayerController : MonoBehaviour
     public bool isDead() 
     {
         return dead;
+    }
+
+    public int GetGun() 
+    {
+        return gun;
     }
 }
 

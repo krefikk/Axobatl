@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 { // Mother (Super) Class of All Enemies
+
+    [Header("Prefabs")]
+    public GameObject bulletPrefab;
+
     [Header("Health")]
     public float maxHealth;
     public float health;
@@ -12,16 +16,25 @@ public class Enemy : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed;
     NavMeshAgent agent;
+    public LayerMask unwalkableLayer;
 
     [Header("Combat")]
     public float damage;
     public float damageRadius; // Only for melee attacker enemies
     public float timeBetweenMeleeAttacks;
     float timeSinceLastMeleeAttack = 0;
+    
+    [Header("Ranged Combat")]
+    int gun; // 0 represents auto gun, 1 represents revolver, 2 represents shotgun
+    float timeBetweenAutomaticGunShots = 0.2f;
+    float timeBetweenRevolverShots = 0.5f;
+    float timeBetweenShotgunShots = 0.6f;
+    float timeSinceLastShoot;
+    public Transform rayThrower;
 
     [Header("Flags")]
-    public bool canShoot;
-    public bool moving = false;
+    protected bool canShoot = true;
+    bool moving = false;
 
     // Components
     Rigidbody2D rb;
@@ -36,19 +49,53 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        // Randomly choosing a gun, according to player's decision
+        if (PlayerController.player.GetGun() == 0) { gun = Random.Range(1, 3); }
+        else if (PlayerController.player.GetGun() == 1)
+        {
+            int indicator = Random.Range(0, 2);
+            if (indicator == 1) { gun = 0; }
+            else { gun = 2; }
+        }
+        else { gun = Random.Range(0, 2); }
     }
 
     private void Update()
     {
-        GiveDamage();
+        FaceToPosition(PlayerController.player.transform.position);
+        if (canShoot && !CheckForObstacles())
+        {
+            Shoot();
+        }
+        else if (!canShoot)
+        {
+            GiveDamage();
+        }      
     }
 
     private void FixedUpdate()
     {
+        CalculateStoppingDistance();
+        MoveToPlayer();
+    }
+
+    void CalculateStoppingDistance() 
+    {
         if (!canShoot)
         {
             // If enemy is a melee attacking enemy, move it to the player's position
-            MoveToPlayer();
+            agent.stoppingDistance = 0.25f;
+        }
+        else
+        { // If enemy is a shooting enemy
+            if (CheckForObstacles())
+            { // If there is a obstacle between them, come closer to the player
+                agent.stoppingDistance = 0.25f;
+            }
+            else
+            { // If there is no obstacles between them, leave a distance between them
+                agent.stoppingDistance = 8f;
+            }
         }
     }
 
@@ -82,6 +129,23 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
+    bool CheckForObstacles()
+    { // Checks if there a re any obstacles between enemy and player
+        Vector3 direction = PlayerController.player.transform.position - transform.position;
+        direction.z = 0f; // Ensure the direction is in the XY plane
+        RaycastHit2D hit = Physics2D.Raycast(rayThrower.transform.position, direction, direction.magnitude);
+        Debug.DrawRay(transform.position, direction);
+        // Check if the ray hits an object
+        if (hit.collider != null)
+        {
+            // If the hit object is on the "Unwalkable" layer, return true
+            return hit.collider.CompareTag("Unwalkable");
+            
+        }
+        // If no obstacles are detected, return false
+        return false;
+    }
+
     public void TakeDamage(float damage)
     {
         // If damage taken is greater than enemy's current health points, kill the enemy
@@ -110,12 +174,115 @@ public class Enemy : MonoBehaviour
         { // For melee attacker enemies
             PlayerController.player.TakeDamage(damage);
             timeSinceLastMeleeAttack = 0;
+        }       
+    }
+
+    public void Shoot() 
+    {
+        if (gun == 0)
+        { // If gun is automatic gun
+            timeSinceLastShoot += Time.deltaTime;
+            // Checks if player pressed attack button, and enough time passed since last shoot
+            if (timeSinceLastShoot >= timeBetweenAutomaticGunShots)
+            {
+                ShootAutoGunBullet();
+                timeSinceLastShoot = 0;
+            }
         }
-        else if (canShoot)
-        { // For ranged enemies
-            
+        else if (gun == 1)
+        { // If gun is revolver
+            timeSinceLastShoot += Time.deltaTime;
+            // Checks if player pressed attack button, and enough time passed since last shoot
+            if (timeSinceLastShoot >= timeBetweenRevolverShots)
+            {
+                ShootRevolverBullet();
+                timeSinceLastShoot = 0;
+            }
         }
-        
+        else if (gun == 2)
+        { // If gun is shotgun
+            timeSinceLastShoot += Time.deltaTime;
+            // Checks if player pressed attack button, and enough time passed since last shoot
+            if (timeSinceLastShoot >= timeBetweenShotgunShots)
+            {
+                ShootShotgunBullets();
+                timeSinceLastShoot = 0;
+            }
+        }
+    }
+
+    void ShootAutoGunBullet() // Shoots bullet
+    {
+        Vector3 bulletSpawnPosition = transform.position + GetDirection();
+        Vector3 bulletDirection = GetDirection();
+
+        GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
+        Bullet bullet = bulletObject.GetComponent<Bullet>();
+
+        if (bullet != null)
+        {
+            bullet.SetDirection(bulletDirection.normalized);
+            bullet.SetSpeed(10f);
+            bullet.SetDamage(2f);
+            bullet.SetParent(gameObject);
+        }
+    }
+
+    void ShootRevolverBullet() // Shoots bullet
+    {
+        Vector3 bulletSpawnPosition = transform.position + GetDirection();
+        Vector3 bulletDirection = GetDirection();
+
+        GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
+        Bullet bullet = bulletObject.GetComponent<Bullet>();
+
+        if (bullet != null)
+        {
+            bullet.SetDirection(bulletDirection.normalized);
+            bullet.SetSpeed(10f);
+            bullet.SetDamage(5f);
+            bullet.SetParent(gameObject);
+        }
+    }
+
+    void ShootShotgunBullets() // Shoots bullets
+    {
+        float spreadAngle1 = Random.Range(-10f, 10f);
+        float spreadAngle3 = Random.Range(-10f, 10f);
+        Vector3 spreadDirection1 = Quaternion.AngleAxis(spreadAngle1, Vector3.forward) * GetDirection();
+        Vector3 spreadDirection3 = Quaternion.AngleAxis(spreadAngle3, Vector3.forward) * GetDirection();
+        spreadDirection1.z = 0;
+        spreadDirection1.Normalize();
+        spreadDirection3.z = 0;
+        spreadDirection3.Normalize();
+
+        Vector3 bulletSpawnPosition = transform.position + GetDirection();
+        Vector3 bulletDirection = GetDirection();
+
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
+            Bullet bullet = bulletObject.GetComponent<Bullet>();
+
+            if (bullet != null)
+            {
+                if (i == 0)
+                {
+                    bullet.SetDirection(spreadDirection1);
+                }
+                else if (i == 2)
+                {
+                    bullet.SetDirection(spreadDirection3);
+                }
+                else
+                {
+                    bullet.SetDirection(bulletDirection.normalized);
+                }
+                bullet.SetSpeed(10f);
+                bullet.SetDamage(2f);
+                bullet.SetParent(gameObject);
+            }
+        }
     }
 
     public float GetRotationAngle() // Returns the enemy's current rotation value as "degrees"
