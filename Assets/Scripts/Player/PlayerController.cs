@@ -58,6 +58,10 @@ public class PlayerController : MonoBehaviour
     [Header("HUD")]
     public StatBar healthBar;
 
+    [Header("Game Manager")]
+    public GameObject gameManagerObject;
+    GameManager gameManager;
+
     // Components
     Rigidbody2D rb;
     Animator anim;
@@ -79,6 +83,7 @@ public class PlayerController : MonoBehaviour
         // Initialize components
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        gameManager = gameManagerObject.GetComponent<GameManager>();
     }
 
     private void Update()
@@ -101,7 +106,12 @@ public class PlayerController : MonoBehaviour
         xAxis = Input.GetAxis("Horizontal"); // Checks if player pressed left, right or A, D
         yAxis = Input.GetAxis("Vertical"); // Checks if player pressed up, down or W, S
         attacking = Input.GetMouseButtonDown(0); // Checks if player pressed left mouse button
-
+        if (Input.GetKeyDown(KeyCode.Escape)) // Stops the game if game is flowing, starts the game if game is stopped
+        {
+            Time.timeScale = 0;
+            gameManager.StopGame();
+            gameManager.ContinueGame();
+        }
         //------------------------------Attribute Inputs-------------------------------------
         if (Input.GetKeyDown(KeyCode.Z) && !mirrorArmorActivated && !isMirrorArmorOnCooldown)
         {

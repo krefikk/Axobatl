@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     GameObject parent;
     public bool IsBoomerang;
     bool moveback = false;
+    float aliveTime = 0;
 
     private void FixedUpdate()
     {
@@ -26,6 +27,7 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         DestroyBullet();
+        aliveTime += Time.deltaTime;
     }
 
     void Move()
@@ -59,11 +61,10 @@ public class Bullet : MonoBehaviour
             Debug.Log("Hit Enemy");
             enemy.TakeDamage(damage);
         }
-        else if (parent.CompareTag("Enemy") && other.CompareTag("Player"))
+        else if ((parent.CompareTag("Enemy") || parent is null) && other.CompareTag("Player"))
         {
             Destroy(gameObject);
             PlayerController.player.TakeDamage(damage);
-
         }
     }
 
@@ -86,16 +87,14 @@ public class Bullet : MonoBehaviour
 
     public bool CheckForDestroy()
     {
-        // Checks if bullet is out of screen or hit an enemy
-        if (Vector2.Distance(parent.transform.position, transform.position) >= 10f)
-        {
-            return true;
-        }
-        else
+        if (aliveTime < 10)
         {
             return false;
         }
-
+        else 
+        {
+            return true;
+        }
     }
 
 
