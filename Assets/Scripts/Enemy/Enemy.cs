@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
@@ -28,6 +29,15 @@ public class Enemy : MonoBehaviour
     public float damageRadius; // Only for melee attacker enemies
     public float timeBetweenMeleeAttacks;
     float timeSinceLastMeleeAttack = 0;
+
+    [Header("Necromancer")]
+    public bool canNecromance;
+    public Transform[] corners;
+    public GameObject specificEnemyPrefab;
+    float lastTimeSinceNecromanced = 0;
+    float timeBetweenEachNecromance = 15f;
+    public Transform[] necromancePoints;
+    bool destinationSet = false;
     
     [Header("Ranged Combat")]
     int gun; // 0 represents auto gun, 1 represents revolver, 2 represents shotgun
@@ -50,6 +60,9 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        // Handling necromancing and shooting flags
+        if (canNecromance) { canShoot = false; }
+        if (canShoot) { canNecromance = false; }
         // Initializing components
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -72,6 +85,7 @@ public class Enemy : MonoBehaviour
     {
         DisplayHealth();
         FaceToPosition(PlayerController.player.transform.position);
+        Necromance();
         if (canShoot && !CheckForObstacles())
         {
             Shoot();
@@ -90,12 +104,12 @@ public class Enemy : MonoBehaviour
 
     void CalculateStoppingDistance() 
     {
-        if (!canShoot)
+        if (!canShoot && !canNecromance)
         {
             // If enemy is a melee attacking enemy, move it to the player's position
             agent.stoppingDistance = 0.25f;
         }
-        else
+        else if (canShoot)
         { // If enemy is a shooting enemy
             if (CheckForObstacles())
             { // If there is a obstacle between them, come closer to the player
@@ -106,11 +120,50 @@ public class Enemy : MonoBehaviour
                 agent.stoppingDistance = 8f;
             }
         }
+        else if (canNecromance) 
+        {
+            if (Vector2.Distance(PlayerController.player.transform.position, transform.position) <= 8f) 
+            {
+                MoveAwayFromPlayer();
+            }
+        }
     }
 
     void MoveToPlayer() // For melee enemies which tries to reach the player to kill them
     {
-        agent.SetDestination(PlayerController.player.transform.position);
+        if (!canNecromance)
+        {
+            agent.SetDestination(PlayerController.player.transform.position);
+        }   
+    }
+
+    void MoveAwayFromPlayer() 
+    {
+        float distance = 1;
+        Transform farest = corners[0];
+        if (!destinationSet)
+        {   
+            foreach (Transform corner in corners)
+            { // Finds farest corner point of the map
+                if (Vector2.Distance(corner.position, PlayerController.player.transform.position) >= distance && ((PlayerController.player.transform.position.y <= transform.position.y && PlayerController.player.transform.position.y >= corner.position.y) || (PlayerController.player.transform.position.y >= transform.position.y && PlayerController.player.transform.position.y <= corner.position.y)))
+                {
+                    distance = Vector2.Distance(corner.position, transform.position);
+                    farest = corner;
+                }
+            }
+            if (Vector2.Distance(PlayerController.player.transform.position, transform.position) <= 12f)
+            { // Moves away from player (goes to the closest corner point) if player is too close to it
+                agent.SetDestination(farest.position);
+                destinationSet = true;
+            }
+        }
+        else 
+        {
+            if (transform.position == farest.position) 
+            {
+                destinationSet = false;
+            }
+        }
     }
 
     void FaceToPosition(Vector3 pos) // Faces enemy to desired position
@@ -297,6 +350,33 @@ public class Enemy : MonoBehaviour
                 bullet.SetSpeed(10f);
                 bullet.SetDamage(2f);
                 bullet.SetParent(gameObject);
+            }
+        }
+    }
+
+    public void Necromance() 
+    {
+        if (canNecromance) 
+        {
+            lastTimeSinceNecromanced += Time.deltaTime;
+            if (lastTimeSinceNecromanced >= timeBetweenEachNecromance) 
+            {
+                foreach (Transform necromancePoint in necromancePoints) 
+                {
+                    GameObject newEnemy = Instantiate(specificEnemyPrefab, necromancePoint.position, Quaternion.identity);
+                    Enemy newEnemyScript = newEnemy.GetComponent<Enemy>();
+                    newEnemyScript.canNecromance = false;
+                    int luck = Random.Range(0, 3);
+                    if (luck == 0 || luck == 1) 
+                    { // Necromanced enemies have 33% chance to be shootable enemies
+                        newEnemyScript.canShoot = false;
+                    }
+                    else 
+                    {
+                        newEnemyScript.canShoot = true;
+                    }
+                }
+                lastTimeSinceNecromanced = 0;
             }
         }
     }
