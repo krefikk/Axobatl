@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 { // Mother (Super) Class of All Enemies
 
+    [Header("Environment")]
+    public Camera screenCamera;
+    
     [Header("Prefabs")]
     public GameObject bulletPrefab;
 
     [Header("Health")]
     public float maxHealth;
     public float health;
+    public Slider healthBar;
 
     [Header("Movement")]
     public float moveSpeed;
@@ -35,6 +40,9 @@ public class Enemy : MonoBehaviour
     [Header("Flags")]
     protected bool canShoot = true;
     bool moving = false;
+
+    [Header("HUD")]
+    public Vector3 healthBarOffset;
 
     // Components
     Rigidbody2D rb;
@@ -62,6 +70,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        DisplayHealth();
         FaceToPosition(PlayerController.player.transform.position);
         if (canShoot && !CheckForObstacles())
         {
@@ -144,6 +153,13 @@ public class Enemy : MonoBehaviour
         }
         // If no obstacles are detected, return false
         return false;
+    }
+
+    public void DisplayHealth()
+    {
+        healthBar.value = health / maxHealth;
+        healthBar.transform.parent.rotation = screenCamera.transform.rotation;
+        healthBar.transform.position = transform.position + healthBarOffset;
     }
 
     public void TakeDamage(float damage)
