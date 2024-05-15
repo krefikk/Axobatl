@@ -10,7 +10,9 @@ public class PlayerController : MonoBehaviour
     public static PlayerController player;
     
     [Header("Prefabs")]
+    public GameObject SawPrefab;
     public GameObject bulletPrefab;
+    
 
     [Header("Combat")]
     float timeBetweenAutomaticGunShots = 0.2f;
@@ -51,6 +53,7 @@ public class PlayerController : MonoBehaviour
     float bulletSpeedMultiplier = 1;
     float bulletDamageMultiplier = 1;
     bool unlockedKatanaDash = false;
+    bool unlockedSawBullets = false;
 
     [Header("Attributes")]
     int attribute; // Represents which attribute player choosed: 0 represents mirror armor
@@ -176,16 +179,33 @@ public class PlayerController : MonoBehaviour
         Vector3 bulletSpawnPosition = transform.position + GetDirection();
         Vector3 bulletDirection = GetDirection();
 
-        GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
-        Bullet bullet = bulletObject.GetComponent<Bullet>();
-
-        if (bullet != null)
+        if (unlockedSawBullets)
         {
-            bullet.SetDirection(bulletDirection.normalized);
-            bullet.SetSpeed(10f * bulletSpeedMultiplier);
-            bullet.SetDamage(2f * bulletDamageMultiplier);
-            bullet.SetParent(gameObject);
+            GameObject bulletObject = Instantiate(SawPrefab, bulletSpawnPosition, Quaternion.identity);
+            Bullet bullet = bulletObject.GetComponent<Bullet>();
+
+            if (bullet != null)
+            {
+                bullet.SetDirection(bulletDirection.normalized);
+                bullet.SetSpeed(10f * bulletSpeedMultiplier);
+                bullet.SetDamage(2f * bulletDamageMultiplier);
+                bullet.SetParent(gameObject);
+            }
         }
+        else
+        {
+            GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
+            Bullet bullet = bulletObject.GetComponent<Bullet>();
+            
+            if (bullet != null)
+            {
+                bullet.SetDirection(bulletDirection.normalized);
+                bullet.SetSpeed(10f * bulletSpeedMultiplier);
+                bullet.SetDamage(2f * bulletDamageMultiplier);
+                bullet.SetParent(gameObject);
+            }
+        }
+
     }
 
     void ShootRevolverBullet() // Shoots bullet
@@ -193,16 +213,34 @@ public class PlayerController : MonoBehaviour
         Vector3 bulletSpawnPosition = transform.position + GetDirection();
         Vector3 bulletDirection = GetDirection();
 
-        GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
-        Bullet bullet = bulletObject.GetComponent<Bullet>();
-
-        if (bullet != null)
+        if (unlockedSawBullets)
         {
-            bullet.SetDirection(bulletDirection.normalized);
-            bullet.SetSpeed(10f * bulletSpeedMultiplier);
-            bullet.SetDamage(5f * bulletDamageMultiplier);
-            bullet.SetParent(gameObject);
+            GameObject bulletObject = Instantiate(SawPrefab, bulletSpawnPosition, Quaternion.identity);
+            Bullet bullet = bulletObject.GetComponent<Bullet>();
+
+            if (bullet != null)
+            {
+                bullet.SetDirection(bulletDirection.normalized);
+                bullet.SetSpeed(10f * bulletSpeedMultiplier);
+                bullet.SetDamage(5f * bulletDamageMultiplier);
+                bullet.SetParent(gameObject);
+            }
         }
+        else
+        {
+            GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
+            Bullet bullet = bulletObject.GetComponent<Bullet>();
+
+            if (bullet != null)
+            {
+                bullet.SetDirection(bulletDirection.normalized);
+                bullet.SetSpeed(10f * bulletSpeedMultiplier);
+                bullet.SetDamage(5f * bulletDamageMultiplier);
+                bullet.SetParent(gameObject);
+            }
+        }
+
+
     }
 
     void ShootShotgunBullets() // Shoots bullets
@@ -455,6 +493,38 @@ public class PlayerController : MonoBehaviour
         bulletSpeedMultiplier *= 1.5f;
     }
 
+    public void ClickClack()
+    { // Decreases time between shots
+        if (gun == 0)
+        {
+            timeBetweenAutomaticGunShots -= 0.1f;
+        }
+        else if (gun == 1)
+        {
+            timeBetweenRevolverShots -= 0.2f;
+        }
+        else if (gun == 2)
+        {
+            timeBetweenShotgunShots -= 0.15f;
+        }
+    }
+    public void BlastGum()
+    { // Decreases time between shots but decreases damage
+        if (gun == 0)
+        {
+            timeBetweenAutomaticGunShots -= 0.3f;
+        }
+        else if (gun == 1)
+        {
+            timeBetweenRevolverShots -= 0.4f;
+        }
+        else if (gun == 2)
+        {
+            timeBetweenShotgunShots -= 0.5f;
+        }
+        bulletDamageMultiplier /= 2.25f;
+    }
+
     public void HighCaliber()
     { // Greatly increases the damage of bullets but also increases the time between shots
         if (gun == 0)
@@ -475,6 +545,10 @@ public class PlayerController : MonoBehaviour
     public void KatanaDash()
     { // Dashes give damage to the enemies (one time)
         unlockedKatanaDash = true;
+    }
+    public void SawBullet()
+    {
+        unlockedSawBullets = true;
     }
 }
 

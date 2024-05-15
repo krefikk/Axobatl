@@ -56,10 +56,25 @@ public class Bullet : MonoBehaviour
         }
         if (parent.CompareTag("Player") && other.CompareTag("Enemy"))
         {
-            Destroy(gameObject);
-            Enemy enemy = other.GetComponent<Enemy>();
-            Debug.Log("Hit Enemy");
-            enemy.TakeDamage(damage);
+            if (IsBoomerang)
+            {
+                int hitsTaken = 0;
+                hitsTaken += 1;
+                Enemy enemy = other.GetComponent<Enemy>();
+                Debug.Log("Hit Enemy");
+                enemy.TakeDamage(damage);
+                if (hitsTaken == 2)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                Destroy(gameObject);
+                Enemy enemy = other.GetComponent<Enemy>();
+                Debug.Log("Hit Enemy");
+                enemy.TakeDamage(damage);
+            }
         }
         else if ((parent.CompareTag("Enemy") || parent is null) && other.CompareTag("Player"))
         {
