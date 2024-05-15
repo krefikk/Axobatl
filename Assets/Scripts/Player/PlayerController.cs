@@ -382,6 +382,11 @@ public class PlayerController : MonoBehaviour
 
 
     // --------------------------------Getters and Setters------------------------------------------
+    public GameObject getPlayer()
+    {
+        return this.gameObject;
+    }
+    
     public Vector3 GetDirection() // Returns the player's current look direction as a vector
     {
         float radians = GetRotationAngle() * Mathf.Deg2Rad;
@@ -418,6 +423,11 @@ public class PlayerController : MonoBehaviour
     public bool isMirrorArmorOn() 
     {
         return mirrorArmorActivated;
+    }
+
+    public bool isAttacking()
+    {
+        return attacking;
     }
 
     //--------------------------------Perks------------------------------------------
@@ -550,5 +560,6 @@ public class PlayerController : MonoBehaviour
     {
         unlockedSawBullets = true;
     }
+
 }
 
