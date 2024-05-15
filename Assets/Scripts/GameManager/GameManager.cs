@@ -4,14 +4,28 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    protected bool gamePaussed = false;
+    // GameManager Singleton
+    public static GameManager gameManager;
+
+    public bool gamePaussed = false;
+
+    private void Awake()
+    {
+        if (gameManager != null && gameManager != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            gameManager = this;
+        }
+    }
 
     public void StopGame() 
     {
         if (!gamePaussed) 
         {
             gamePaussed = true;
-            Time.timeScale = 0;
         }
     }
 
@@ -20,7 +34,6 @@ public class GameManager : MonoBehaviour
         if (gamePaussed)
         {
             gamePaussed = false;
-            Time.timeScale = 1;
         }
     }
 }

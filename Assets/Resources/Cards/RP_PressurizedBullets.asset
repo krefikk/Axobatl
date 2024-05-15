@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99411f14067058440ba03c5d9d32e748, type: 3}
-  m_Name: RP_DashDamageIncrease
+  m_Name: RP_PressurizedBullets
   m_EditorClassIdentifier: 
-  uniqueID: 2
-  title: {fileID: 0}
-  image: {fileID: 0}
-  desc: {fileID: 0}
+  uniqueID: 7
+  title: Pressurized Bullets
+  desc: Doubles the speed of bullets.
+  oneTime: 1

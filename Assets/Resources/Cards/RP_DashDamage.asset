@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RP_DashDamage
   m_EditorClassIdentifier: 
   uniqueID: 1
-  title: {fileID: 0}
-  image: {fileID: 0}
-  desc: {fileID: 0}
+  title: Katana Dash
+  desc: Dashes give damage to the nearby enemies.
+  oneTime: 1

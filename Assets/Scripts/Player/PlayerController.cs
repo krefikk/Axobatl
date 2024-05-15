@@ -22,8 +22,8 @@ public class PlayerController : MonoBehaviour
     protected int gun = 0; // 0 represents automatic gun, 1 represents revolver, 2 represents shotgun
 
     [Header("Health")]
-    private float maxHealth = 20;
-    private float health = 20;
+    private float maxHealth = 50;
+    private float health = 50;
 
     [Header("Movement")]
     private float xAxis = 0;
@@ -46,6 +46,11 @@ public class PlayerController : MonoBehaviour
     float dashTime = 0.2f;
     float dashCooldown = 1f;
 
+    [Header("Perks")]
+    float bulletSpeedMultiplier = 1;
+    float bulletDamageMultiplier = 1;
+    bool unlockedKatanaDash = false;
+
     [Header("Attributes")]
     int attribute; // Represents which attribute player choosed: 0 represents mirror armor
     float attributeUsingTime = 0;
@@ -57,10 +62,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("HUD")]
     public StatBar healthBar;
-
-    [Header("Game Manager")]
-    public GameObject gameManagerObject;
-    GameManager gameManager;
 
     // Components
     Rigidbody2D rb;
@@ -83,7 +84,6 @@ public class PlayerController : MonoBehaviour
         // Initialize components
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        gameManager = gameManagerObject.GetComponent<GameManager>();
     }
 
     private void Update()
@@ -108,12 +108,11 @@ public class PlayerController : MonoBehaviour
         attacking = Input.GetMouseButtonDown(0); // Checks if player pressed left mouse button
         if (Input.GetKeyDown(KeyCode.Escape)) // Stops the game if game is flowing, starts the game if game is stopped
         {
-            Time.timeScale = 0;
-            gameManager.StopGame();
-            gameManager.ContinueGame();
+            GameManager.gameManager.StopGame();
+            GameManager.gameManager.ContinueGame();
         }
         //------------------------------Attribute Inputs-------------------------------------
-        if (Input.GetKeyDown(KeyCode.Z) && !mirrorArmorActivated && !isMirrorArmorOnCooldown)
+        if (Input.GetKeyDown(KeyCode.Z) && !mirrorArmorActivated && !isMirrorArmorOnCooldown && attribute == 0)
         {
             ActivateMirrorArmor();
         }
@@ -180,8 +179,8 @@ public class PlayerController : MonoBehaviour
         if (bullet != null)
         {
             bullet.SetDirection(bulletDirection.normalized);
-            bullet.SetSpeed(10f);
-            bullet.SetDamage(2f);
+            bullet.SetSpeed(10f * bulletSpeedMultiplier);
+            bullet.SetDamage(2f * bulletDamageMultiplier);
             bullet.SetParent(gameObject);
         }
     }
@@ -197,8 +196,8 @@ public class PlayerController : MonoBehaviour
         if (bullet != null)
         {
             bullet.SetDirection(bulletDirection.normalized);
-            bullet.SetSpeed(10f);
-            bullet.SetDamage(5f);
+            bullet.SetSpeed(10f * bulletSpeedMultiplier);
+            bullet.SetDamage(5f * bulletDamageMultiplier);
             bullet.SetParent(gameObject);
         }
     }
@@ -236,8 +235,8 @@ public class PlayerController : MonoBehaviour
                 {
                     bullet.SetDirection(bulletDirection.normalized);
                 }
-                bullet.SetSpeed(10f);
-                bullet.SetDamage(2f);
+                bullet.SetSpeed(10f * bulletSpeedMultiplier);
+                bullet.SetDamage(2f * bulletDamageMultiplier);
                 bullet.SetParent(gameObject);
             }
         }
@@ -255,18 +254,22 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage) 
     {
-        // If damage taken is greater than enemy's current health points, kill the enemy
-        if (damage >= health)
+        if (!dashing) // Can't take damage while dashing
         {
-            Debug.Log("Died");
-            // Play some animations or sounds here
-        }
-        // If damage is not enough to kill the enemy, just decrease their health
-        else
-        {
-            health -= damage;
-            Debug.Log("Took damage");
-            // Play some animations or sounds here
+            // If damage taken is greater than enemy's current health points, kill the enemy
+            if (damage >= health)
+            {
+                Die();
+                Debug.Log("Died");
+                // Play some animations or sounds here
+            }
+            // If damage is not enough to kill the enemy, just decrease their health
+            else
+            {
+                health -= damage;
+                Debug.Log("Took damage");
+                // Play some animations or sounds here
+            }
         }
     }
 
@@ -360,45 +363,107 @@ public class PlayerController : MonoBehaviour
     {
         return gun;
     }
+
+    public bool getKatanaDashStatus() 
+    {
+        return unlockedKatanaDash;
+    }
+
+    public bool isDashing() 
+    {
+        return dashing;
+    }
+
+    public bool isMirrorArmorOn() 
+    {
+        return mirrorArmorActivated;
+    }
+
     //--------------------------------Perks------------------------------------------
-    //Health
+    // ------Health
     public void HealthBoost()
-    {       
-        maxHealth += 5;
-        health += 5;   
+    { // Increases max health and refreshes the health     
+        maxHealth += 15;
+        health = maxHealth;   
     }
     public void AppleJuice()
-    {
-        maxHealth += 10;
-        health += 10;
-        walkSpeed -= 5;
+    { // Increases max health, refreshes health but slightly decreases walk speed.
+        maxHealth += 30;
+        health = maxHealth;
+        walkSpeed -= 1;
     }
 
     public void Fortress()
-    {
+    { // Greatly increases maximum health, replenishes health but also greatly reduces walk speed.
         maxHealth += 75;
-
-        walkSpeed = 0;
+        health = maxHealth;
+        if (walkSpeed > 4)
+        {
+            walkSpeed -= 4f;
+        }
+        else if (walkSpeed <= 4 && walkSpeed > 1)
+        {
+            walkSpeed = 1f;
+        }
+        else 
+        {
+            walkSpeed = 0.5f;
+        }    
     }
-    //Speed
+
+    // -------Movement
     public void SqueezE()
-    {
-            maxHealth -= 5;
-            health -= 5;
-            walkSpeed += 2;
+    { // Increases walk speed but slightly reduces maximum health.
+        maxHealth -= 7.5f;
+        if (health > maxHealth - 7.5f) 
+        {
+            health = maxHealth;
+        }
+        walkSpeed += 1.5f;
+    }
 
+    public void CoolerDash() 
+    { // Decreases cooldown time of dash (can be used maximum 3 times)
+        dashCooldown -= 0.25f;
     }
-    public void NewKicks()
-    {
-        maxHealth = 1;
-        health = 1;
-        walkSpeed += 10;
-    }
-    //Gun
+
+    // -------Combat
     public void ExtraBarrel()
     {
         
 
+    }
+
+    public void PressurizedBullets()
+    { // Doubles the speed of bullets
+        bulletSpeedMultiplier *= 2;
+    }
+
+    public void FatalBullets() 
+    { // Increases the damage of bullets
+        bulletSpeedMultiplier *= 1.5f;
+    }
+
+    public void HighCaliber()
+    { // Greatly increases the damage of bullets but also increases the time between shots
+        if (gun == 0)
+        {
+            timeBetweenAutomaticGunShots += 0.3f;           
+        }
+        else if (gun == 1)
+        {
+            timeBetweenRevolverShots += 0.4f;
+        }
+        else if (gun == 2) 
+        {
+            timeBetweenShotgunShots += 0.5f;
+        }
+        bulletDamageMultiplier *= 2.25f;
+    }
+
+    public void KatanaDash()
+    { // Dashes give damage to the enemies (one time)
+        unlockedKatanaDash = true;
     }
 }
 

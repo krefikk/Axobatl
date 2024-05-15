@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RP_HealthIncrease
   m_EditorClassIdentifier: 
   uniqueID: 0
-  title: {fileID: 0}
-  image: {fileID: 0}
-  desc: {fileID: 0}
+  title: Health Boost
+  desc: Replenishes health and slightly increases maximum health.
+  oneTime: 0

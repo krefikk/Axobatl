@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99411f14067058440ba03c5d9d32e748, type: 3}
-  m_Name: RP_DamageIncrease
+  m_Name: RP_HighCaliber
   m_EditorClassIdentifier: 
-  uniqueID: 3
-  title: Fatal Bullets
-  desc: Slightly increases the damage of bullets.
+  uniqueID: 8
+  title: High Caliber
+  desc: Greatly increases the damage of bullets but also increases the time between
+    shots.
   oneTime: 0

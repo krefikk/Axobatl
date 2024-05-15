@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99411f14067058440ba03c5d9d32e748, type: 3}
-  m_Name: RP_DamageIncrease
+  m_Name: RP_Fortress
   m_EditorClassIdentifier: 
-  uniqueID: 3
-  title: Fatal Bullets
-  desc: Slightly increases the damage of bullets.
-  oneTime: 0
+  uniqueID: 5
+  title: Fortress
+  desc: Greatly increases maximum health, replenishes health but also greatly reduces
+    walk speed.
+  oneTime: 1

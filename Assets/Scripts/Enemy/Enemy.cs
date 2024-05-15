@@ -215,6 +215,14 @@ public class Enemy : MonoBehaviour
         healthBar.transform.position = transform.position + healthBarOffset;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    { // If player has unlocked Katana Dash perk, enemies take damage while player dashing close enough to them
+        if (collision.gameObject.CompareTag("Player") && PlayerController.player.getKatanaDashStatus() && PlayerController.player.isDashing())
+        {
+            TakeDamage(3);
+        }
+    }
+
     public void TakeDamage(float damage)
     {
         // If damage taken is greater than enemy's current health points, kill the enemy

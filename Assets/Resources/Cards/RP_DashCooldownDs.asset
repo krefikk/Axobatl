@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99411f14067058440ba03c5d9d32e748, type: 3}
   m_Name: RP_DashCooldownDs
   m_EditorClassIdentifier: 
-  uniqueID: 3
-  title: {fileID: 0}
-  image: {fileID: 0}
-  desc: {fileID: 0}
+  uniqueID: 2
+  title: Cooler Dash
+  desc: Slightly decreases cooldown time for dashing.
+  oneTime: 0
