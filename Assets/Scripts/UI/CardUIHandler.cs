@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class CardUIHandler : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class CardUIHandler : MonoBehaviour
     public TextMeshProUGUI middleDesc;
     public TextMeshProUGUI rightDesc;
     bool displayed = false;
+    int leftCardPerkID;
+    int middleCardPerkID;
+    int rightCardPerkID;
 
     public void Start()
     {
@@ -39,10 +43,16 @@ public class CardUIHandler : MonoBehaviour
         int[] IDArray = ChosenCards();
         leftTitle.text = cards[IDArray[0]].Title;
         leftDesc.text = cards[IDArray[0]].Description;
+        leftCardPerkID = IDArray[0];
         middleTitle.text = cards[IDArray[1]].Title;
         middleDesc.text = cards[IDArray[1]].Description;
+        middleCardPerkID = IDArray[1];
         rightTitle.text = cards[IDArray[2]].Title;
         rightDesc.text = cards[IDArray[2]].Description;
+        rightCardPerkID = IDArray[2];
+        Debug.Log(leftCardPerkID);
+        Debug.Log(middleCardPerkID);
+        Debug.Log(rightCardPerkID);
     }
 
     public int[] ChosenCards() 
@@ -95,5 +105,48 @@ public class CardUIHandler : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void AssignLeftCardToPlayer() 
+    {
+        AssignPerkToPlayer(leftCardPerkID);
+        leftTitle.text = "";
+        leftDesc.text = "";
+        SceneManager.LoadScene(0);
+        PlayerController.player.gameObject.SetActive(true);
+        PlayerController.player.inCardsScene = false;
+    }
+
+    public void AssignMiddleCardToPlayer()
+    {
+        AssignPerkToPlayer(middleCardPerkID);
+        middleTitle.text = "";
+        middleDesc.text = "";
+        SceneManager.LoadScene(0);
+        PlayerController.player.gameObject.SetActive(true);
+        PlayerController.player.inCardsScene = false;
+    }
+
+    public void AssignRightCardToPlayer()
+    {
+        AssignPerkToPlayer(rightCardPerkID);
+        rightTitle.text = "";
+        rightDesc.text = "";
+        SceneManager.LoadScene(0);
+        PlayerController.player.gameObject.SetActive(true);
+        PlayerController.player.inCardsScene = false;
+    }
+
+    void AssignPerkToPlayer(int ID) 
+    {
+        if (ID == 0) { PlayerController.player.HealthBoost(); }
+        else if (ID == 1) { PlayerController.player.KatanaDash(); }
+        else if (ID == 2) { PlayerController.player.CoolerDash(); }
+        else if (ID == 3) { PlayerController.player.FatalBullets(); }
+        else if (ID == 4) { PlayerController.player.AppleJuice(); }
+        else if (ID == 5) { PlayerController.player.Fortress(); }
+        else if (ID == 6) { PlayerController.player.SqueezE(); }
+        else if (ID == 7) { PlayerController.player.PressurizedBullets(); }
+        else if (ID == 8) { PlayerController.player.HighCaliber(); }
     }
 }

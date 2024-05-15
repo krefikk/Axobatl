@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     bool dead = false;
     bool moving = false;
     bool dashing = false;
+    public bool inCardsScene = false;
     // Attributes
     bool mirrorArmorActivated = false;
 
@@ -77,6 +78,7 @@ public class PlayerController : MonoBehaviour
         {
             player = this;
         }
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
@@ -108,8 +110,9 @@ public class PlayerController : MonoBehaviour
         attacking = Input.GetMouseButtonDown(0); // Checks if player pressed left mouse button
         if (Input.GetKeyDown(KeyCode.Escape)) // Stops the game if game is flowing, starts the game if game is stopped
         {
-            GameManager.gameManager.StopGame();
-            GameManager.gameManager.ContinueGame();
+            GameManager.gameManager.OpenCardsScene();
+            inCardsScene = true;
+            this.gameObject.SetActive(false);
         }
         //------------------------------Attribute Inputs-------------------------------------
         if (Input.GetKeyDown(KeyCode.Z) && !mirrorArmorActivated && !isMirrorArmorOnCooldown && attribute == 0)
