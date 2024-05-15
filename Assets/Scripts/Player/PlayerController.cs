@@ -360,5 +360,45 @@ public class PlayerController : MonoBehaviour
     {
         return gun;
     }
+    //--------------------------------Perks------------------------------------------
+    //Health
+    public void HealthBoost()
+    {       
+        maxHealth += 5;
+        health += 5;   
+    }
+    public void AppleJuice()
+    {
+        maxHealth += 10;
+        health += 10;
+        walkSpeed -= 5;
+    }
+
+    public void Fortress()
+    {
+        maxHealth += 75;
+
+        walkSpeed = 0;
+    }
+    //Speed
+    public void SqueezE()
+    {
+            maxHealth -= 5;
+            health -= 5;
+            walkSpeed += 2;
+
+    }
+    public void NewKicks()
+    {
+        maxHealth = 1;
+        health = 1;
+        walkSpeed += 10;
+    }
+    //Gun
+    public void ExtraBarrel()
+    {
+        
+
+    }
 }
 
