@@ -387,7 +387,7 @@ public class PlayerController : MonoBehaviour
     public void HealthBoost()
     { // Increases max health and refreshes the health     
         maxHealth += 15;
-        health = maxHealth;   
+        health = maxHealth;
     }
     public void AppleJuice()
     { // Increases max health, refreshes health but slightly decreases walk speed.
@@ -395,7 +395,6 @@ public class PlayerController : MonoBehaviour
         health = maxHealth;
         walkSpeed -= 1;
     }
-
     public void Fortress()
     { // Greatly increases maximum health, replenishes health but also greatly reduces walk speed.
         maxHealth += 75;
@@ -408,24 +407,33 @@ public class PlayerController : MonoBehaviour
         {
             walkSpeed = 1f;
         }
-        else 
+        else
         {
             walkSpeed = 0.5f;
-        }    
+        }
     }
 
     // -------Movement
     public void SqueezE()
     { // Increases walk speed but slightly reduces maximum health.
         maxHealth -= 7.5f;
-        if (health > maxHealth - 7.5f) 
+        if (health > maxHealth - 7.5f)
         {
             health = maxHealth;
         }
         walkSpeed += 1.5f;
     }
+    public void SpeedUp()
+    { // Increases walk speed but slightly reduces maximum health.
+        walkSpeed += 0.75f;
+    }
+    public void DashBurger()
+    { //Increases Dashtime but decreases walkSpeed
+        dashTime += 0.5f;
+        walkSpeed -= 0.75f;
+    }
 
-    public void CoolerDash() 
+    public void CoolerDash()
     { // Decreases cooldown time of dash (can be used maximum 3 times)
         dashCooldown -= 0.25f;
     }
@@ -433,7 +441,7 @@ public class PlayerController : MonoBehaviour
     // -------Combat
     public void ExtraBarrel()
     {
-        
+
 
     }
 
@@ -442,7 +450,7 @@ public class PlayerController : MonoBehaviour
         bulletSpeedMultiplier *= 2;
     }
 
-    public void FatalBullets() 
+    public void FatalBullets()
     { // Increases the damage of bullets
         bulletSpeedMultiplier *= 1.5f;
     }
@@ -451,13 +459,13 @@ public class PlayerController : MonoBehaviour
     { // Greatly increases the damage of bullets but also increases the time between shots
         if (gun == 0)
         {
-            timeBetweenAutomaticGunShots += 0.3f;           
+            timeBetweenAutomaticGunShots += 0.3f;
         }
         else if (gun == 1)
         {
             timeBetweenRevolverShots += 0.4f;
         }
-        else if (gun == 2) 
+        else if (gun == 2)
         {
             timeBetweenShotgunShots += 0.5f;
         }
