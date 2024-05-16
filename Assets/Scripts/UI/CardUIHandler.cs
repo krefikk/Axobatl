@@ -148,5 +148,12 @@ public class CardUIHandler : MonoBehaviour
         else if (ID == 6) { PlayerController.player.SqueezE(); }
         else if (ID == 7) { PlayerController.player.PressurizedBullets(); }
         else if (ID == 8) { PlayerController.player.HighCaliber(); }
+        else if (ID == 9) { PlayerController.player.SpeedUp(); }
+        else if (ID == 10) { PlayerController.player.DashBurger(); }
+        else if (ID == 11) { PlayerController.player.ClickClack(); }
+        else if (ID == 12) { PlayerController.player.BlastGum(); }
+        else if (ID == 13) { PlayerController.player.SawBullets(); }
+        else if (ID == 14) { PlayerController.player.LetItBeBullet(); }
+        else if (ID == 15) { PlayerController.player.DashAirlines(); }
     }
 }

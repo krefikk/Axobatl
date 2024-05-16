@@ -10,10 +10,8 @@ public class PlayerController : MonoBehaviour
     public static PlayerController player;
     
     [Header("Prefabs")]
-    public GameObject SawPrefab;
     public GameObject bulletPrefab;
     
-
     [Header("Combat")]
     float timeBetweenAutomaticGunShots = 0.2f;
     float timeBetweenRevolverShots = 0.5f;
@@ -48,6 +46,7 @@ public class PlayerController : MonoBehaviour
     float dashSpeed = 15f;
     float dashTime = 0.2f;
     float dashCooldown = 1f;
+    float dashDistanceMultiplier = 1;
 
     [Header("Perks")]
     float bulletSpeedMultiplier = 1;
@@ -66,6 +65,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("HUD")]
     public StatBar healthBar;
+
+    [Header("Waves")]
+    int inWave = 0;
 
     // Components
     Rigidbody2D rb;
@@ -179,33 +181,20 @@ public class PlayerController : MonoBehaviour
         Vector3 bulletSpawnPosition = transform.position + GetDirection();
         Vector3 bulletDirection = GetDirection();
 
-        if (unlockedSawBullets)
-        {
-            GameObject bulletObject = Instantiate(SawPrefab, bulletSpawnPosition, Quaternion.identity);
-            Bullet bullet = bulletObject.GetComponent<Bullet>();
+        GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
+        Bullet bullet = bulletObject.GetComponent<Bullet>();
 
-            if (bullet != null)
+        if (bullet != null)
+        {
+            bullet.SetDirection(bulletDirection.normalized);
+            bullet.SetSpeed(10f * bulletSpeedMultiplier);
+            bullet.SetDamage(2f * bulletDamageMultiplier);
+            bullet.SetParent(gameObject);
+            if (unlockedSawBullets) 
             {
-                bullet.SetDirection(bulletDirection.normalized);
-                bullet.SetSpeed(10f * bulletSpeedMultiplier);
-                bullet.SetDamage(2f * bulletDamageMultiplier);
-                bullet.SetParent(gameObject);
+                bullet.IsBoomerang = true;
             }
         }
-        else
-        {
-            GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
-            Bullet bullet = bulletObject.GetComponent<Bullet>();
-            
-            if (bullet != null)
-            {
-                bullet.SetDirection(bulletDirection.normalized);
-                bullet.SetSpeed(10f * bulletSpeedMultiplier);
-                bullet.SetDamage(2f * bulletDamageMultiplier);
-                bullet.SetParent(gameObject);
-            }
-        }
-
     }
 
     void ShootRevolverBullet() // Shoots bullet
@@ -213,34 +202,20 @@ public class PlayerController : MonoBehaviour
         Vector3 bulletSpawnPosition = transform.position + GetDirection();
         Vector3 bulletDirection = GetDirection();
 
-        if (unlockedSawBullets)
-        {
-            GameObject bulletObject = Instantiate(SawPrefab, bulletSpawnPosition, Quaternion.identity);
-            Bullet bullet = bulletObject.GetComponent<Bullet>();
+        GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
+        Bullet bullet = bulletObject.GetComponent<Bullet>();
 
-            if (bullet != null)
+        if (bullet != null)
+        {
+            bullet.SetDirection(bulletDirection.normalized);
+            bullet.SetSpeed(10f * bulletSpeedMultiplier);
+            bullet.SetDamage(5f * bulletDamageMultiplier);
+            bullet.SetParent(gameObject);
+            if (unlockedSawBullets)
             {
-                bullet.SetDirection(bulletDirection.normalized);
-                bullet.SetSpeed(10f * bulletSpeedMultiplier);
-                bullet.SetDamage(5f * bulletDamageMultiplier);
-                bullet.SetParent(gameObject);
+                bullet.IsBoomerang = true;
             }
         }
-        else
-        {
-            GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
-            Bullet bullet = bulletObject.GetComponent<Bullet>();
-
-            if (bullet != null)
-            {
-                bullet.SetDirection(bulletDirection.normalized);
-                bullet.SetSpeed(10f * bulletSpeedMultiplier);
-                bullet.SetDamage(5f * bulletDamageMultiplier);
-                bullet.SetParent(gameObject);
-            }
-        }
-
-
     }
 
     void ShootShotgunBullets() // Shoots bullets
@@ -279,6 +254,10 @@ public class PlayerController : MonoBehaviour
                 bullet.SetSpeed(10f * bulletSpeedMultiplier);
                 bullet.SetDamage(2f * bulletDamageMultiplier);
                 bullet.SetParent(gameObject);
+                if (unlockedSawBullets)
+                {
+                    bullet.IsBoomerang = true;
+                }
             }
         }
     }
@@ -346,7 +325,7 @@ public class PlayerController : MonoBehaviour
         Vector2 direction = new Vector2(xAxis, yAxis);
         if (direction.magnitude == 0)
         {
-            rb.velocity = GetDirection() * dashSpeed;
+            rb.velocity = GetDirection() * dashSpeed * dashDistanceMultiplier;
             Debug.Log("No movement");
         }
         else
@@ -430,6 +409,17 @@ public class PlayerController : MonoBehaviour
         return attacking;
     }
 
+    public int GetWaveNumber() 
+    { // Returns the number of the wave player currently dealing
+        if (inCardsScene) { return -1; }
+        return inWave;
+    }
+
+    public void IncreaseWaveNumber(int number) 
+    {
+        inWave += number;
+    }
+
     //--------------------------------Perks------------------------------------------
     // ------Health
     public void HealthBoost()
@@ -472,18 +462,27 @@ public class PlayerController : MonoBehaviour
         walkSpeed += 1.5f;
     }
     public void SpeedUp()
-    { // Increases walk speed but slightly reduces maximum health.
+    { // Slightly increases walk speed
         walkSpeed += 0.75f;
     }
     public void DashBurger()
-    { //Increases Dashtime but decreases walkSpeed
-        dashTime += 0.5f;
+    { // Increases Dashtime but decreases walkSpeed (one time)
+        dashTime += 0.4f;
         walkSpeed -= 0.75f;
     }
 
     public void CoolerDash()
     { // Decreases cooldown time of dash (can be used maximum 3 times)
         dashCooldown -= 0.25f;
+        if (dashCooldown <= 0) 
+        {
+            dashCooldown = 0.2f;
+        }
+    }
+
+    public void DashAirlines()
+    { // Increases the speed and distance of the dash.
+        dashDistanceMultiplier *= 1.5f;
     }
 
     // -------Combat
@@ -519,20 +518,24 @@ public class PlayerController : MonoBehaviour
         }
     }
     public void BlastGum()
-    { // Decreases time between shots but decreases damage
-        if (gun == 0)
+    { // Decreases time between shots but also decreases damage (one time)
+        if (gun == 0 && timeBetweenAutomaticGunShots > 0.3f)
         {
             timeBetweenAutomaticGunShots -= 0.3f;
         }
+        else if (timeBetweenAutomaticGunShots <= 0.3f) 
+        {
+            timeBetweenAutomaticGunShots -= 0.05f;
+        }
         else if (gun == 1)
         {
-            timeBetweenRevolverShots -= 0.4f;
+            timeBetweenRevolverShots -= 0.3f;
         }
         else if (gun == 2)
         {
-            timeBetweenShotgunShots -= 0.5f;
+            timeBetweenShotgunShots -= 0.2f;
         }
-        bulletDamageMultiplier /= 2.25f;
+        bulletDamageMultiplier /= 1.7f;
     }
 
     public void HighCaliber()
@@ -547,7 +550,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (gun == 2)
         {
-            timeBetweenShotgunShots += 0.5f;
+            timeBetweenShotgunShots += 0.3f;
         }
         bulletDamageMultiplier *= 2.25f;
     }
@@ -556,10 +559,32 @@ public class PlayerController : MonoBehaviour
     { // Dashes give damage to the enemies (one time)
         unlockedKatanaDash = true;
     }
-    public void SawBullet()
-    {
+    public void SawBullets()
+    { // Bullets come back to the player (one time)
         unlockedSawBullets = true;
     }
+
+    public void LetItBeBullet() 
+    { // Greatly decreases time between shots but also greatly decreases walk speed. (one time)
+        if (gun == 0)
+        {
+            timeBetweenAutomaticGunShots -= 0.1f;
+            if (timeBetweenAutomaticGunShots <= 0) { timeBetweenAutomaticGunShots = 0.05f; }
+        }
+        else if (gun == 1)
+        {
+            timeBetweenRevolverShots -= 0.25f;
+            if (timeBetweenRevolverShots <= 0) { timeBetweenRevolverShots = 0.05f; }
+        }
+        else if (gun == 2)
+        {
+            timeBetweenShotgunShots -= 0.3f;
+            if (timeBetweenShotgunShots <= 0) { timeBetweenShotgunShots = 0.05f; }
+        }
+        walkSpeed -= 2.5f;
+        if (walkSpeed <= 0) { walkSpeed = 0.1f; }
+    }
+
 
 }
 

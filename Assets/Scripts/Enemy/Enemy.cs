@@ -48,8 +48,10 @@ public class Enemy : MonoBehaviour
     public Transform rayThrower;
 
     [Header("Flags")]
-    protected bool canShoot = true;
+    public bool canShoot = true;
     bool moving = false;
+    public bool meleeEnemy = false;
+
 
     [Header("HUD")]
     public Vector3 healthBarOffset;
@@ -60,9 +62,16 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        // Handling necromancing and shooting flags
-        if (canNecromance) { canShoot = false; }
-        if (canShoot) { canNecromance = false; }
+        // Handling melee, necromancing and shooting flags
+        if (!meleeEnemy)
+        {
+            if (canNecromance) { canShoot = false; meleeEnemy = true; }
+            if (canShoot) { canNecromance = false; meleeEnemy = false; }
+        }
+        else 
+        {
+            canShoot = false;
+        }
         // Initializing components
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
