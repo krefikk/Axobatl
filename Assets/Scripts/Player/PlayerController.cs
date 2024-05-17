@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private float xAxis = 0;
     private float yAxis = 0;
     public float walkSpeed = 5f;
+    
 
     [Header("Flags")]
     bool attacking = false;
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
     bool canDash = true;
 
     [Header("Dash")]
+    public bool DashAbility = true;
     float dashSpeed = 15f;
     float dashTime = 0.2f;
     float dashCooldown = 1f;
@@ -319,24 +321,27 @@ public class PlayerController : MonoBehaviour
     
     IEnumerator Dash()
     {
-        canDash = false;
-        dashing = true;
-        // Trigger animation
-        Vector2 direction = new Vector2(xAxis, yAxis);
-        if (direction.magnitude == 0)
+        if (DashAbility)
         {
-            rb.velocity = GetDirection() * dashSpeed * dashDistanceMultiplier;
-            Debug.Log("No movement");
+            canDash = false;
+            dashing = true;
+            // Trigger animation
+            Vector2 direction = new Vector2(xAxis, yAxis);
+            if (direction.magnitude == 0)
+            {
+                rb.velocity = GetDirection() * dashSpeed * dashDistanceMultiplier;
+                Debug.Log("No movement");
+            }
+            else
+            {
+                direction.Normalize();
+                rb.velocity = direction * dashSpeed;
+            }
+            yield return new WaitForSeconds(dashTime);
+            dashing = false;
+            yield return new WaitForSeconds(dashCooldown);
+            canDash = true;
         }
-        else
-        {
-            direction.Normalize();
-            rb.velocity = direction * dashSpeed;
-        }
-        yield return new WaitForSeconds(dashTime);
-        dashing = false;
-        yield return new WaitForSeconds(dashCooldown);
-        canDash = true;
     }
 
     // --------------------------------Attributes------------------------------------------
@@ -451,6 +456,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void PlotArmor()
+    { // Increases your health greatly but you lose your dash (one time)
+        maxHealth += 100;
+        health = maxHealth;
+        DashAbility = false;
+    }
+
     // -------Movement
     public void SqueezE()
     { // Increases walk speed but slightly reduces maximum health.
@@ -489,8 +501,23 @@ public class PlayerController : MonoBehaviour
     public void ExtraBarrel()
     {
 
-
+        
     }
+
+    public void DashBlast()
+    {// greatly upgrades your dash but greatly decreases your health
+        dashTime += 1f;
+        dashDistanceMultiplier *= 2f;
+        maxHealth -= 15;     
+        if (maxHealth <= 0)
+        {
+            maxHealth = 5;
+
+        }
+        health = maxHealth;
+    }
+
+
 
     public void PressurizedBullets()
     { // Doubles the speed of bullets
@@ -586,11 +613,15 @@ public class PlayerController : MonoBehaviour
     }
     
     public void AxoWaddle()
-    { // Greatly increases walk speed but also greatly decreases bullet damage. (one time)
-        bulletDamageMultiplier /= 1.5f;
+    { // Greatly increases walk speed and bullet damage but greatly increases time between shots. (one time)
+        bulletDamageMultiplier *= 1.5f;
+        timeBetweenAutomaticGunShots *= 2.5f;
+        timeBetweenRevolverShots *= 2.5f;
+        timeBetweenShotgunShots *= 2.5f;
         walkSpeed += 3f;
         if (walkSpeed <= 0) { walkSpeed = 0.1f; }
     }
+
 
 }
 
