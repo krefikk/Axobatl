@@ -614,11 +614,11 @@ public class PlayerController : MonoBehaviour
     
     public void AxoWaddle()
     { // Greatly increases walk speed and bullet damage but greatly increases time between shots. (one time)
-        bulletDamageMultiplier *= 1.5f;
-        timeBetweenAutomaticGunShots *= 2.5f;
-        timeBetweenRevolverShots *= 2.5f;
-        timeBetweenShotgunShots *= 2.5f;
-        walkSpeed += 3f;
+        bulletDamageMultiplier *= 2f;
+        timeBetweenAutomaticGunShots *= 2f;
+        timeBetweenRevolverShots *= 2;
+        timeBetweenShotgunShots *= 2;
+        walkSpeed *= 2f;
         if (walkSpeed <= 0) { walkSpeed = 0.1f; }
     }
 
