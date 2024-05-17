@@ -584,7 +584,13 @@ public class PlayerController : MonoBehaviour
         walkSpeed -= 2.5f;
         if (walkSpeed <= 0) { walkSpeed = 0.1f; }
     }
-
+    
+    public void AxoWaddle()
+    { // Greatly increases walk speed but also greatly decreases bullet damage. (one time)
+        bulletDamageMultiplier /= 1.5f;
+        walkSpeed += 3f;
+        if (walkSpeed <= 0) { walkSpeed = 0.1f; }
+    }
 
 }
 
