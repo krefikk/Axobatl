@@ -13,7 +13,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayGunSound()
     {
-        //RuntimeManager.PlayOneShotAttached(gunshot, controller.getPlayer());
+        RuntimeManager.PlayOneShotAttached(gunshot, controller.getPlayer());
     }
     // Start is called before the first frame update
     void Start()
