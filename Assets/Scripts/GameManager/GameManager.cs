@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager gameManager;
 
     public bool gamePaussed = false;
+    private float elapsedTime = 0f;
 
     private void Awake()
     {
@@ -19,6 +20,15 @@ public class GameManager : MonoBehaviour
         else
         {
             gameManager = this;
+        }
+        DontDestroyOnLoad(this.gameObject);
+    }
+
+    private void Update()
+    {
+        if (!gamePaussed)
+        {
+            elapsedTime += Time.deltaTime;
         }
     }
 
@@ -40,6 +50,18 @@ public class GameManager : MonoBehaviour
 
     public void OpenCardsScene() 
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("CardChoose");
+    }
+
+    public float GetElapsedTime() 
+    {
+        return elapsedTime;
+    }
+
+    public string GetFormattedElapsedTime()
+    {
+        int minutes = Mathf.FloorToInt(elapsedTime / 60);
+        int seconds = Mathf.FloorToInt(elapsedTime % 60);
+        return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }

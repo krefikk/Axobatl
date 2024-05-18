@@ -36,6 +36,16 @@ public class WholeGameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 50);
+        musicVolume = PlayerPrefs.GetFloat("MusicVolume", 50);
+        if (PlayerPrefs.GetInt("IsTutorialsOn", 1) == 1)
+        {
+            isTutorialsOn = true;
+        }
+        else 
+        {
+            isTutorialsOn = false;
+        }
     }
 
     private void OnEnable()
@@ -100,6 +110,8 @@ public class WholeGameManager : MonoBehaviour
 
         inMainMenu = false;
         mainMenuManager = null;
+
+        PlayerPrefs.Save();
     }
 
     //---------------------------------------- Getters & Setters --------------------------------------------------

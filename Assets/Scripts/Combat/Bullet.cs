@@ -75,11 +75,13 @@ public class Bullet : MonoBehaviour
                 Debug.Log("Hit Enemy");
                 enemy.TakeDamage(damage);
             }
+            PlayerController.player.SetScore(PlayerController.player.GetScore() + 10);
         }
         else if ((parent.CompareTag("Enemy") || parent is null) && other.CompareTag("Player"))
         {
             Destroy(gameObject);
             PlayerController.player.TakeDamage(damage);
+            PlayerController.player.SetScore(PlayerController.player.GetScore() - 3);
         }
     }
 

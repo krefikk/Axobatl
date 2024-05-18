@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -67,9 +68,15 @@ public class PlayerController : MonoBehaviour
 
     [Header("HUD")]
     public StatBar healthBar;
+    public TextMeshProUGUI elapsedTime;
+    public TextMeshProUGUI hudScore;
 
     [Header("Waves")]
     int inWave = 0;
+
+    [Header("Score")]
+    float highScore;
+    float score = 0;
 
     // Components
     Rigidbody2D rb;
@@ -95,6 +102,7 @@ public class PlayerController : MonoBehaviour
         // Initialize components
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        highScore = PlayerPrefs.GetFloat("HighScore", 0);
     }
 
     private void Update()
@@ -103,6 +111,8 @@ public class PlayerController : MonoBehaviour
         FaceMouse();
         Shoot();
         DisplayHealth();
+        DisplayScore();
+        DisplayElapsedTime();
     }
 
     private void FixedUpdate()
@@ -272,8 +282,23 @@ public class PlayerController : MonoBehaviour
         healthBar.current = 100 * health / maxHealth;
     }
 
+    public void DisplayElapsedTime() 
+    {
+        elapsedTime.text = GameManager.gameManager.GetFormattedElapsedTime();
+    }
+
+    public void DisplayScore() 
+    {
+        hudScore.text = score.ToString();
+    }
+
     public void Die() 
     {
+        if (score > highScore) 
+        {
+            highScore = score;
+            PlayerPrefs.SetFloat("HighScore", highScore);
+        }       
         dead = true;
     }
 
@@ -426,6 +451,16 @@ public class PlayerController : MonoBehaviour
     public void IncreaseWaveNumber(int number) 
     {
         inWave += number;
+    }
+
+    public float GetScore() 
+    {
+        return score;
+    }
+
+    public void SetScore(float value) 
+    {
+        score = value;
     }
 
     //--------------------------------Perks------------------------------------------
