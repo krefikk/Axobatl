@@ -6,6 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using FMODUnity;
 
 public class CardUIHandler : MonoBehaviour
 {
@@ -23,14 +24,21 @@ public class CardUIHandler : MonoBehaviour
     int middleCardPerkID;
     int rightCardPerkID;
 
+    public EventReference cardLoad;
+    public EventReference cardSelect;
+    public GameObject instance; // placeholder because I can't get the singleton to work using PlayerController.player
+
     public void Start()
     {
         cardAnimator = GetComponentInChildren<CardAnimator>();
         cards = Resources.LoadAll<Card>("Cards/");
+
+        RuntimeManager.PlayOneShotAttached(cardLoad, instance);
     }
 
     public void Update()
     {
+
         if (cardAnimator.AnimFinished() && !displayed) 
         {
             DisplayChosenCards();

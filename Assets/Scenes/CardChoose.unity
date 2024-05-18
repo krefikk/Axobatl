@@ -1305,6 +1305,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1155996833}
   m_CullTransparentMesh: 1
+--- !u!1 &1538229997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1538229999}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1538229999
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538229997}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1807830387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,6 +1483,21 @@ MonoBehaviour:
   leftDesc: {fileID: 1155996835}
   middleDesc: {fileID: 1866990975}
   rightDesc: {fileID: 1863740641}
+  cardLoad:
+    Guid:
+      Data1: 1890260032
+      Data2: 1258259740
+      Data3: 2120850
+      Data4: 1299670890
+    Path: event:/CardLoad
+  cardSelect:
+    Guid:
+      Data1: 1436127388
+      Data2: 1312316193
+      Data3: 1178911361
+      Data4: 742874224
+    Path: event:/CardSelect
+  instance: {fileID: 1807830387}
 --- !u!1 &1863740639
 GameObject:
   m_ObjectHideFlags: 0
