@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{8c3310d4-dc48-43f1-a184-a3fb5db14cdc}">
 		<property name="name">
-			<value>New Event</value>
+			<value>Shotgun</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -84,7 +84,7 @@
 	</object>
 	<object class="MultiSound" id="{5c655500-58db-4eab-ad95-1ac1b6766512}">
 		<relationship name="sounds">
-			<destination>{5a7c6d70-8513-4e9c-b19b-a8f97d48e7a2}</destination>
+			<destination>{6aacb659-daca-4c32-8fc4-e222012f4086}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{94e15072-ecc8-4c9d-8530-c6ae5929ff26}">
@@ -100,14 +100,9 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{01d47e62-c6e3-4e6c-ab0a-ded607efe2ed}" />
-	<object class="MultiSound" id="{5a7c6d70-8513-4e9c-b19b-a8f97d48e7a2}">
-		<property name="looping">
-			<value>true</value>
-		</property>
-		<relationship name="sounds">
-			<destination>{d8018703-a586-49ed-874c-3fed822e1696}</destination>
-			<destination>{e7518285-41a1-402b-9e9e-18a0f02c1133}</destination>
-			<destination>{67d812ae-de27-401a-b635-d04c221d0f2c}</destination>
+	<object class="SingleSound" id="{6aacb659-daca-4c32-8fc4-e222012f4086}">
+		<relationship name="audioFile">
+			<destination>{8a052693-76a8-41ba-a1ab-4e1b81bd1524}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{0e6af9d2-aaf9-4d72-be3f-2ac9292befe2}" />
@@ -128,20 +123,5 @@
 		<property name="soundSize">
 			<value>10000</value>
 		</property>
-	</object>
-	<object class="SingleSound" id="{d8018703-a586-49ed-874c-3fed822e1696}">
-		<relationship name="audioFile">
-			<destination>{a2e3e670-c6d9-41d4-a7c7-32e32528ffe3}</destination>
-		</relationship>
-	</object>
-	<object class="SingleSound" id="{e7518285-41a1-402b-9e9e-18a0f02c1133}">
-		<relationship name="audioFile">
-			<destination>{ffb780be-5da4-442a-8602-312f326ac516}</destination>
-		</relationship>
-	</object>
-	<object class="SingleSound" id="{67d812ae-de27-401a-b635-d04c221d0f2c}">
-		<relationship name="audioFile">
-			<destination>{b045d57c-0e62-42c8-99ab-c5bdaf087dc6}</destination>
-		</relationship>
 	</object>
 </objects>

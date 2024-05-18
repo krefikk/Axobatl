@@ -77,6 +77,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        player = this;
+
         if (player != null && player != this)
         {
             Destroy(gameObject);
@@ -176,6 +178,7 @@ public class PlayerController : MonoBehaviour
                 timeSinceLastShoot = 0;
             }
         }
+        //attacking = false;
     }
 
     void ShootAutoGunBullet() // Shoots bullet
@@ -409,7 +412,7 @@ public class PlayerController : MonoBehaviour
         return mirrorArmorActivated;
     }
 
-    public bool isAttacking()
+    public bool isShooting()
     {
         return attacking;
     }

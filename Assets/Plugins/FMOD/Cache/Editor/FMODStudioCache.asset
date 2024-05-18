@@ -1,5 +1,106 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7446827679239875473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Shotgun
+  m_EditorClassIdentifier: 
+  Path: event:/Shotgun
+  Guid:
+    Data1: -1942810412
+    Data2: 1139924040
+    Data3: -73169759
+    Data4: -598953635
+  Banks:
+  - {fileID: 6620326056187169626}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6872912945755803373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Handgun
+  m_EditorClassIdentifier: 
+  Path: event:/Handgun
+  Guid:
+    Data1: 339986610
+    Data2: 1256911626
+    Data3: -609821796
+    Data4: -1268073296
+  Banks:
+  - {fileID: 6620326056187169626}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5508419831715900160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX_cards.bank
+  m_EditorClassIdentifier: 
+  Path: Axobatl FMOD/Build/Desktop/SFX_cards.bank
+  Name: SFX_cards
+  StudioPath: bank:/SFX_cards
+  lastModified: 638515908453473943
+  FileSizes:
+  - Name: Desktop
+    Value: 52384
+  Exists: 1
+--- !u!114 &-361160366949042472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CardLoad
+  m_EditorClassIdentifier: 
+  Path: event:/CardLoad
+  Guid:
+    Data1: 1890260032
+    Data2: 1258259740
+    Data3: 2120850
+    Data4: 1299670890
+  Banks:
+  - {fileID: -5508419831715900160}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16,14 +117,19 @@ MonoBehaviour:
   - {fileID: 1847468067600089330}
   - {fileID: 2705059955615945622}
   - {fileID: 6620326056187169626}
+  - {fileID: -5508419831715900160}
   EditorEvents:
-  - {fileID: 5855772553711206577}
+  - {fileID: -6872912945755803373}
+  - {fileID: -7446827679239875473}
+  - {fileID: 8089034092387346589}
+  - {fileID: -361160366949042472}
+  - {fileID: 8049233034189810712}
   EditorParameters: []
   MasterBanks:
   - {fileID: 2705059955615945622}
   StringsBanks:
   - {fileID: 1847468067600089330}
-  cacheTime: 638513957272963862
+  cacheTime: 638515908453473943
   cacheVersion: 131618
 --- !u!114 &1847468067600089330
 MonoBehaviour:
@@ -40,10 +146,10 @@ MonoBehaviour:
   Path: Axobatl FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638513957272963862
+  lastModified: 638515908452970296
   FileSizes:
   - Name: Desktop
-    Value: 810
+    Value: 1036
   Exists: 1
 --- !u!114 &2705059955615945622
 MonoBehaviour:
@@ -60,38 +166,11 @@ MonoBehaviour:
   Path: Axobatl FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638513957272963862
+  lastModified: 638515908452960314
   FileSizes:
   - Name: Desktop
     Value: 1036
   Exists: 1
---- !u!114 &5855772553711206577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/New Event
-  m_EditorClassIdentifier: 
-  Path: event:/New Event
-  Guid:
-    Data1: -1942810412
-    Data2: 1139924040
-    Data3: -73169759
-    Data4: -598953635
-  Banks:
-  - {fileID: 6620326056187169626}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &6620326056187169626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,8 +186,62 @@ MonoBehaviour:
   Path: Axobatl FMOD/Build/Desktop/SFX_main.bank
   Name: SFX_main
   StudioPath: bank:/SFX_main
-  lastModified: 638513957272963862
+  lastModified: 638515887819996484
   FileSizes:
   - Name: Desktop
-    Value: 6336
+    Value: 8992
   Exists: 1
+--- !u!114 &8049233034189810712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CardSelect
+  m_EditorClassIdentifier: 
+  Path: event:/CardSelect
+  Guid:
+    Data1: 1436127388
+    Data2: 1312316193
+    Data3: 1178911361
+    Data4: 742874224
+  Banks:
+  - {fileID: -5508419831715900160}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8089034092387346589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Necromancer
+  m_EditorClassIdentifier: 
+  Path: event:/Necromancer
+  Guid:
+    Data1: -1944780330
+    Data2: 1336436960
+    Data3: 626325891
+    Data4: -1235076952
+  Banks:
+  - {fileID: 6620326056187169626}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
