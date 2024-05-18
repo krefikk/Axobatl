@@ -7,7 +7,7 @@ using TMPro;
 
 
 public class MainMenuManager : MonoBehaviour
-{
+{  
     public GameObject start;
     public GameObject settings;
     public GameObject credits;
