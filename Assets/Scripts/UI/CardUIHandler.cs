@@ -12,7 +12,6 @@ public class CardUIHandler : MonoBehaviour
 {
     CardAnimator cardAnimator;
     Card[] cards;
-    List<int> displayedOneTimeCardIDs = new List<int>();
     public TextMeshProUGUI leftTitle;
     public TextMeshProUGUI middleTitle;
     public TextMeshProUGUI rightTitle;
@@ -66,31 +65,31 @@ public class CardUIHandler : MonoBehaviour
     public int[] ChosenCards() 
     {
         int firstID = Random.Range(0, cards.Length);
-        while (CheckInside(firstID, displayedOneTimeCardIDs)) 
+        while (CheckInside(firstID, PlayerController.player.displayedOneTimeCardIDs)) 
         {
             firstID = Random.Range(0, cards.Length);
         }
         int secondID = Random.Range(0, cards.Length);
-        while (secondID == firstID || CheckInside(secondID, displayedOneTimeCardIDs)) 
+        while (secondID == firstID || CheckInside(secondID, PlayerController.player.displayedOneTimeCardIDs)) 
         {
             secondID = Random.Range(0, cards.Length);
         }
         int thirdID = Random.Range(0, cards.Length);
-        while (thirdID == firstID || thirdID == secondID || CheckInside(thirdID, displayedOneTimeCardIDs))
+        while (thirdID == firstID || thirdID == secondID || CheckInside(thirdID, PlayerController.player.displayedOneTimeCardIDs))
         {
             thirdID = Random.Range(0, cards.Length);
         }
         if (cards[firstID].OneTime) 
         {
-            displayedOneTimeCardIDs.Add(firstID);
+            PlayerController.player.displayedOneTimeCardIDs.Add(firstID);
         }
         if (cards[secondID].OneTime)
         {
-            displayedOneTimeCardIDs.Add(secondID);
+            PlayerController.player.displayedOneTimeCardIDs.Add(secondID);
         }
         if (cards[thirdID].OneTime)
         {
-            displayedOneTimeCardIDs.Add(thirdID);
+            PlayerController.player.displayedOneTimeCardIDs.Add(thirdID);
         }
         int[] array = new int[3];
         array[0] = firstID;
@@ -120,9 +119,10 @@ public class CardUIHandler : MonoBehaviour
         AssignPerkToPlayer(leftCardPerkID);
         leftTitle.text = "";
         leftDesc.text = "";
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MainGame");
         PlayerController.player.gameObject.SetActive(true);
         PlayerController.player.inCardsScene = false;
+        PlayerController.player.IncreaseWaveNumber(1);
     }
 
     public void AssignMiddleCardToPlayer()
@@ -130,9 +130,10 @@ public class CardUIHandler : MonoBehaviour
         AssignPerkToPlayer(middleCardPerkID);
         middleTitle.text = "";
         middleDesc.text = "";
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MainGame");
         PlayerController.player.gameObject.SetActive(true);
         PlayerController.player.inCardsScene = false;
+        PlayerController.player.IncreaseWaveNumber(1);
     }
 
     public void AssignRightCardToPlayer()
@@ -140,9 +141,10 @@ public class CardUIHandler : MonoBehaviour
         AssignPerkToPlayer(rightCardPerkID);
         rightTitle.text = "";
         rightDesc.text = "";
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MainGame");
         PlayerController.player.gameObject.SetActive(true);
         PlayerController.player.inCardsScene = false;
+        PlayerController.player.IncreaseWaveNumber(1);
     }
 
     void AssignPerkToPlayer(int ID) 

@@ -14,20 +14,26 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!moveback)
+        if (!GameManager.gameManager.gamePaussed) 
         {
-            Move();
-        }
-        else
-        {
-            Backwards();
-        }
+            if (!moveback)
+            {
+                Move();
+            }
+            else
+            {
+                Backwards();
+            }
+        }      
     }
 
     private void Update()
     {
-        DestroyBullet();
-        aliveTime += Time.deltaTime;
+        if (!GameManager.gameManager.gamePaussed) 
+        {
+            DestroyBullet();
+            aliveTime += Time.deltaTime;
+        }      
     }
 
     void Move()
@@ -104,7 +110,7 @@ public class Bullet : MonoBehaviour
 
     public bool CheckForDestroy()
     {
-        if (aliveTime < 10)
+        if (aliveTime < 30)
         {
             return false;
         }

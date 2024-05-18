@@ -69,7 +69,7 @@ MonoBehaviour:
   Path: Axobatl FMOD/Build/Desktop/SFX_cards.bank
   Name: SFX_cards
   StudioPath: bank:/SFX_cards
-  lastModified: 638516446622721964
+  lastModified: 638516636608987721
   FileSizes:
   - Name: Desktop
     Value: 52384
@@ -129,7 +129,7 @@ MonoBehaviour:
   - {fileID: 2705059955615945622}
   StringsBanks:
   - {fileID: 1847468067600089330}
-  cacheTime: 638516446622721964
+  cacheTime: 638516636609007741
   cacheVersion: 131618
 --- !u!114 &1847468067600089330
 MonoBehaviour:
@@ -146,7 +146,7 @@ MonoBehaviour:
   Path: Axobatl FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638516446622711953
+  lastModified: 638516636608967731
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -186,7 +186,7 @@ MonoBehaviour:
   Path: Axobatl FMOD/Build/Desktop/SFX_main.bank
   Name: SFX_main
   StudioPath: bank:/SFX_main
-  lastModified: 638516446622721964
+  lastModified: 638516636609007741
   FileSizes:
   - Name: Desktop
     Value: 8992

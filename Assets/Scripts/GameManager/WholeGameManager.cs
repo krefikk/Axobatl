@@ -12,6 +12,7 @@ public class WholeGameManager : MonoBehaviour
     bool inSettingsMenu = false;
     bool inCreditsMenu = false;
     bool inCardsMenu = false;
+    bool inIntro = false;
 
     // Scene managers
     SettingsMenuHandler settingsMenuHandler;
@@ -19,6 +20,7 @@ public class WholeGameManager : MonoBehaviour
     GameManager mainGameManager;
     CardSceneManager cardSceneManager;
     MainMenuManager mainMenuManager;
+    IntroManager introManager;
 
     // Music and sfx
     float sfxVolume = 50; // Max is 100
@@ -70,6 +72,11 @@ public class WholeGameManager : MonoBehaviour
                 Debug.Log("Current scene: Main Menu");
                 inMainMenu = true;
                 mainMenuManager = FindAnyObjectByType<MainMenuManager>();
+                break;
+            case "Intro":
+                Debug.Log("Current scene: Intro");
+                inIntro = true;
+                introManager = FindAnyObjectByType<IntroManager>();
                 break;
             case "SettingScene":
                 Debug.Log("Current scene: Settings");

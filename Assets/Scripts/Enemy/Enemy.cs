@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.U2D;
@@ -92,23 +93,30 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        DisplayHealth();
-        FaceToPosition(PlayerController.player.transform.position);
-        Necromance();
-        if (canShoot && !CheckForObstacles())
+        if (!GameManager.gameManager.gamePaussed) 
         {
-            Shoot();
+            DisplayHealth();
+            FaceToPosition(PlayerController.player.transform.position);
+            Necromance();
+            if (canShoot && !CheckForObstacles())
+            {
+                Shoot();
+            }
+            else if (!canShoot)
+            {
+                GiveDamage();
+            }
         }
-        else if (!canShoot)
-        {
-            GiveDamage();
-        }      
+             
     }
 
     private void FixedUpdate()
     {
-        CalculateStoppingDistance();
-        MoveToPlayer();
+        if (!GameManager.gameManager.gamePaussed) 
+        {
+            CalculateStoppingDistance();
+            MoveToPlayer();
+        }       
     }
 
     void CalculateStoppingDistance() 
@@ -250,7 +258,6 @@ public class Enemy : MonoBehaviour
 
     public void Die() 
     {
-        
     }
 
     void GiveDamage()

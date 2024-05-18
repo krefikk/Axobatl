@@ -65,7 +65,15 @@ public class MainMenuManager : MonoBehaviour
         settingsText.interactable = true;
         creditsText.interactable = true;
         exitText.interactable = true;
-        SceneManager.LoadScene("MainGame");
+        if (PlayerPrefs.GetInt("SawIntro", 0) == 0)
+        {
+            SceneManager.LoadScene("Intro");
+            PlayerPrefs.SetInt("SawIntro", 1);
+        }
+        else 
+        {
+            SceneManager.LoadScene("MainGame");
+        }       
     }
 
     IEnumerator PressedSettingsButtonCO() 

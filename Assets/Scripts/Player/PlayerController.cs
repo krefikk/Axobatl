@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -30,7 +31,9 @@ public class PlayerController : MonoBehaviour
     private float xAxis = 0;
     private float yAxis = 0;
     public float walkSpeed = 5f;
-    
+
+    [Header("Cards")]
+    public List<int> displayedOneTimeCardIDs = new List<int>();
 
     [Header("Flags")]
     bool attacking = false;
@@ -41,10 +44,8 @@ public class PlayerController : MonoBehaviour
     // Attributes
     bool mirrorArmorActivated = false;
 
-    [Header("Skills")]
-    bool canDash = true;
-
     [Header("Dash")]
+    bool canDash = true;
     public bool DashAbility = true;
     float dashSpeed = 15f;
     float dashTime = 0.2f;
@@ -70,13 +71,17 @@ public class PlayerController : MonoBehaviour
     public StatBar healthBar;
     public TextMeshProUGUI elapsedTime;
     public TextMeshProUGUI hudScore;
+    TextMeshProUGUI waveText;
+    public GameObject waveTextParent;
 
     [Header("Waves")]
     int inWave = 0;
+    public bool finishedGame = false;
 
     [Header("Score")]
     float highScore;
     float score = 0;
+    public bool highScoreUpdated = false;
 
     // Components
     Rigidbody2D rb;
@@ -103,23 +108,32 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         highScore = PlayerPrefs.GetFloat("HighScore", 0);
+        waveText = waveTextParent.GetComponent<TextMeshProUGUI>();
+        waveText.text = "";
     }
 
     private void Update()
     {
         GetInputs();
-        FaceMouse();
-        Shoot();
-        DisplayHealth();
-        DisplayScore();
-        DisplayElapsedTime();
+        if (!GameManager.gameManager.gamePaussed) 
+        {            
+            FaceMouse();
+            Shoot();
+            DisplayHealth();
+            DisplayScore();
+            DisplayElapsedTime();
+            FinishGame();
+        }      
     }
 
     private void FixedUpdate()
     {
-        if (dashing) { return; } // Movement functions won't get called if player is dashing
-        Move();
-        StartDash();
+        if (!GameManager.gameManager.gamePaussed)
+        {
+            if (dashing) { return; } // Movement functions won't get called if player is dashing
+            Move();
+            StartDash();
+        }
     }
 
     void GetInputs() 
@@ -129,9 +143,7 @@ public class PlayerController : MonoBehaviour
         attacking = Input.GetMouseButtonDown(0); // Checks if player pressed left mouse button
         if (Input.GetKeyDown(KeyCode.Escape)) // Stops the game if game is flowing, starts the game if game is stopped
         {
-            GameManager.gameManager.OpenCardsScene();
-            inCardsScene = true;
-            this.gameObject.SetActive(false);
+            GameManager.gameManager.gamePaussed = !GameManager.gameManager.gamePaussed;
         }
         //------------------------------Attribute Inputs-------------------------------------
         if (Input.GetKeyDown(KeyCode.Z) && !mirrorArmorActivated && !isMirrorArmorOnCooldown && attribute == 0)
@@ -292,14 +304,69 @@ public class PlayerController : MonoBehaviour
         hudScore.text = score.ToString();
     }
 
+    public void DisplayWaveText() 
+    {
+        StartCoroutine(DisplayWaveTextCO());
+    }
+
+    IEnumerator DisplayWaveTextCO() 
+    {
+        if (inWave == 1) 
+        {
+            waveText.text = "WAVE 1";
+        }
+        else if (inWave == 2)
+        {
+            waveText.text = "WAVE 2";
+        }
+        else if (inWave == 3)
+        {
+            waveText.text = "WAVE 3";
+        }
+        else if (inWave == 4)
+        {
+            waveText.text = "WAVE 4";
+        }
+        else if (inWave == 5)
+        {
+            waveText.text = "WAVE 5";
+        }
+        yield return new WaitForSeconds(3f);
+        waveText.text = "WAVE";
+        yield return new WaitForSeconds(0.5f);
+        waveText.text = "WAV";
+        yield return new WaitForSeconds(0.25f);
+        waveText.text = "WA";
+        yield return new WaitForSeconds(0.25f);
+        waveText.text = "W";
+        yield return new WaitForSeconds(0.25f);
+        waveText.text = "";
+    }
+
     public void Die() 
     {
         if (score > highScore) 
         {
             highScore = score;
             PlayerPrefs.SetFloat("HighScore", highScore);
+            highScoreUpdated = true;
         }       
         dead = true;
+        SceneManager.LoadScene("GameOver");
+    }
+
+    public void FinishGame() 
+    {
+        if (finishedGame) 
+        {
+            if (score > highScore)
+            {
+                highScore = score;
+                PlayerPrefs.SetFloat("HighScore", highScore);
+                highScoreUpdated = true;
+            }
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     public void TakeDamage(float damage) 
@@ -335,6 +402,38 @@ public class PlayerController : MonoBehaviour
 
         // Rotate the character to face the mouse direction
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    public void Restart() 
+    {
+        canDash = true;
+        DashAbility = true;
+        maxHealth = 50;
+        health = maxHealth;
+        inWave = 0;
+        bulletSpeedMultiplier = 1;
+        bulletDamageMultiplier = 1;
+        unlockedKatanaDash = false;
+        unlockedSawBullets = false;
+        timeBetweenAutomaticGunShots = 0.2f;
+        timeBetweenRevolverShots = 0.5f;
+        timeBetweenShotgunShots = 0.6f;
+        walkSpeed = 5f;
+        displayedOneTimeCardIDs.Clear();
+        dead = false;
+        inCardsScene = false;
+        dashSpeed = 15f;
+        dashTime = 0.2f;
+        dashCooldown = 1f;
+        dashDistanceMultiplier = 1;
+        // All attribute bools
+        mirrorArmorCooldown = 20f;
+        mirrorArmorTime = 5f;
+        isMirrorArmorOnCooldown = false;
+        score = 0;
+        transform.position = new Vector2(0.3f, -0.1f);
+        highScoreUpdated = false;
+        finishedGame = false;
     }
 
     // --------------------------------Player Skills------------------------------------------
@@ -451,6 +550,7 @@ public class PlayerController : MonoBehaviour
     public void IncreaseWaveNumber(int number) 
     {
         inWave += number;
+        DisplayWaveText();
     }
 
     public float GetScore() 

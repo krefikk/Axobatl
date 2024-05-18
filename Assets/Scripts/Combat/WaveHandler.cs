@@ -21,6 +21,10 @@ public class WaveHandler : MonoBehaviour
         {
             enemyList.Clear();
             waveFinished = true;
+            if (PlayerController.player.GetWaveNumber() == 5)
+            {
+                PlayerController.player.finishedGame = true;
+            }
         }
         foreach (GameObject enemy in enemyList) 
         {
