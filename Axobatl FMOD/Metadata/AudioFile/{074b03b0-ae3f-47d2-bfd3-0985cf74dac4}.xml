@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{074b03b0-ae3f-47d2-bfd3-0985cf74dac4}">
+		<property name="assetPath">
+			<value>Axolotl Cutscene Music.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>21.576916666666666</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{0ad2ceb4-6996-41b1-82ce-e0a94a72da93}</destination>
+		</relationship>
+	</object>
+</objects>

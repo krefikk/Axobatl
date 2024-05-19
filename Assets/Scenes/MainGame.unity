@@ -1326,6 +1326,13 @@ MonoBehaviour:
       Data3: -1042563393
       Data4: -1126922626
     Path: event:/Revolver
+  audioPlayerDeath:
+    Guid:
+      Data1: 946575839
+      Data2: 1185513617
+      Data3: 1144118719
+      Data4: -246550537
+    Path: event:/Player Death
 --- !u!50 &1001629143
 Rigidbody2D:
   serializedVersion: 4
@@ -2629,6 +2636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 0}
+  menuMusicTracker: 0
 --- !u!4 &2096225195
 Transform:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +14,7 @@ public class WholeGameManager : MonoBehaviour
     bool inCreditsMenu = false;
     bool inCardsMenu = false;
     bool inIntro = false;
+    bool inMenu = true;
 
     // Scene managers
     SettingsMenuHandler settingsMenuHandler;
@@ -26,6 +28,12 @@ public class WholeGameManager : MonoBehaviour
     float sfxVolume = 100; // Max is 100
     float musicVolume = 100; // Max is 100
     bool isTutorialsOn = true; // Default is true
+
+    public EventReference musicMenu;
+    public EventReference musicIntro;
+    public EventReference musicMain;
+    public EventReference musicCards;
+
 
 
     private void Awake()
@@ -80,32 +88,67 @@ public class WholeGameManager : MonoBehaviour
             case "MainMenu":
                 Debug.Log("Current scene: Main Menu");
                 inMainMenu = true;
+                inMenu = true;
                 mainMenuManager = FindAnyObjectByType<MainMenuManager>();
+
+                Debug.Log("menu music tracker before audio call " + AudioManager.audioManager.getMenuMusicTracker());
+
+                if (!AudioManager.audioManager.getMenuMusicTracker() && inMenu)
+                {
+                    RuntimeManager.PlayOneShot(musicMenu);
+                    AudioManager.audioManager.setMenuMusicTracker(true);
+                    Debug.Log("inside main menu audio call " + AudioManager.audioManager.getMenuMusicTracker());
+                }
+
                 break;
             case "Intro":
                 Debug.Log("Current scene: Intro");
                 inIntro = true;
+                inMenu = false;
                 introManager = FindAnyObjectByType<IntroManager>();
+
+                RuntimeManager.PlayOneShot(musicIntro);
+
                 break;
+
             case "SettingScene":
                 Debug.Log("Current scene: Settings");
                 inSettingsMenu = true;
+                inMenu = true;
                 settingsMenuHandler = FindAnyObjectByType<SettingsMenuHandler>();
+
+                Debug.Log("menu music tracker inside settings " + AudioManager.audioManager.getMenuMusicTracker());
+
                 break;
+
             case "CreditsScene":
                 Debug.Log("Current scene: Credits");
                 inCreditsMenu = true;
                 creditsMenuManager = FindAnyObjectByType<CreditsMenuManager>();
+
                 break;
+
             case "MainGame":
                 Debug.Log("Current scene: Main Game");
                 inGameflow = true;
+                inMenu = false;
                 mainGameManager = FindAnyObjectByType<GameManager>();
+
+                AudioManager.audioManager.setMenuMusicTracker(false);
+                AudioManager.audioManager.EndMusic();
+                RuntimeManager.PlayOneShot(musicMain);
+
                 break;
+
             case "CardChoose":
                 Debug.Log("Current scene: Cards");
                 inCardsMenu = true;
+                inMenu = false;
                 cardSceneManager = FindAnyObjectByType<CardSceneManager>();
+
+                AudioManager.audioManager.EndMusic();
+                RuntimeManager.PlayOneShot(musicCards);
+
                 break;
         }
     }

@@ -108,6 +108,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6833686888593208664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music Intro
+  m_EditorClassIdentifier: 
+  Path: event:/Music Intro
+  Guid:
+    Data1: -1611327872
+    Data2: 1101233613
+    Data3: 1301182384
+    Data4: -1204417026
+  Banks:
+  - {fileID: -3549555321612725806}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-6783451944554489966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,10 +251,10 @@ MonoBehaviour:
   Path: Axobatl FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638517183081221159
+  lastModified: 638517279266071368
   FileSizes:
   - Name: Desktop
-    Value: 2503552
+    Value: 2796608
   Exists: 1
 --- !u!114 &-2587205528582885609
 MonoBehaviour:
@@ -336,12 +363,13 @@ MonoBehaviour:
   - {fileID: -7819785082411620809}
   - {fileID: -7356615135305709602}
   - {fileID: -2587205528582885609}
+  - {fileID: -6833686888593208664}
   EditorParameters: []
   MasterBanks:
   - {fileID: -3549555321612725806}
   StringsBanks:
   - {fileID: 7440584091901399918}
-  cacheTime: 638517183081231171
+  cacheTime: 638517279266081414
   cacheVersion: 131618
 --- !u!114 &1847468067600089330
 MonoBehaviour:
@@ -472,10 +500,10 @@ MonoBehaviour:
   Path: Axobatl FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638517183081231171
+  lastModified: 638517279266081414
   FileSizes:
   - Name: Desktop
-    Value: 1196
+    Value: 1232
   Exists: 1
 --- !u!114 &8049233034189810712
 MonoBehaviour:

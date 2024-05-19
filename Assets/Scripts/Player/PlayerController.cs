@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+//using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class PlayerController : MonoBehaviour
 {
@@ -97,6 +97,8 @@ public class PlayerController : MonoBehaviour
     // Audio
     public EventReference audioHandgun;
     public EventReference audioRevolver;
+
+    public EventReference audioPlayerDeath;
 
     private void Awake()
     {
@@ -384,6 +386,9 @@ public class PlayerController : MonoBehaviour
 
     public void Die() 
     {
+        AudioManager.audioManager.EndMusic();
+        RuntimeManager.PlayOneShot(audioPlayerDeath);
+
         if (score > highScore) 
         {
             highScore = score;

@@ -21,8 +21,6 @@ public class MainMenuManager : MonoBehaviour
     MainMenuTextHandler textHandler;
     public Animator logoAnim;
 
-    public EventReference musicMenu;
-
     void Start()
     {
         startText = start.GetComponent<Button>();
@@ -30,8 +28,6 @@ public class MainMenuManager : MonoBehaviour
         creditsText = credits.GetComponent<Button>();
         exitText = exit.GetComponent<Button>();
         textHandler = start.GetComponentInParent<MainMenuTextHandler>();
-
-        RuntimeManager.PlayOneShot(musicMenu);
     }
 
     public void PressedStartButton() 

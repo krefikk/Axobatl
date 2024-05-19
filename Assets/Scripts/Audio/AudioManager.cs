@@ -19,15 +19,18 @@ public class AudioManager : MonoBehaviour
     FMOD.Studio.Bus musicBus;
     FMOD.Studio.Bus sfxBus;
 
+    public bool menuMusicTracker = false;
+
     private void Awake()
     {
-        if (audioManager != null && audioManager != this)
+        if (audioManager == null)
         {
-            Destroy(this);
+            audioManager = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            audioManager = this;
+            Destroy(gameObject);
         }
 
         musicBus = RuntimeManager.GetBus(musicBusString);
@@ -62,6 +65,16 @@ public class AudioManager : MonoBehaviour
     public void EndMusic()
     {
         musicBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+    public bool getMenuMusicTracker()
+    {
+        return menuMusicTracker;
+    }
+
+    public void setMenuMusicTracker(bool value)
+    {
+        menuMusicTracker = value;
     }
 
 

@@ -420,13 +420,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5d470fedf123b45a664b9b7ecbd275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicCards:
-    Guid:
-      Data1: -1614872496
-      Data2: 1212595368
-      Data3: -356282447
-      Data4: -273460674
-    Path: event:/Music Cards
   cardLoad:
     Guid:
       Data1: -754754972
@@ -1499,19 +1492,18 @@ MonoBehaviour:
   rightDesc: {fileID: 1863740641}
   cardLoad:
     Guid:
-      Data1: 1890260032
-      Data2: 1258259740
-      Data3: 2120850
-      Data4: 1299670890
-    Path: event:/CardLoad
+      Data1: -754754972
+      Data2: 1231770139
+      Data3: 1600994742
+      Data4: 1017594265
+    Path: event:/Card Load
   cardSelect:
     Guid:
-      Data1: 1436127388
-      Data2: 1312316193
-      Data3: 1178911361
-      Data4: 742874224
-    Path: event:/CardSelect
-  instance: {fileID: 1807830387}
+      Data1: 1001479156
+      Data2: 1203337816
+      Data3: -1685396564
+      Data4: 328690519
+    Path: event:/Card Select
 --- !u!1 &1863740639
 GameObject:
   m_ObjectHideFlags: 0

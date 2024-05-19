@@ -811,13 +811,6 @@ MonoBehaviour:
   credits: {fileID: 70040817}
   exit: {fileID: 361606254}
   logoAnim: {fileID: 1328314113}
-  musicMenu:
-    Guid:
-      Data1: 714881701
-      Data2: 1131875740
-      Data3: 1693808315
-      Data4: -1627386469
-    Path: event:/Music Menu
 --- !u!1 &600311995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,6 +1059,86 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicMain.Path
+      value: event:/Music Main
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicMenu.Path
+      value: event:/Music Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicCards.Path
+      value: event:/Music Cards
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicIntro.Path
+      value: event:/music Intro
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicMain.Guid.Data1
+      value: -1731564525
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicMain.Guid.Data2
+      value: 1251230249
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicMain.Guid.Data3
+      value: 1994149517
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicMain.Guid.Data4
+      value: -1056471929
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicMenu.Guid.Data1
+      value: 714881701
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicMenu.Guid.Data2
+      value: 1131875740
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicMenu.Guid.Data3
+      value: 1693808315
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicMenu.Guid.Data4
+      value: -1627386469
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicCards.Guid.Data1
+      value: -1614872496
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicCards.Guid.Data2
+      value: 1212595368
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicCards.Guid.Data3
+      value: -356282447
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicCards.Guid.Data4
+      value: -273460674
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicIntro.Guid.Data1
+      value: -1611327872
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicIntro.Guid.Data2
+      value: 1101233613
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicIntro.Guid.Data3
+      value: 1301182384
+      objectReference: {fileID: 0}
+    - target: {fileID: 328269923308843035, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
+      propertyPath: musicIntro.Guid.Data4
+      value: -1204417026
+      objectReference: {fileID: 0}
     - target: {fileID: 1703108866342992077, guid: 3526af42e6bcfc840a85f685dfd81b63, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1208.6465
@@ -1145,6 +1218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 0}
+  menuMusicTracker: 0
 --- !u!4 &1298232599
 Transform:
   m_ObjectHideFlags: 0

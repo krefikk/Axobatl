@@ -23,16 +23,13 @@ public class CardUIHandler : MonoBehaviour
     int middleCardPerkID;
     int rightCardPerkID;
 
-    public EventReference cardLoad;
     public EventReference cardSelect;
-    public GameObject instance; // placeholder because I can't get the singleton to work using PlayerController.player
+
 
     public void Start()
     {
         cardAnimator = GetComponentInChildren<CardAnimator>();
         cards = Resources.LoadAll<Card>("Cards/");
-
-        RuntimeManager.PlayOneShotAttached(cardLoad, instance);
     }
 
     public void Update()
@@ -149,6 +146,9 @@ public class CardUIHandler : MonoBehaviour
 
     void AssignPerkToPlayer(int ID) 
     {
+
+        RuntimeManager.PlayOneShot(cardSelect);
+
         if (ID == 0) { PlayerController.player.HealthBoost(); }
         else if (ID == 1) { PlayerController.player.KatanaDash(); }
         else if (ID == 2) { PlayerController.player.CoolerDash(); }
