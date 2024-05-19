@@ -110,7 +110,7 @@ public class Bullet : MonoBehaviour
 
     public bool CheckForDestroy()
     {
-        if (aliveTime < 30)
+        if (aliveTime < 20)
         {
             return false;
         }

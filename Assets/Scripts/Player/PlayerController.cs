@@ -26,8 +26,8 @@ public class PlayerController : MonoBehaviour
     protected int gun = 0; // 0 represents automatic gun, 1 represents revolver, 2 represents shotgun
 
     [Header("Health")]
-    private float maxHealth = 50;
-    private float health = 50;
+    private float maxHealth = 150;
+    private float health = 150;
 
     [Header("Movement")]
     private float xAxis = 0;

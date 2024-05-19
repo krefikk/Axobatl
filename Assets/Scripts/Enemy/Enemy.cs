@@ -42,9 +42,9 @@ public class Enemy : MonoBehaviour
     
     [Header("Ranged Combat")]
     int gun; // 0 represents auto gun, 1 represents revolver, 2 represents shotgun
-    float timeBetweenAutomaticGunShots = 0.2f;
-    float timeBetweenRevolverShots = 0.5f;
-    float timeBetweenShotgunShots = 0.6f;
+    float timeBetweenAutomaticGunShots = 0.4f;
+    float timeBetweenRevolverShots = 0.8f;
+    float timeBetweenShotgunShots = 1f;
     float timeSinceLastShoot;
     public Transform rayThrower;
 

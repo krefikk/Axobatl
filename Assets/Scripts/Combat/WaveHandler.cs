@@ -12,9 +12,9 @@ public class WaveHandler : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("Enemy Count: " + enemyList.Count);
         UpdateEnemyList();
-        Debug.Log("Wave Finished: " + waveFinished + ". Wave Coroutine Running: " + isWaveCoroutineRunning);
-        if (waveFinished && !isWaveCoroutineRunning)
+        if (waveFinished && !isWaveCoroutineRunning && enemyList.Count == 0)
         {
             switch (PlayerController.player.GetWaveNumber())
             {
@@ -33,24 +33,23 @@ public class WaveHandler : MonoBehaviour
                 case 4:
                     StartWave5();
                     break;
-                default:
-                    Debug.Log("All waves completed.");
-                    break;
             }
         }
     }
 
     void UpdateEnemyList()
     {
-        for (int i = enemyList.Count - 1; i >= 0; i--)
+        if (enemyList.Count > 0) 
         {
-            if (enemyList[i] == null)
+            for (int i = enemyList.Count - 1; i >= 0; i--)
             {
-                enemyList.RemoveAt(i);
+                if (enemyList[i] == null)
+                {
+                    enemyList.RemoveAt(i);
+                }
             }
         }
-
-        if (enemyList.Count == 0 && PlayerController.player.GetWaveNumber() >= 0)
+        else if (enemyList.Count == 0 && PlayerController.player.GetWaveNumber() >= 0 && !waveFinished)
         {
             waveFinished = true;
             Debug.Log("Wave finished.");
@@ -59,7 +58,6 @@ public class WaveHandler : MonoBehaviour
 
     IEnumerator CreateEnemy(bool isMelee, bool canNecromance)
     {
-        Debug.Log("Creating enemy...");
         Vector3 spawnPosition = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
         GameObject e1 = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         Enemy enemy1 = e1.GetComponent<Enemy>();
@@ -75,14 +73,12 @@ public class WaveHandler : MonoBehaviour
         waveFinished = false;
         isWaveCoroutineRunning = true;
         Debug.Log("Starting wave...");
+        PlayerController.player.IncreaseWaveNumber(1);
         yield return new WaitForSeconds(5);
-
         foreach (var config in enemyConfigs)
         {
             yield return StartCoroutine(CreateEnemy(config.isMelee, config.canNecromance));
         }
-
-        PlayerController.player.IncreaseWaveNumber(1);
         isWaveCoroutineRunning = false;
     }
 
