@@ -52,55 +52,58 @@ public class WaveHandler : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log("Enemy Count: " + enemyList.Count);
-        UpdateEnemyList();
-        if (waveFinished && !isWaveCoroutineRunning && enemyList.Count == 0)
+        if (!GameManager.gameManager.gamePaussed) 
         {
-            if (PlayerController.player.GetWaveNumber() == 1 && !gotWave1Award)
+            Debug.Log("Enemy Count: " + enemyList.Count);
+            UpdateEnemyList();
+            if (waveFinished && !isWaveCoroutineRunning && enemyList.Count == 0)
             {
-                PlayerPrefs.SetInt("GotWave1Award", 1);
-                SceneManager.LoadScene("CardChoose");
-                PlayerController.player.gameObject.SetActive(false);
-                PlayerController.player.inCardsScene = true;
-            }
-            else if (PlayerController.player.GetWaveNumber() == 2 && !gotWave2Award) 
-            {
-                PlayerPrefs.SetInt("GotWave2Award", 1);
-                SceneManager.LoadScene("CardChoose");
-                PlayerController.player.gameObject.SetActive(false);
-                PlayerController.player.inCardsScene = true;
-            }
-            else if (PlayerController.player.GetWaveNumber() == 3 && !gotWave3Award)
-            {
-                PlayerPrefs.SetInt("GotWave3Award", 1);
-                SceneManager.LoadScene("CardChoose");
-                PlayerController.player.gameObject.SetActive(false);
-                PlayerController.player.inCardsScene = true;
-            }
-            else if (PlayerController.player.GetWaveNumber() == 4 && !gotWave4Award)
-            {
-                PlayerPrefs.SetInt("GotWave4Award", 1);
-                SceneManager.LoadScene("CardChoose");
-                PlayerController.player.gameObject.SetActive(false);
-                PlayerController.player.inCardsScene = true;
-            }
-            switch (PlayerController.player.GetWaveNumber())
-            {
-                case 0:
-                    StartWave1();
-                    break;
-                case 1:
-                    StartWave2();
-                    break;
-                case 2:
-                    StartWave3();
-                    break;
-                case 3:
-                    StartWave4();
-                    break;
-                case 4:
-                    StartWave5();
-                    break;
+                if (PlayerController.player.GetWaveNumber() == 1 && !gotWave1Award)
+                {
+                    PlayerPrefs.SetInt("GotWave1Award", 1);
+                    SceneManager.LoadScene("CardChoose");
+                    PlayerController.player.gameObject.SetActive(false);
+                    PlayerController.player.inCardsScene = true;
+                }
+                else if (PlayerController.player.GetWaveNumber() == 2 && !gotWave2Award)
+                {
+                    PlayerPrefs.SetInt("GotWave2Award", 1);
+                    SceneManager.LoadScene("CardChoose");
+                    PlayerController.player.gameObject.SetActive(false);
+                    PlayerController.player.inCardsScene = true;
+                }
+                else if (PlayerController.player.GetWaveNumber() == 3 && !gotWave3Award)
+                {
+                    PlayerPrefs.SetInt("GotWave3Award", 1);
+                    SceneManager.LoadScene("CardChoose");
+                    PlayerController.player.gameObject.SetActive(false);
+                    PlayerController.player.inCardsScene = true;
+                }
+                else if (PlayerController.player.GetWaveNumber() == 4 && !gotWave4Award)
+                {
+                    PlayerPrefs.SetInt("GotWave4Award", 1);
+                    SceneManager.LoadScene("CardChoose");
+                    PlayerController.player.gameObject.SetActive(false);
+                    PlayerController.player.inCardsScene = true;
+                }
+                switch (PlayerController.player.GetWaveNumber())
+                {
+                    case 0:
+                        StartWave1();
+                        break;
+                    case 1:
+                        StartWave2();
+                        break;
+                    case 2:
+                        StartWave3();
+                        break;
+                    case 3:
+                        StartWave4();
+                        break;
+                    case 4:
+                        StartWave5();
+                        break;
+                }
             }
         }
     }

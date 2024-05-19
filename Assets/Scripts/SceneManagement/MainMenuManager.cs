@@ -19,6 +19,7 @@ public class MainMenuManager : MonoBehaviour
     Button creditsText;
     Button exitText;
     MainMenuTextHandler textHandler;
+    public Animator logoAnim;
 
     public EventReference musicMenu;
 
@@ -59,6 +60,8 @@ public class MainMenuManager : MonoBehaviour
         settingsText.interactable = false;
         creditsText.interactable = false;
         exitText.interactable = false;
+        logoAnim.Play("logoExit");
+        yield return new WaitForSeconds(0.5f);
         textHandler.StartButtonExitAnimation();
         yield return new WaitForSeconds(0.5f);
         textHandler.SettingsButtonExitAnimation();
@@ -88,6 +91,8 @@ public class MainMenuManager : MonoBehaviour
         settingsText.interactable = false;
         creditsText.interactable = false;
         exitText.interactable = false;
+        logoAnim.Play("logoExit");
+        yield return new WaitForSeconds(0.5f);
         textHandler.StartButtonExitAnimation();
         yield return new WaitForSeconds(0.5f);
         textHandler.SettingsButtonExitAnimation();
@@ -109,6 +114,8 @@ public class MainMenuManager : MonoBehaviour
         settingsText.interactable = false;
         creditsText.interactable = false;
         exitText.interactable = false;
+        logoAnim.Play("logoExit");
+        yield return new WaitForSeconds(0.5f);
         textHandler.StartButtonExitAnimation();
         yield return new WaitForSeconds(0.5f);
         textHandler.SettingsButtonExitAnimation();
@@ -130,6 +137,8 @@ public class MainMenuManager : MonoBehaviour
         settingsText.interactable = false;
         creditsText.interactable = false;
         exitText.interactable = false;
+        logoAnim.Play("logoExit");
+        yield return new WaitForSeconds(0.5f);
         textHandler.StartButtonExitAnimation();
         yield return new WaitForSeconds(0.5f);
         textHandler.SettingsButtonExitAnimation();
