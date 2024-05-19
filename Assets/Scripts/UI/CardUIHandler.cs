@@ -121,8 +121,8 @@ public class CardUIHandler : MonoBehaviour
         leftDesc.text = "";
         SceneManager.LoadScene("MainGame");
         PlayerController.player.gameObject.SetActive(true);
+        PlayerController.player.transform.position = new Vector3(0.3f, -0.1f, 0);
         PlayerController.player.inCardsScene = false;
-        PlayerController.player.IncreaseWaveNumber(1);
     }
 
     public void AssignMiddleCardToPlayer()
@@ -132,8 +132,8 @@ public class CardUIHandler : MonoBehaviour
         middleDesc.text = "";
         SceneManager.LoadScene("MainGame");
         PlayerController.player.gameObject.SetActive(true);
+        PlayerController.player.transform.position = new Vector3(0.3f, -0.1f, 0);
         PlayerController.player.inCardsScene = false;
-        PlayerController.player.IncreaseWaveNumber(1);
     }
 
     public void AssignRightCardToPlayer()
@@ -143,8 +143,8 @@ public class CardUIHandler : MonoBehaviour
         rightDesc.text = "";
         SceneManager.LoadScene("MainGame");
         PlayerController.player.gameObject.SetActive(true);
+        PlayerController.player.transform.position = new Vector3(0.3f, -0.1f, 0);
         PlayerController.player.inCardsScene = false;
-        PlayerController.player.IncreaseWaveNumber(1);
     }
 
     void AssignPerkToPlayer(int ID) 

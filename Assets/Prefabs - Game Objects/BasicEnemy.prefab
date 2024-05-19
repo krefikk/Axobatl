@@ -592,10 +592,10 @@ MonoBehaviour:
   timeBetweenMeleeAttacks: 1
   canNecromance: 1
   corners:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 652831422936319767, guid: f7c95745276663647a235f49e47a87d9, type: 3}
+  - {fileID: 6169298668849680973, guid: 4088a2b3102f3a941955d137b49c7903, type: 3}
+  - {fileID: 3671646073621048795, guid: 7ab58d5cfdb80b442969c73c29c84b5c, type: 3}
+  - {fileID: 5405362994190180536, guid: 5c93fa054e7de4f468f9bb09973c2ed4, type: 3}
   specificEnemyPrefab: {fileID: 7916448569371871451}
   necromancePoints:
   - {fileID: 3556527951321370627}

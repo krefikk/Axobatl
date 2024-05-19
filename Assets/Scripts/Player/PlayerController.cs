@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     bool isMirrorArmorOnCooldown = false;
 
     [Header("HUD")]
-    public StatBar healthBar;
+    public Slider healthBar;
     public TextMeshProUGUI elapsedTime;
     public TextMeshProUGUI hudScore;
     TextMeshProUGUI waveText;
@@ -312,7 +312,7 @@ public class PlayerController : MonoBehaviour
 
     public void DisplayHealth() 
     {
-        healthBar.current = 100 * health / maxHealth;
+        healthBar.value = health / maxHealth;
     }
 
     public void DisplayElapsedTime() 
@@ -392,6 +392,10 @@ public class PlayerController : MonoBehaviour
         }       
         dead = true;
         gameObject.SetActive(false);
+        PlayerPrefs.SetInt("GotWave1Award", 0);
+        PlayerPrefs.SetInt("GotWave2Award", 0);
+        PlayerPrefs.SetInt("GotWave3Award", 0);
+        PlayerPrefs.SetInt("GotWave4Award", 0);
         SceneManager.LoadScene("GameOver");
     }
 
@@ -406,6 +410,10 @@ public class PlayerController : MonoBehaviour
                 highScoreUpdated = true;
             }
             gameObject.SetActive(false);
+            PlayerPrefs.SetInt("GotWave1Award", 0);
+            PlayerPrefs.SetInt("GotWave2Award", 0);
+            PlayerPrefs.SetInt("GotWave3Award", 0);
+            PlayerPrefs.SetInt("GotWave4Award", 0);
             SceneManager.LoadScene("GameOver");
         }
     }
@@ -635,7 +643,7 @@ public class PlayerController : MonoBehaviour
     // ------Health
     public void HealthBoost()
     { // Increases max health and refreshes the health     
-        maxHealth += 15;
+        maxHealth += 30;
         health = maxHealth;
     }
     public void AppleJuice()

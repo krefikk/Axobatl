@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WaveHandler : MonoBehaviour
 {
@@ -9,13 +10,80 @@ public class WaveHandler : MonoBehaviour
     public List<GameObject> enemyList = new List<GameObject>();
     public bool waveFinished = false;
     private bool isWaveCoroutineRunning = false;
+    bool gotWave1Award = false;
+    bool gotWave2Award = false;
+    bool gotWave3Award = false;
+    bool gotWave4Award = false;
 
+    private void Start()
+    {
+        if (PlayerPrefs.GetInt("GotWave1Award", 0) == 0)
+        {
+            gotWave1Award = false;
+        }
+        else 
+        {
+            gotWave1Award = true;
+        }
+        if (PlayerPrefs.GetInt("GotWave2Award", 0) == 0)
+        {
+            gotWave2Award = false;
+        }
+        else
+        {
+            gotWave2Award = true;
+        }
+        if (PlayerPrefs.GetInt("GotWave3Award", 0) == 0)
+        {
+            gotWave3Award = false;
+        }
+        else
+        {
+            gotWave3Award = true;
+        }
+        if (PlayerPrefs.GetInt("GotWave4Award", 0) == 0)
+        {
+            gotWave4Award = false;
+        }
+        else
+        {
+            gotWave4Award = true;
+        }
+    }
     private void Update()
     {
         Debug.Log("Enemy Count: " + enemyList.Count);
         UpdateEnemyList();
         if (waveFinished && !isWaveCoroutineRunning && enemyList.Count == 0)
         {
+            if (PlayerController.player.GetWaveNumber() == 1 && !gotWave1Award)
+            {
+                PlayerPrefs.SetInt("GotWave1Award", 1);
+                SceneManager.LoadScene("CardChoose");
+                PlayerController.player.gameObject.SetActive(false);
+                PlayerController.player.inCardsScene = true;
+            }
+            else if (PlayerController.player.GetWaveNumber() == 2 && !gotWave2Award) 
+            {
+                PlayerPrefs.SetInt("GotWave2Award", 1);
+                SceneManager.LoadScene("CardChoose");
+                PlayerController.player.gameObject.SetActive(false);
+                PlayerController.player.inCardsScene = true;
+            }
+            else if (PlayerController.player.GetWaveNumber() == 3 && !gotWave3Award)
+            {
+                PlayerPrefs.SetInt("GotWave3Award", 1);
+                SceneManager.LoadScene("CardChoose");
+                PlayerController.player.gameObject.SetActive(false);
+                PlayerController.player.inCardsScene = true;
+            }
+            else if (PlayerController.player.GetWaveNumber() == 4 && !gotWave4Award)
+            {
+                PlayerPrefs.SetInt("GotWave4Award", 1);
+                SceneManager.LoadScene("CardChoose");
+                PlayerController.player.gameObject.SetActive(false);
+                PlayerController.player.inCardsScene = true;
+            }
             switch (PlayerController.player.GetWaveNumber())
             {
                 case 0:

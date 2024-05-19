@@ -51,6 +51,14 @@ public class WholeGameManager : MonoBehaviour
         }
     }
 
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.SetInt("GotWave1Award", 0);
+        PlayerPrefs.SetInt("GotWave2Award", 0);
+        PlayerPrefs.SetInt("GotWave3Award", 0);
+        PlayerPrefs.SetInt("GotWave4Award", 0);
+    }
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
