@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using FMODUnity;
+using FMOD.Studio;
 
 
 public class MainMenuManager : MonoBehaviour
@@ -18,6 +20,8 @@ public class MainMenuManager : MonoBehaviour
     Button exitText;
     MainMenuTextHandler textHandler;
 
+    public EventReference musicMenu;
+
     void Start()
     {
         startText = start.GetComponent<Button>();
@@ -25,6 +29,8 @@ public class MainMenuManager : MonoBehaviour
         creditsText = credits.GetComponent<Button>();
         exitText = exit.GetComponent<Button>();
         textHandler = start.GetComponentInParent<MainMenuTextHandler>();
+
+        RuntimeManager.PlayOneShot(musicMenu);
     }
 
     public void PressedStartButton() 

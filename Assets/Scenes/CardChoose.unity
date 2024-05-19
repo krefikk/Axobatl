@@ -420,6 +420,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5d470fedf123b45a664b9b7ecbd275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicCards:
+    Guid:
+      Data1: -1614872496
+      Data2: 1212595368
+      Data3: -356282447
+      Data4: -273460674
+    Path: event:/Music Cards
+  cardLoad:
+    Guid:
+      Data1: -754754972
+      Data2: 1231770139
+      Data3: 1600994742
+      Data4: 1017594265
+    Path: event:/Card Load
 --- !u!4 &182821406
 Transform:
   m_ObjectHideFlags: 0

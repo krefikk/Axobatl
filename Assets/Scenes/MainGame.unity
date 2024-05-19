@@ -1327,6 +1327,20 @@ MonoBehaviour:
   waveTextParent: {fileID: 480702591899403374}
   finishedGame: 0
   highScoreUpdated: 0
+  audioHandgun:
+    Guid:
+      Data1: -1114261832
+      Data2: 1125010267
+      Data3: 1582388378
+      Data4: 131251586
+    Path: event:/Handgun
+  audioRevolver:
+    Guid:
+      Data1: 1216921030
+      Data2: 1168731526
+      Data3: -1042563393
+      Data4: -1126922626
+    Path: event:/Revolver
 --- !u!50 &1001629143
 Rigidbody2D:
   serializedVersion: 4
@@ -2107,6 +2121,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamePaussed: 0
+  musicMain:
+    Guid:
+      Data1: -1731564525
+      Data2: 1251230249
+      Data3: 1994149517
+      Data4: -1056471929
+    Path: event:/Music Main
 --- !u!4 &1636041250
 Transform:
   m_ObjectHideFlags: 0
@@ -2631,14 +2652,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31fb52bdc2df0c74b9a29404cbdf4c40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handgun:
+  settings: {fileID: 0}
+  musicMain:
     Guid:
-      Data1: 339986610
-      Data2: 1256911626
-      Data3: -609821796
-      Data4: -1268073296
-    Path: event:/Handgun
-  controller: {fileID: 1001629142}
+      Data1: -1731564525
+      Data2: 1251230249
+      Data3: 1994149517
+      Data4: -1056471929
+    Path: event:/Music Main
+  musicMenu:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!4 &2096225195
 Transform:
   m_ObjectHideFlags: 0
@@ -3881,11 +3909,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1165345807654038916, guid: b3482a4f852d6974588c013e122981ba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6340844142689697071, guid: b3482a4f852d6974588c013e122981ba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7920442388114104655}
   m_SourcePrefab: {fileID: 100100000, guid: b3482a4f852d6974588c013e122981ba, type: 3}
+--- !u!1 &7920442388114104654 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6340844142689697071, guid: b3482a4f852d6974588c013e122981ba, type: 3}
+  m_PrefabInstance: {fileID: 7920442388114104653}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7920442388114104655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7920442388114104654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1001 &8140225955933026292
 PrefabInstance:
   m_ObjectHideFlags: 0

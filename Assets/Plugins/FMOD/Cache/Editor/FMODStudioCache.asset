@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7819785082411620809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music Cards
+  m_EditorClassIdentifier: 
+  Path: event:/Music Cards
+  Guid:
+    Data1: -1614872496
+    Data2: 1212595368
+    Data3: -356282447
+    Data4: -273460674
+  Banks:
+  - {fileID: -3549555321612725806}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-7446827679239875473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23,6 +50,33 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7356615135305709602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music Menu
+  m_EditorClassIdentifier: 
+  Path: event:/Music Menu
+  Guid:
+    Data1: 714881701
+    Data2: 1131875740
+    Data3: 1693808315
+    Data4: -1627386469
+  Banks:
+  - {fileID: -3549555321612725806}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -54,6 +108,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6783451944554489966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Card Select
+  m_EditorClassIdentifier: 
+  Path: event:/Card Select
+  Guid:
+    Data1: 1001479156
+    Data2: 1203337816
+    Data3: -1685396564
+    Data4: 328690519
+  Banks:
+  - {fileID: -3549555321612725806}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-5508419831715900160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,6 +155,107 @@ MonoBehaviour:
   - Name: Desktop
     Value: 52384
   Exists: 1
+--- !u!114 &-4732228551602056308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player Death
+  m_EditorClassIdentifier: 
+  Path: event:/Player Death
+  Guid:
+    Data1: 946575839
+    Data2: 1185513617
+    Data3: 1144118719
+    Data4: -246550537
+  Banks:
+  - {fileID: -3549555321612725806}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3950814174913444116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music Main
+  m_EditorClassIdentifier: 
+  Path: event:/Music Main
+  Guid:
+    Data1: -1731564525
+    Data2: 1251230249
+    Data3: 1994149517
+    Data4: -1056471929
+  Banks:
+  - {fileID: -3549555321612725806}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3549555321612725806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Axobatl FMOD/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638516699615054778
+  FileSizes:
+  - Name: Desktop
+    Value: 2503552
+  Exists: 1
+--- !u!114 &-2587205528582885609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Revolver
+  m_EditorClassIdentifier: 
+  Path: event:/Revolver
+  Guid:
+    Data1: 1216921030
+    Data2: 1168731526
+    Data3: -1042563393
+    Data4: -1126922626
+  Banks:
+  - {fileID: -3549555321612725806}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-361160366949042472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,6 +283,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-317084473546002901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Card Load
+  m_EditorClassIdentifier: 
+  Path: event:/Card Load
+  Guid:
+    Data1: -754754972
+    Data2: 1231770139
+    Data3: 1600994742
+    Data4: 1017594265
+  Banks:
+  - {fileID: -3549555321612725806}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,22 +323,25 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 1847468067600089330}
-  - {fileID: 2705059955615945622}
-  - {fileID: 6620326056187169626}
-  - {fileID: -5508419831715900160}
+  - {fileID: 7440584091901399918}
+  - {fileID: -3549555321612725806}
   EditorEvents:
-  - {fileID: -6872912945755803373}
-  - {fileID: -7446827679239875473}
-  - {fileID: 8089034092387346589}
-  - {fileID: -361160366949042472}
-  - {fileID: 8049233034189810712}
+  - {fileID: -317084473546002901}
+  - {fileID: -6783451944554489966}
+  - {fileID: 2783059717162365799}
+  - {fileID: 2280287203427893696}
+  - {fileID: 8980721404132813804}
+  - {fileID: -4732228551602056308}
+  - {fileID: -3950814174913444116}
+  - {fileID: -7819785082411620809}
+  - {fileID: -7356615135305709602}
+  - {fileID: -2587205528582885609}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 2705059955615945622}
+  - {fileID: -3549555321612725806}
   StringsBanks:
-  - {fileID: 1847468067600089330}
-  cacheTime: 638516636609007741
+  - {fileID: 7440584091901399918}
+  cacheTime: 638516699615064775
   cacheVersion: 131618
 --- !u!114 &1847468067600089330
 MonoBehaviour:
@@ -151,6 +363,33 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1036
   Exists: 1
+--- !u!114 &2280287203427893696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Gun Reload
+  m_EditorClassIdentifier: 
+  Path: event:/Gun Reload
+  Guid:
+    Data1: 142201637
+    Data2: 1285475268
+    Data3: -298447712
+    Data4: 2063096326
+  Banks:
+  - {fileID: -3549555321612725806}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &2705059955615945622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +410,33 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1036
   Exists: 1
+--- !u!114 &2783059717162365799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Necromancer Spawn
+  m_EditorClassIdentifier: 
+  Path: event:/Necromancer Spawn
+  Guid:
+    Data1: -1784938206
+    Data2: 1167103080
+    Data3: -1049400446
+    Data4: 1190410950
+  Banks:
+  - {fileID: -3549555321612725806}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &6620326056187169626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +456,26 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 8992
+  Exists: 1
+--- !u!114 &7440584091901399918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Axobatl FMOD/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638516699615064775
+  FileSizes:
+  - Name: Desktop
+    Value: 1196
   Exists: 1
 --- !u!114 &8049233034189810712
 MonoBehaviour:
@@ -238,6 +524,33 @@ MonoBehaviour:
     Data4: -1235076952
   Banks:
   - {fileID: 6620326056187169626}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8980721404132813804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Handgun
+  m_EditorClassIdentifier: 
+  Path: event:/Handgun
+  Guid:
+    Data1: -1114261832
+    Data2: 1125010267
+    Data3: 1582388378
+    Data4: 131251586
+  Banks:
+  - {fileID: -3549555321612725806}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1

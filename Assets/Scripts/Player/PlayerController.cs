@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -86,6 +87,10 @@ public class PlayerController : MonoBehaviour
     // Components
     Rigidbody2D rb;
     Animator anim;
+
+    // Audio
+    public EventReference audioHandgun;
+    public EventReference audioRevolver;
 
     private void Awake()
     {
@@ -178,6 +183,8 @@ public class PlayerController : MonoBehaviour
             {
                 ShootAutoGunBullet();
                 timeSinceLastShoot = 0;
+
+                RuntimeManager.PlayOneShot(audioHandgun);
             }
         }
         else if (gun == 1)
@@ -188,6 +195,8 @@ public class PlayerController : MonoBehaviour
             {
                 ShootRevolverBullet();
                 timeSinceLastShoot = 0;
+
+                RuntimeManager.PlayOneShot(audioRevolver);
             }
         }
         else if (gun == 2)
@@ -544,6 +553,29 @@ public class PlayerController : MonoBehaviour
         return attacking;
     }
 
+    public float getTimeSinceLastShot()
+    {
+        return timeSinceLastShoot;
+    }
+
+    public float getTimeBetweenShots(int gun)
+    {
+        switch(gun)
+        {
+            case 0:
+                return timeBetweenAutomaticGunShots;
+
+            case 1:
+                return timeBetweenRevolverShots;
+
+            case 2:
+                return timeBetweenShotgunShots;
+
+            default:
+                return 0;
+        }
+
+    }
     public int GetWaveNumber() 
     { // Returns the number of the wave player currently dealing
         if (inCardsScene) { return -1; }

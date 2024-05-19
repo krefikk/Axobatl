@@ -41,6 +41,10 @@ public class SettingsMenuHandler : MonoBehaviour
     {
         musicValue.text = ((int) wholeGameManager.GetMusicVolume()).ToString();
         sfxValue.text = ((int) wholeGameManager.GetSFXVolume()).ToString();
+
+        AudioManager.audioManager.ChangeMusicVolume(wholeGameManager.GetMusicVolume() / 100);
+        AudioManager.audioManager.ChangeSFXVolume(wholeGameManager.GetSFXVolume() / 100);
+
     }
 
     public void ClickedCheckBox() 

@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class GameManager : MonoBehaviour
     public bool gamePaussed = false;
     private float elapsedTime = 0f;
 
+    public EventReference musicMain;
+
     private void Awake()
     {
         if (gameManager != null && gameManager != this)
@@ -22,6 +25,11 @@ public class GameManager : MonoBehaviour
             gameManager = this;
         }
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    private void Start()
+    {
+        RuntimeManager.PlayOneShot(musicMain);
     }
 
     private void Update()

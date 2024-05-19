@@ -23,9 +23,10 @@ public class WholeGameManager : MonoBehaviour
     IntroManager introManager;
 
     // Music and sfx
-    float sfxVolume = 50; // Max is 100
-    float musicVolume = 50; // Max is 100
+    float sfxVolume = 100; // Max is 100
+    float musicVolume = 100; // Max is 100
     bool isTutorialsOn = true; // Default is true
+
 
     private void Awake()
     {
@@ -38,8 +39,8 @@ public class WholeGameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 50);
-        musicVolume = PlayerPrefs.GetFloat("MusicVolume", 50);
+        sfxVolume = PlayerPrefs.GetFloat("SFXVolume", 100);
+        musicVolume = PlayerPrefs.GetFloat("MusicVolume", 100);
         if (PlayerPrefs.GetInt("IsTutorialsOn", 1) == 1)
         {
             isTutorialsOn = true;
