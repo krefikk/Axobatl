@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     public Slider healthBar;
 
     [Header("Movement")]
-    public float moveSpeed;
+    float moveSpeed = 2;
     NavMeshAgent agent;
     public LayerMask unwalkableLayer;
 
@@ -106,8 +106,9 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (!GameManager.gameManager.gamePaussed) 
+        if (!GameManager.gameManager.gamePaussed)
         {
+            agent.speed = moveSpeed;
             DisplayHealth();
             FaceToPosition(PlayerController.player.transform.position);
             Necromance();
@@ -119,6 +120,10 @@ public class Enemy : MonoBehaviour
             {
                 GiveDamage();
             }
+        }
+        else 
+        {
+            agent.speed = 0;
         }
              
     }

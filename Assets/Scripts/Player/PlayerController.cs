@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI hudScore;
     TextMeshProUGUI waveText;
     public GameObject waveTextParent;
+    public GameObject inGameMenu;
 
     [Header("Waves")]
     int inWave = 0;
@@ -127,15 +128,20 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         GetInputs();
-        if (!GameManager.gameManager.gamePaussed) 
-        {            
+        if (!GameManager.gameManager.gamePaussed)
+        {
+            inGameMenu.SetActive(false);
             FaceMouse();
             Shoot();
             DisplayHealth();
             DisplayScore();
             DisplayElapsedTime();
             FinishGame();
-        }      
+        }
+        else 
+        {
+            inGameMenu.SetActive(true);
+        }
     }
 
     private void FixedUpdate()
