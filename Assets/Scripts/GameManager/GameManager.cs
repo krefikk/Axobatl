@@ -38,6 +38,10 @@ public class GameManager : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
         }
+        if (PlayerController.player.isDead()) 
+        {
+            elapsedTime = 0;
+        }
     }
 
     public void StopGame() 

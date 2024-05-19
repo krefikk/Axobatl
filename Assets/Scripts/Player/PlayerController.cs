@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class PlayerController : MonoBehaviour
 {
@@ -78,6 +79,11 @@ public class PlayerController : MonoBehaviour
     [Header("Waves")]
     int inWave = 0;
     public bool finishedGame = false;
+    bool displayedWave1Text = false;
+    bool displayedWave2Text = false;
+    bool displayedWave3Text = false;
+    bool displayedWave4Text = false;
+    bool displayedWave5Text = false;
 
     [Header("Score")]
     float highScore;
@@ -94,17 +100,15 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        player = this;
-
-        if (player != null && player != this)
+        if (player == null)
         {
-            Destroy(gameObject);
+            player = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            player = this;
+            Destroy(gameObject);
         }
-        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
@@ -115,6 +119,7 @@ public class PlayerController : MonoBehaviour
         highScore = PlayerPrefs.GetFloat("HighScore", 0);
         waveText = waveTextParent.GetComponent<TextMeshProUGUI>();
         waveText.text = "";
+        anim.SetInteger("Gun", gun);
     }
 
     private void Update()
@@ -181,6 +186,7 @@ public class PlayerController : MonoBehaviour
             // Checks if player pressed attack button, and enough time passed since last shoot
             if (attacking && timeSinceLastShoot >= timeBetweenAutomaticGunShots)
             {
+                anim.SetTrigger("Attacking");
                 ShootAutoGunBullet();
                 timeSinceLastShoot = 0;
 
@@ -193,6 +199,7 @@ public class PlayerController : MonoBehaviour
             // Checks if player pressed attack button, and enough time passed since last shoot
             if (attacking && timeSinceLastShoot >= timeBetweenRevolverShots)
             {
+                anim.SetTrigger("Attacking");
                 ShootRevolverBullet();
                 timeSinceLastShoot = 0;
 
@@ -205,16 +212,21 @@ public class PlayerController : MonoBehaviour
             // Checks if player pressed attack button, and enough time passed since last shoot
             if (attacking && timeSinceLastShoot >= timeBetweenShotgunShots)
             {
+                anim.SetTrigger("Attacking");
                 ShootShotgunBullets();
                 timeSinceLastShoot = 0;
             }
         }
-        //attacking = false;
     }
 
     void ShootAutoGunBullet() // Shoots bullet
     {
-        Vector3 bulletSpawnPosition = transform.position + GetDirection();
+        float offset = 0;
+        if (GetDirection().y < 0 && GetDirection().x > 0) { offset = 0.5f; }
+        else if (GetDirection().y < 0 && GetDirection().x < 0) { offset = 0.5f; }
+        else if (GetDirection().y > 0 && GetDirection().x > 0) { offset = -0.5f; }
+        else if (GetDirection().y > 0 && GetDirection().x < 0) { offset = -0.5f; }
+        Vector3 bulletSpawnPosition = transform.position + GetDirection() + new Vector3(offset, 0, 0);
         Vector3 bulletDirection = GetDirection();
 
         GameObject bulletObject = Instantiate(bulletPrefab, bulletSpawnPosition, Quaternion.identity);
@@ -320,27 +332,27 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator DisplayWaveTextCO() 
     {
-        if (inWave == 1) 
+        if (inWave == 1 && !displayedWave1Text) 
         {
             waveText.text = "WAVE 1";
         }
-        else if (inWave == 2)
+        else if (inWave == 2 && !displayedWave2Text)
         {
             waveText.text = "WAVE 2";
         }
-        else if (inWave == 3)
+        else if (inWave == 3 && !displayedWave3Text)
         {
             waveText.text = "WAVE 3";
         }
-        else if (inWave == 4)
+        else if (inWave == 4 && !displayedWave4Text)
         {
             waveText.text = "WAVE 4";
         }
-        else if (inWave == 5)
+        else if (inWave == 5 && !displayedWave5Text)
         {
             waveText.text = "WAVE 5";
         }
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         waveText.text = "WAVE";
         yield return new WaitForSeconds(0.5f);
         waveText.text = "WAV";
@@ -350,6 +362,24 @@ public class PlayerController : MonoBehaviour
         waveText.text = "W";
         yield return new WaitForSeconds(0.25f);
         waveText.text = "";
+        switch (inWave) 
+        {
+            case 1:
+                displayedWave1Text = true;
+                break;
+            case 2:
+                displayedWave2Text = true;
+                break;
+            case 3:
+                displayedWave3Text = true;
+                break;
+            case 4:
+                displayedWave4Text = true;
+                break;
+            case 5:
+                displayedWave5Text = true;
+                break;
+        }
     }
 
     public void Die() 
@@ -417,6 +447,7 @@ public class PlayerController : MonoBehaviour
 
     public void Restart() 
     {
+        /*
         canDash = true;
         DashAbility = true;
         maxHealth = 50;
@@ -446,6 +477,8 @@ public class PlayerController : MonoBehaviour
         highScoreUpdated = false;
         finishedGame = false;
         gameObject.SetActive(true);
+        */
+        Destroy(gameObject);
     }
 
     // --------------------------------Player Skills------------------------------------------

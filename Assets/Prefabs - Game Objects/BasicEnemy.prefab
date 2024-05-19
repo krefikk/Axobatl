@@ -161,7 +161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 31}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1521094832098743377
@@ -407,7 +407,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 0e265b9e44b1ef042909b46ba1d666bc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8f18d3e0f97b74642bb1cc574c0d3ef7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -481,7 +481,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.56, y: 2.57}
     newSize: {x: 0.5, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -489,10 +489,40 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.5, y: 0.5}
-      - {x: -0.5, y: -0.5}
-      - {x: 0.5, y: -0.5}
-      - {x: 0.5, y: 0.5}
+    - - {x: 0.78999996, y: -0.805}
+      - {x: 0.95, y: -0.645}
+      - {x: 1, y: -0.645}
+      - {x: 1.05, y: -0.615}
+      - {x: 1.13, y: -0.225}
+      - {x: 1.13, y: 0.095}
+      - {x: 1.11, y: 0.21499999}
+      - {x: 1.09, y: 0.275}
+      - {x: 1.01, y: 0.435}
+      - {x: 0.96, y: 0.515}
+      - {x: 0.66999996, y: 0.765}
+      - {x: 0.34, y: 1.055}
+      - {x: 0.22999999, y: 1.105}
+      - {x: -0.17999999, y: 1.105}
+      - {x: -0.34, y: 1.0749999}
+      - {x: -0.45999998, y: 1.045}
+      - {x: -0.65999997, y: 0.98499995}
+      - {x: -0.82, y: 0.905}
+      - {x: -0.98999995, y: 0.755}
+      - {x: -1.1, y: 0.53499997}
+      - {x: -1.15, y: 0.405}
+      - {x: -1.18, y: 0.33499998}
+      - {x: -1.18, y: -0.175}
+      - {x: -1.15, y: -0.385}
+      - {x: -1.1, y: -0.505}
+      - {x: -1.03, y: -0.66499996}
+      - {x: -0.96999997, y: -0.765}
+      - {x: -0.75, y: -0.965}
+      - {x: -0.59, y: -1.045}
+      - {x: -0.44, y: -1.095}
+      - {x: 0.049999997, y: -1.095}
+      - {x: 0.26999998, y: -1.0749999}
+      - {x: 0.51, y: -1.005}
+      - {x: 0.65, y: -0.91499996}
   m_UseDelaunayMesh: 0
 --- !u!95 &3635843043373942660
 Animator:
@@ -558,21 +588,22 @@ MonoBehaviour:
   unwalkableLayer:
     serializedVersion: 2
     m_Bits: 8
-  damage: 1
   damageRadius: 1
   timeBetweenMeleeAttacks: 1
-  canNecromance: 0
+  canNecromance: 1
   corners:
-  - {fileID: 6169298668849680973, guid: 4088a2b3102f3a941955d137b49c7903, type: 3}
-  - {fileID: 652831422936319767, guid: f7c95745276663647a235f49e47a87d9, type: 3}
-  - {fileID: 5405362994190180536, guid: 5c93fa054e7de4f468f9bb09973c2ed4, type: 3}
-  - {fileID: 3671646073621048795, guid: 7ab58d5cfdb80b442969c73c29c84b5c, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   specificEnemyPrefab: {fileID: 7916448569371871451}
   necromancePoints:
   - {fileID: 3556527951321370627}
   - {fileID: 8836723537355246691}
   rayThrower: {fileID: 6805869401353004835}
-  healthBarOffset: {x: 0, y: 0.5, z: 0}
+  canShoot: 1
+  meleeEnemy: 0
+  healthBarOffset: {x: 0, y: 0.75, z: 0}
 --- !u!1 &8215651074281236514
 GameObject:
   m_ObjectHideFlags: 0

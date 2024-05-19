@@ -87,6 +87,7 @@ public class GameOverManager : MonoBehaviour
         {
             PlayerController.player.Restart();
             SceneManager.LoadScene("MainMenu");
+            Destroy(PlayerController.player.gameObject);
             returningMainMenu = false;
         }
     }

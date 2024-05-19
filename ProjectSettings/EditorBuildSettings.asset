@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CardChoose.unity
     guid: cedc465d0f23a5746bcee78bb4017069
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 64d70f4521a70614eb1bf3e025297910
   m_configObjects: {}

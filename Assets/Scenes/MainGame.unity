@@ -1321,7 +1321,7 @@ MonoBehaviour:
   displayedOneTimeCardIDs: 
   inCardsScene: 0
   DashAbility: 1
-  healthBar: {fileID: 934988369137881126, guid: 50c5ad70a7e73ea458309fa35ede649b, type: 3}
+  healthBar: {fileID: 2102898529}
   elapsedTime: {fileID: 729858487889809341}
   hudScore: {fileID: 1117190460}
   waveTextParent: {fileID: 480702591899403374}
@@ -2653,20 +2653,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 0}
-  musicMain:
-    Guid:
-      Data1: -1731564525
-      Data2: 1251230249
-      Data3: 1994149517
-      Data4: -1056471929
-    Path: event:/Music Main
-  musicMenu:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
 --- !u!4 &2096225195
 Transform:
   m_ObjectHideFlags: 0
@@ -2687,6 +2673,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8614138122840835870, guid: 50c5ad70a7e73ea458309fa35ede649b, type: 3}
   m_PrefabInstance: {fileID: 5299751887704990671}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2102898529 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 934988369137881126, guid: 50c5ad70a7e73ea458309fa35ede649b, type: 3}
+  m_PrefabInstance: {fileID: 5299751887704990671}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60c9a0eaad6f2ff499a3c1408230ceb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &281299072332705299
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2720,14 +2717,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3850749865535926420, guid: 620fb711707364346afbdecf1862bfad, type: 3}
-      propertyPath: healthBarOffset.y
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 3850749865535926420, guid: 620fb711707364346afbdecf1862bfad, type: 3}
-      propertyPath: specificEnemyPrefab
-      value: 
-      objectReference: {fileID: 7916448569371871451, guid: 620fb711707364346afbdecf1862bfad, type: 3}
-    - target: {fileID: 3850749865535926420, guid: 620fb711707364346afbdecf1862bfad, type: 3}
       propertyPath: corners.Array.data[0]
       value: 
       objectReference: {fileID: 508843619}
@@ -2743,6 +2732,18 @@ PrefabInstance:
       propertyPath: corners.Array.data[3]
       value: 
       objectReference: {fileID: 1379584454}
+    - target: {fileID: 5669289204896846535, guid: 620fb711707364346afbdecf1862bfad, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669289204896846535, guid: 620fb711707364346afbdecf1862bfad, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669289204896846535, guid: 620fb711707364346afbdecf1862bfad, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 2.57
+      objectReference: {fileID: 0}
     - target: {fileID: 7228545812613478321, guid: 620fb711707364346afbdecf1862bfad, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.462
@@ -3483,10 +3484,6 @@ PrefabInstance:
     - target: {fileID: 934988369137881126, guid: 50c5ad70a7e73ea458309fa35ede649b, type: 3}
       propertyPath: current
       value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 934988369137881126, guid: 50c5ad70a7e73ea458309fa35ede649b, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3404745169758096741, guid: 50c5ad70a7e73ea458309fa35ede649b, type: 3}
       propertyPath: m_Name

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WaveHandler : MonoBehaviour
@@ -9,136 +8,136 @@ public class WaveHandler : MonoBehaviour
     public Transform[] spawnPoints;
     public List<GameObject> enemyList = new List<GameObject>();
     public bool waveFinished = false;
+    private bool isWaveCoroutineRunning = false;
 
     private void Update()
     {
         UpdateEnemyList();
+        Debug.Log("Wave Finished: " + waveFinished + ". Wave Coroutine Running: " + isWaveCoroutineRunning);
+        if (waveFinished && !isWaveCoroutineRunning)
+        {
+            switch (PlayerController.player.GetWaveNumber())
+            {
+                case 0:
+                    StartWave1();
+                    break;
+                case 1:
+                    StartWave2();
+                    break;
+                case 2:
+                    StartWave3();
+                    break;
+                case 3:
+                    StartWave4();
+                    break;
+                case 4:
+                    StartWave5();
+                    break;
+                default:
+                    Debug.Log("All waves completed.");
+                    break;
+            }
+        }
     }
 
-    void UpdateEnemyList() 
+    void UpdateEnemyList()
     {
-        if (PlayerController.player.GetWaveNumber() > 0 && enemyList.Count == 0) 
+        for (int i = enemyList.Count - 1; i >= 0; i--)
         {
-            enemyList.Clear();
-            waveFinished = true;
-            if (PlayerController.player.GetWaveNumber() == 5)
+            if (enemyList[i] == null)
             {
-                PlayerController.player.finishedGame = true;
+                enemyList.RemoveAt(i);
             }
         }
-        foreach (GameObject enemy in enemyList) 
+
+        if (enemyList.Count == 0 && PlayerController.player.GetWaveNumber() >= 0)
         {
-            if (enemy.IsDestroyed()) 
-            {
-                enemyList.Remove(enemy);
-            }
+            waveFinished = true;
+            Debug.Log("Wave finished.");
         }
     }
-    
-    void CreateEnemy(bool isMelee, bool canNecromance) 
+
+    IEnumerator CreateEnemy(bool isMelee, bool canNecromance)
     {
-        GameObject e1 = Instantiate(enemyPrefab, spawnPoints[Random.Range(0, 9)].position, Quaternion.identity);
+        Debug.Log("Creating enemy...");
+        Vector3 spawnPosition = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
+        GameObject e1 = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         Enemy enemy1 = e1.GetComponent<Enemy>();
         enemy1.canNecromance = canNecromance;
         enemy1.canShoot = !isMelee;
         enemy1.meleeEnemy = isMelee;
         enemyList.Add(e1);
-    }
-    
-    void CreateWave1() 
-    {
-        for (int i = 0; i < 5; i++) 
-        {
-            CreateEnemy(true, false);
-        }
-        for (int z = 0; z < 5; z++) 
-        {
-            CreateEnemy(false, false);
-        }
-    }
-    public void StartWave1() { StartCoroutine(StartWave1Co()); }
-    IEnumerator StartWave1Co() 
-    {
-        yield return new WaitForSeconds(5);
-        waveFinished = false;
-        CreateWave1();
-        PlayerController.player.IncreaseWaveNumber(1);
+        yield return new WaitForSeconds(0.75f);
     }
 
-    void CreateWave2() 
+    IEnumerator CreateWave(List<(bool isMelee, bool canNecromance)> enemyConfigs)
     {
-        for (int z = 0; z < 7; z++)
-        {
-            CreateEnemy(false, false);
-        }
-        for (int i = 0; i < 1; i++) 
-        {
-            CreateEnemy(true, true);
-        }
-    }
-    public void StartWave2() { StartCoroutine(StartWave2Co()); }
-    IEnumerator StartWave2Co()
-    {
-        yield return new WaitForSeconds(5);
         waveFinished = false;
-        CreateWave2();
+        isWaveCoroutineRunning = true;
+        Debug.Log("Starting wave...");
+        yield return new WaitForSeconds(5);
+
+        foreach (var config in enemyConfigs)
+        {
+            yield return StartCoroutine(CreateEnemy(config.isMelee, config.canNecromance));
+        }
+
         PlayerController.player.IncreaseWaveNumber(1);
+        isWaveCoroutineRunning = false;
     }
 
-    void CreateWave3() 
+    void StartWave1()
     {
-        for (int z = 0; z < 9; z++)
+        Debug.Log("Starting Wave 1");
+        StartCoroutine(CreateWave(new List<(bool, bool)>
         {
-            CreateEnemy(false, false);
-        }
-        for (int i = 0; i < 2; i++)
-        {
-            CreateEnemy(true, true);
-        }
-    }
-    public void StartWave3() { StartCoroutine(StartWave3Co()); }
-    IEnumerator StartWave3Co()
-    {
-        yield return new WaitForSeconds(5);
-        waveFinished = false;
-        CreateWave3();
-        PlayerController.player.IncreaseWaveNumber(1);
+            (true, false), (true, false), (true, false), (true, false), (true, false),
+            (false, false), (false, false), (false, false), (false, false), (false, false)
+        }));
     }
 
-    void CreateWave4() 
+    void StartWave2()
     {
-        for (int z = 0; z < 6; z++)
+        Debug.Log("Starting Wave 2");
+        StartCoroutine(CreateWave(new List<(bool, bool)>
         {
-            CreateEnemy(false, false);
-        }
-        for (int i = 0; i < 5; i++)
-        {
-            CreateEnemy(true, true);
-        }
-    }
-    public void StartWave4() { StartCoroutine(StartWave4Co()); }
-    IEnumerator StartWave4Co()
-    {
-        yield return new WaitForSeconds(5);
-        waveFinished = false;
-        CreateWave4();
-        PlayerController.player.IncreaseWaveNumber(1);
+            (false, false), (false, false), (false, false), (false, false),
+            (false, false), (false, false), (false, false), (true, true)
+        }));
     }
 
-    void CreateWave5() 
+    void StartWave3()
     {
-        for (int z = 0; z < 20; z++)
+        Debug.Log("Starting Wave 3");
+        StartCoroutine(CreateWave(new List<(bool, bool)>
         {
-            CreateEnemy(false, false);
-        }
-    }
-    public void StartWave5() { StartCoroutine(StartWave5Co()); }
-    IEnumerator StartWave5Co()
-    {
-        yield return new WaitForSeconds(5);
-        waveFinished = false;
-        CreateWave5();
-        PlayerController.player.IncreaseWaveNumber(1);
+            (false, false), (false, false), (false, false), (false, false),
+            (false, false), (false, false), (false, false), (false, false),
+            (false, false), (true, true), (true, true)
+        }));
     }
 
+    void StartWave4()
+    {
+        Debug.Log("Starting Wave 4");
+        StartCoroutine(CreateWave(new List<(bool, bool)>
+        {
+            (false, false), (false, false), (false, false), (false, false),
+            (false, false), (false, false), (true, true), (true, true),
+            (true, true), (true, true), (true, true)
+        }));
+    }
+
+    void StartWave5()
+    {
+        Debug.Log("Starting Wave 5");
+        StartCoroutine(CreateWave(new List<(bool, bool)>
+        {
+            (false, false), (false, false), (false, false), (false, false),
+            (false, false), (false, false), (false, false), (false, false),
+            (false, false), (false, false), (false, false), (false, false),
+            (false, false), (false, false), (false, false), (false, false),
+            (false, false), (false, false), (false, false), (false, false)
+        }));
+    }
 }

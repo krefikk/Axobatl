@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
     public LayerMask unwalkableLayer;
 
     [Header("Combat")]
-    public float damage;
+    float damage = 5;
     public float damageRadius; // Only for melee attacker enemies
     public float timeBetweenMeleeAttacks;
     float timeSinceLastMeleeAttack = 0;
@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
         // Handling melee, necromancing and shooting flags
         if (!meleeEnemy)
         {
-            if (canNecromance) { canShoot = false; meleeEnemy = true; }
+            if (canNecromance) { canShoot = false; meleeEnemy = true; damage = 10; }
             if (canShoot) { canNecromance = false; meleeEnemy = false; }
         }
         else 
@@ -76,6 +76,19 @@ public class Enemy : MonoBehaviour
         // Initializing components
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        // Setting idle animations
+        if (meleeEnemy && !canNecromance)
+        {
+            anim.SetInteger("IdleState", 0);
+        }
+        else if (canShoot)
+        {
+            anim.SetInteger("IdleState", 1);
+        }
+        else if (canNecromance) 
+        {
+            anim.SetInteger("IdleState", 2);
+        }
         // Initializing AI
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -265,6 +278,7 @@ public class Enemy : MonoBehaviour
         timeSinceLastMeleeAttack += Time.deltaTime;
         if (Vector2.Distance(PlayerController.player.transform.position, transform.position) <= damageRadius && !canShoot && timeSinceLastMeleeAttack >= timeBetweenMeleeAttacks)
         { // For melee attacker enemies
+            anim.SetTrigger("Attacking");
             PlayerController.player.TakeDamage(damage);
             timeSinceLastMeleeAttack = 0;
         }       
@@ -302,6 +316,7 @@ public class Enemy : MonoBehaviour
                 timeSinceLastShoot = 0;
             }
         }
+        anim.SetTrigger("Attacking");
     }
 
     void ShootAutoGunBullet() // Shoots bullet
@@ -316,7 +331,7 @@ public class Enemy : MonoBehaviour
         {
             bullet.SetDirection(bulletDirection.normalized);
             bullet.SetSpeed(10f);
-            bullet.SetDamage(2f);
+            bullet.SetDamage(15f);
             bullet.SetParent(gameObject);
         }
     }
@@ -333,7 +348,7 @@ public class Enemy : MonoBehaviour
         {
             bullet.SetDirection(bulletDirection.normalized);
             bullet.SetSpeed(10f);
-            bullet.SetDamage(5f);
+            bullet.SetDamage(20f);
             bullet.SetParent(gameObject);
         }
     }
@@ -372,7 +387,7 @@ public class Enemy : MonoBehaviour
                     bullet.SetDirection(bulletDirection.normalized);
                 }
                 bullet.SetSpeed(10f);
-                bullet.SetDamage(2f);
+                bullet.SetDamage(15f);
                 bullet.SetParent(gameObject);
             }
         }
@@ -385,11 +400,13 @@ public class Enemy : MonoBehaviour
             lastTimeSinceNecromanced += Time.deltaTime;
             if (lastTimeSinceNecromanced >= timeBetweenEachNecromance) 
             {
+                anim.SetBool("Necromancing", true);
                 foreach (Transform necromancePoint in necromancePoints) 
                 {
                     GameObject newEnemy = Instantiate(specificEnemyPrefab, necromancePoint.position, Quaternion.identity);
                     Enemy newEnemyScript = newEnemy.GetComponent<Enemy>();
                     newEnemyScript.canNecromance = false;
+                    newEnemyScript.health = newEnemyScript.maxHealth;
                     int luck = Random.Range(0, 3);
                     if (luck == 0 || luck == 1) 
                     { // Necromanced enemies have 33% chance to be shootable enemies
@@ -401,6 +418,7 @@ public class Enemy : MonoBehaviour
                     }
                 }
                 lastTimeSinceNecromanced = 0;
+                anim.SetBool("Necromancing", false);
             }
         }
     }
