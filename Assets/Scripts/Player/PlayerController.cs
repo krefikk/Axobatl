@@ -352,6 +352,7 @@ public class PlayerController : MonoBehaviour
             highScoreUpdated = true;
         }       
         dead = true;
+        gameObject.SetActive(false);
         SceneManager.LoadScene("GameOver");
     }
 
@@ -365,6 +366,7 @@ public class PlayerController : MonoBehaviour
                 PlayerPrefs.SetFloat("HighScore", highScore);
                 highScoreUpdated = true;
             }
+            gameObject.SetActive(false);
             SceneManager.LoadScene("GameOver");
         }
     }
@@ -434,6 +436,7 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector2(0.3f, -0.1f);
         highScoreUpdated = false;
         finishedGame = false;
+        gameObject.SetActive(true);
     }
 
     // --------------------------------Player Skills------------------------------------------
