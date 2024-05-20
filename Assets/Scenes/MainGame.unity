@@ -5083,18 +5083,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5665926469708315940, guid: b3482a4f852d6974588c013e122981ba, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0.16470589
-      objectReference: {fileID: 0}
-    - target: {fileID: 5665926469708315940, guid: b3482a4f852d6974588c013e122981ba, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0.16470589
-      objectReference: {fileID: 0}
-    - target: {fileID: 5665926469708315940, guid: b3482a4f852d6974588c013e122981ba, type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0.43529415
-      objectReference: {fileID: 0}
     - target: {fileID: 6340844142689697071, guid: b3482a4f852d6974588c013e122981ba, type: 3}
       propertyPath: m_Name
       value: Main Camera
