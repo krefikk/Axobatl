@@ -171,6 +171,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void ReturnToMainMenu() 
+    {
+        Restart();
+        SceneManager.LoadScene("MainMenu");
+        Destroy(this.gameObject);
+    }
     void Move()
     {
         Vector2 movement = new Vector2(xAxis, yAxis) * walkSpeed * Time.deltaTime;
