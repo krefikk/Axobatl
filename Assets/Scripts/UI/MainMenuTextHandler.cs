@@ -8,6 +8,7 @@ public class MainMenuTextHandler : MonoBehaviour
     public Animator settingsAnim;
     public Animator creditsAnim;
     public Animator exitAnim;
+    public Animator htpAnim;
 
     void Start()
     {
@@ -57,5 +58,15 @@ public class MainMenuTextHandler : MonoBehaviour
     public void ExitButtonExitAnimation()
     {
         exitAnim.Play("exitExit");
+    }
+
+    public void HTPButtonEnterAnimation()
+    {
+        htpAnim.Play("htpEnter");
+    }
+
+    public void HTPButtonExitAnimation()
+    {
+        htpAnim.Play("htpExit");
     }
 }

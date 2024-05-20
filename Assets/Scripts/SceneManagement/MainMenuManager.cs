@@ -14,10 +14,12 @@ public class MainMenuManager : MonoBehaviour
     public GameObject settings;
     public GameObject credits;
     public GameObject exit;
+    public GameObject htp;
     Button startText;
     Button settingsText;
     Button creditsText;
     Button exitText;
+    Button htpText;
     MainMenuTextHandler textHandler;
     public Animator logoAnim;
 
@@ -27,6 +29,7 @@ public class MainMenuManager : MonoBehaviour
         settingsText = settings.GetComponent<Button>();
         creditsText = credits.GetComponent<Button>();
         exitText = exit.GetComponent<Button>();
+        htpText = htp.GetComponent<Button>();
         textHandler = start.GetComponentInParent<MainMenuTextHandler>();
     }
 
@@ -50,12 +53,18 @@ public class MainMenuManager : MonoBehaviour
         StartCoroutine(PressedExitButtonCO());
     }
 
+    public void PressedHTPButton() 
+    {
+        StartCoroutine(PressedHTPButtonCO());
+    }
+
     IEnumerator PressedStartButtonCO()
     {
         startText.interactable = false;
         settingsText.interactable = false;
         creditsText.interactable = false;
         exitText.interactable = false;
+        htpText.interactable = false;
         logoAnim.Play("logoExit");
         yield return new WaitForSeconds(0.5f);
         textHandler.StartButtonExitAnimation();
@@ -66,10 +75,13 @@ public class MainMenuManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         textHandler.ExitButtonExitAnimation();
         yield return new WaitForSeconds(0.5f);
+        textHandler.HTPButtonExitAnimation();
+        yield return new WaitForSeconds(0.5f);
         startText.interactable = true;
         settingsText.interactable = true;
         creditsText.interactable = true;
         exitText.interactable = true;
+        htpText.interactable = true;
         if (PlayerPrefs.GetInt("SawIntro", 0) == 0)
         {
             SceneManager.LoadScene("Intro");
@@ -87,6 +99,7 @@ public class MainMenuManager : MonoBehaviour
         settingsText.interactable = false;
         creditsText.interactable = false;
         exitText.interactable = false;
+        htpText.interactable = false;
         logoAnim.Play("logoExit");
         yield return new WaitForSeconds(0.5f);
         textHandler.StartButtonExitAnimation();
@@ -97,10 +110,13 @@ public class MainMenuManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         textHandler.ExitButtonExitAnimation();
         yield return new WaitForSeconds(0.5f);
+        textHandler.HTPButtonExitAnimation();
+        yield return new WaitForSeconds(0.5f);
         startText.interactable = true;
         settingsText.interactable = true;
         creditsText.interactable = true;
         exitText.interactable = true;
+        htpText.interactable = true;
         SceneManager.LoadScene("SettingScene");
     }
 
@@ -110,6 +126,7 @@ public class MainMenuManager : MonoBehaviour
         settingsText.interactable = false;
         creditsText.interactable = false;
         exitText.interactable = false;
+        htpText.interactable = false;
         logoAnim.Play("logoExit");
         yield return new WaitForSeconds(0.5f);
         textHandler.StartButtonExitAnimation();
@@ -120,10 +137,13 @@ public class MainMenuManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         textHandler.ExitButtonExitAnimation();
         yield return new WaitForSeconds(0.5f);
+        textHandler.HTPButtonExitAnimation();
+        yield return new WaitForSeconds(0.5f);
         startText.interactable = true;
         settingsText.interactable = true;
         creditsText.interactable = true;
         exitText.interactable = true;
+        htpText.interactable = true;
         SceneManager.LoadScene("CreditsScene");
     }
 
@@ -133,6 +153,7 @@ public class MainMenuManager : MonoBehaviour
         settingsText.interactable = false;
         creditsText.interactable = false;
         exitText.interactable = false;
+        htpText.interactable = false;
         logoAnim.Play("logoExit");
         yield return new WaitForSeconds(0.5f);
         textHandler.StartButtonExitAnimation();
@@ -143,10 +164,40 @@ public class MainMenuManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         textHandler.ExitButtonExitAnimation();
         yield return new WaitForSeconds(0.5f);
+        textHandler.HTPButtonExitAnimation();
+        yield return new WaitForSeconds(0.5f);
         startText.interactable = true;
         settingsText.interactable = true;
         creditsText.interactable = true;
         exitText.interactable = true;
+        htpText.interactable = true;
         Application.Quit();
+    }
+
+    IEnumerator PressedHTPButtonCO()
+    {
+        startText.interactable = false;
+        settingsText.interactable = false;
+        creditsText.interactable = false;
+        exitText.interactable = false;
+        htpText.interactable = false;
+        logoAnim.Play("logoExit");
+        yield return new WaitForSeconds(0.5f);
+        textHandler.StartButtonExitAnimation();
+        yield return new WaitForSeconds(0.5f);
+        textHandler.SettingsButtonExitAnimation();
+        yield return new WaitForSeconds(0.5f);
+        textHandler.CreditsButtonExitAnimation();
+        yield return new WaitForSeconds(0.5f);
+        textHandler.ExitButtonExitAnimation();
+        yield return new WaitForSeconds(0.5f);
+        textHandler.HTPButtonExitAnimation();
+        yield return new WaitForSeconds(0.5f);
+        startText.interactable = true;
+        settingsText.interactable = true;
+        creditsText.interactable = true;
+        exitText.interactable = true;
+        htpText.interactable = true;
+        SceneManager.LoadScene("HowToPlay");
     }
 }
