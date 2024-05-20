@@ -305,7 +305,7 @@ MonoBehaviour:
   Path: Axobatl FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638517747449743950
+  lastModified: 638518150357413334
   FileSizes:
   - Name: Desktop
     Value: 2926400
@@ -719,7 +719,7 @@ MonoBehaviour:
   - {fileID: -4304498392897435866}
   StringsBanks:
   - {fileID: 1496517174456269406}
-  cacheTime: 638517747449759017
+  cacheTime: 638518150357413334
   cacheVersion: 131618
 --- !u!114 &1496517174456269406
 MonoBehaviour:
@@ -736,7 +736,7 @@ MonoBehaviour:
   Path: Axobatl FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638517747449759017
+  lastModified: 638518150357413334
   FileSizes:
   - Name: Desktop
     Value: 1546

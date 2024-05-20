@@ -182,8 +182,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Armed Enemy
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
+  m_sharedMaterial: {fileID: 13501656097163537, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -523,8 +523,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Melee Enemy
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
+  m_sharedMaterial: {fileID: 13501656097163537, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -727,8 +727,8 @@ MonoBehaviour:
     revolver and shotgun. Enemies will attack you with weapons you didn''t choose,
     so choose carefully.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
+  m_sharedMaterial: {fileID: 13501656097163537, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -940,8 +940,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: ENEMIES
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
+  m_sharedMaterial: {fileID: 13501656097163537, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1667,8 +1667,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Pause Game
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
+  m_sharedMaterial: {fileID: 13501656097163537, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1951,8 +1951,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Dash
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
+  m_sharedMaterial: {fileID: 13501656097163537, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2085,8 +2085,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Attack
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
+  m_sharedMaterial: {fileID: 13501656097163537, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2219,8 +2219,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Necromancer Enemy
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
+  m_sharedMaterial: {fileID: 13501656097163537, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2505,8 +2505,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: GAME
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
+  m_sharedMaterial: {fileID: 13501656097163537, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2731,8 +2731,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: PLAYER
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
+  m_sharedMaterial: {fileID: 13501656097163537, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2869,8 +2869,8 @@ MonoBehaviour:
     worry if you die, you still get a score and you can compare your score with other
     players.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
+  m_sharedMaterial: {fileID: 13501656097163537, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3086,8 +3086,8 @@ MonoBehaviour:
     follow you, they will retreat to a secluded corner and overwhelm you with their
     necromanced dead demons'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
+  m_sharedMaterial: {fileID: 13501656097163537, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3464,8 +3464,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Movement
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
+  m_sharedMaterial: {fileID: 13501656097163537, guid: 73da61c0fbaa4e74aac57676bfbb1dd3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
