@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Intro.unity
     guid: 773a853e773ba334286c0c8be50c5da0
   - enabled: 1
+    path: Assets/Scenes/GunChoose.unity
+    guid: f2933bcc8b6cadb4d870884ccd93571b
+  - enabled: 1
     path: Assets/Scenes/MainGame.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1

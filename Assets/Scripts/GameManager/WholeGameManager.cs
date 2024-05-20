@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class WholeGameManager : MonoBehaviour
 {
-    private static WholeGameManager instance;
+    public static WholeGameManager instance;
 
     // State flags
     bool inGameflow = false;
@@ -28,6 +28,9 @@ public class WholeGameManager : MonoBehaviour
     float sfxVolume = 100; // Max is 100
     float musicVolume = 100; // Max is 100
     bool isTutorialsOn = true; // Default is true
+
+    // Gun
+    int gun = 0;
 
     public EventReference musicMenu;
     public EventReference musicIntro;
@@ -53,7 +56,7 @@ public class WholeGameManager : MonoBehaviour
         {
             isTutorialsOn = true;
         }
-        else 
+        else
         {
             isTutorialsOn = false;
         }
@@ -174,7 +177,7 @@ public class WholeGameManager : MonoBehaviour
     }
 
     //---------------------------------------- Getters & Setters --------------------------------------------------
-    public float GetSFXVolume() 
+    public float GetSFXVolume()
     {
         return sfxVolume;
     }
@@ -184,7 +187,7 @@ public class WholeGameManager : MonoBehaviour
         return musicVolume;
     }
 
-    public void SetSFXVolume(float value) 
+    public void SetSFXVolume(float value)
     {
         sfxVolume = value;
     }
@@ -194,13 +197,23 @@ public class WholeGameManager : MonoBehaviour
         musicVolume = value;
     }
 
-    public bool IsTutorialsOn() 
+    public bool IsTutorialsOn()
     {
         return isTutorialsOn;
     }
 
-    public void TurnOnOffTutorials(bool value) 
+    public void TurnOnOffTutorials(bool value)
     {
         isTutorialsOn = value;
+    }
+
+    public void SetGun(int value)
+    {
+        gun = value;
+    }
+
+    public int GetGun() 
+    {
+        return gun;
     }
 }

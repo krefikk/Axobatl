@@ -80,7 +80,7 @@ public class GameOverManager : MonoBehaviour
         if (restartingGame) 
         {
             PlayerController.player.Restart();
-            SceneManager.LoadScene("MainGame");
+            SceneManager.LoadScene("GunChoose");
             restartingGame = false;
         }
         if (returningMainMenu) 

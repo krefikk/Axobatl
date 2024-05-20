@@ -116,6 +116,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        gun = WholeGameManager.instance.GetGun();
         // Initialize components
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -505,7 +506,6 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Dash") && canDash) 
         {
-            Debug.Log("Dashed");
             StartCoroutine(Dash());
         }
     }
@@ -521,12 +521,11 @@ public class PlayerController : MonoBehaviour
             if (direction.magnitude == 0)
             {
                 rb.velocity = GetDirection() * dashSpeed * dashDistanceMultiplier;
-                Debug.Log("No movement");
             }
             else
             {
                 direction.Normalize();
-                rb.velocity = direction * dashSpeed;
+                rb.velocity = direction * dashSpeed * dashDistanceMultiplier;
             }
             yield return new WaitForSeconds(dashTime);
             dashing = false;
@@ -704,7 +703,7 @@ public class PlayerController : MonoBehaviour
     }
     public void DashBurger()
     { // Increases Dashtime but decreases walkSpeed (one time)
-        dashTime += 0.4f;
+        dashSpeed *= 1.5f;
         walkSpeed -= 0.75f;
     }
 
@@ -731,7 +730,7 @@ public class PlayerController : MonoBehaviour
 
     public void DashBlast()
     {// greatly upgrades your dash but greatly decreases your health
-        dashTime += 1f;
+        dashSpeed *= 1.5f;
         dashDistanceMultiplier *= 2f;
         maxHealth -= 15;     
         if (maxHealth <= 0)

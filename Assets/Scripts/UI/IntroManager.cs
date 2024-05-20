@@ -46,6 +46,6 @@ public class IntroManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("MainGame");
+        SceneManager.LoadScene("GunChoose");
     }
 }

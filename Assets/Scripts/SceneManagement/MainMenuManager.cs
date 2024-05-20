@@ -77,7 +77,7 @@ public class MainMenuManager : MonoBehaviour
         }
         else 
         {
-            SceneManager.LoadScene("MainGame");
+            SceneManager.LoadScene("GunChoose");
         }       
     }
 
