@@ -26,8 +26,8 @@ public class PlayerController : MonoBehaviour
     protected int gun = 0; // 0 represents automatic gun, 1 represents revolver, 2 represents shotgun
 
     [Header("Health")]
-    private float maxHealth = 150;
-    private float health = 150;
+    float maxHealth = 150;
+    float health = 150;
 
     [Header("Movement")]
     private float xAxis = 0;
@@ -702,8 +702,8 @@ public class PlayerController : MonoBehaviour
     // -------Movement
     public void SqueezE()
     { // Increases walk speed but slightly reduces maximum health.
-        maxHealth -= 7.5f;
-        if (health > maxHealth - 7.5f)
+        maxHealth -= 15f;
+        if (health > maxHealth)
         {
             health = maxHealth;
         }
