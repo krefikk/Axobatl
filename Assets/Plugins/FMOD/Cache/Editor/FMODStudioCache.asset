@@ -305,10 +305,10 @@ MonoBehaviour:
   Path: Axobatl FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638518075315091827
+  lastModified: 638517747449743950
   FileSizes:
   - Name: Desktop
-    Value: 2895456
+    Value: 2926400
   Exists: 1
 --- !u!114 &-4102070950861125023
 MonoBehaviour:
@@ -546,6 +546,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-1275517655257381836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Necromancer Death
+  m_EditorClassIdentifier: 
+  Path: event:/Necromancer Death
+  Guid:
+    Data1: 371926411
+    Data2: 1218789219
+    Data3: 789015208
+    Data4: -192033847
+  Banks:
+  - {fileID: -4304498392897435866}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-873790230615227448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,12 +713,13 @@ MonoBehaviour:
   - {fileID: 4208750298080813109}
   - {fileID: -8921922783267195964}
   - {fileID: -4102070950861125023}
+  - {fileID: -1275517655257381836}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4304498392897435866}
   StringsBanks:
   - {fileID: 1496517174456269406}
-  cacheTime: 638518075315101838
+  cacheTime: 638517747449759017
   cacheVersion: 131618
 --- !u!114 &1496517174456269406
 MonoBehaviour:
@@ -708,10 +736,10 @@ MonoBehaviour:
   Path: Axobatl FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638518075315101838
+  lastModified: 638517747449759017
   FileSizes:
   - Name: Desktop
-    Value: 1498
+    Value: 1546
   Exists: 1
 --- !u!114 &1847468067600089330
 MonoBehaviour:
