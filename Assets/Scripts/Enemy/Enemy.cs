@@ -67,6 +67,7 @@ public class Enemy : MonoBehaviour
     public EventReference necromancerSpawn;
     public EventReference gunGuyDeath;
     public EventReference zombieDeath;
+    public EventReference necroDeath;
 
     private void Start()
     {
@@ -285,17 +286,22 @@ public class Enemy : MonoBehaviour
 
     public void Die() 
     {
-        if (meleeEnemy)
+        if (canNecromance)
         {
+            RuntimeManager.PlayOneShotAttached(necroDeath, gameObject);
+        }
+        else
+        {
+            if (meleeEnemy)
+            {
                 RuntimeManager.PlayOneShotAttached(zombieDeath, gameObject);
-        }
-
-        if (canShoot)
-        {
-
+            }
+            if (canShoot)
+            {
                 RuntimeManager.PlayOneShotAttached(gunGuyDeath, gameObject);
-            
+            }
         }
+        
 
     }
 
@@ -426,6 +432,8 @@ public class Enemy : MonoBehaviour
             lastTimeSinceNecromanced += Time.deltaTime;
             if (lastTimeSinceNecromanced >= timeBetweenEachNecromance) 
             {
+                RuntimeManager.PlayOneShotAttached(necromancerSpawn, gameObject);
+
                 anim.SetBool("Necromancing", true);
                 foreach (Transform necromancePoint in necromancePoints) 
                 {

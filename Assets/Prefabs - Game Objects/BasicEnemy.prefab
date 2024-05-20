@@ -624,6 +624,13 @@ MonoBehaviour:
       Data3: 44625852
       Data4: 1445274292
     Path: event:/Zombie Death
+  necroDeath:
+    Guid:
+      Data1: 371926411
+      Data2: 1218789219
+      Data3: 789015208
+      Data4: -192033847
+    Path: event:/Necromancer Death
 --- !u!1 &8215651074281236514
 GameObject:
   m_ObjectHideFlags: 0
