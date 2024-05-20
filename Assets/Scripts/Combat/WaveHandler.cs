@@ -103,6 +103,9 @@ public class WaveHandler : MonoBehaviour
                     case 4:
                         StartWave5();
                         break;
+                    case 5:
+                        PlayerController.player.IncreaseWaveNumber(1);
+                        break;
                 }
             }
         }

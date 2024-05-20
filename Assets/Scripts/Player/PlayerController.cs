@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
     public GameObject inGameMenu;
 
     [Header("Waves")]
+    public WaveHandler waveHandler;
     int inWave = 0;
     public bool finishedGame = false;
     bool displayedWave1Text = false;
@@ -138,7 +139,6 @@ public class PlayerController : MonoBehaviour
             DisplayHealth();
             DisplayScore();
             DisplayElapsedTime();
-            FinishGame();
         }
         else 
         {
@@ -162,8 +162,11 @@ public class PlayerController : MonoBehaviour
         yAxis = Input.GetAxis("Vertical"); // Checks if player pressed up, down or W, S
         attacking = Input.GetMouseButtonDown(0); // Checks if player pressed left mouse button
         if (Input.GetKeyDown(KeyCode.Escape)) // Stops the game if game is flowing, starts the game if game is stopped
-        {
+        {           
+            StopCoroutine(Dash());
             GameManager.gameManager.gamePaussed = !GameManager.gameManager.gamePaussed;
+            if (GameManager.gameManager.gamePaussed) { rb.drag = 10; }
+            if (!GameManager.gameManager.gamePaussed) { rb.drag = 0; }
         }
         //------------------------------Attribute Inputs-------------------------------------
         if (Input.GetKeyDown(KeyCode.Z) && !mirrorArmorActivated && !isMirrorArmorOnCooldown && attribute == 0)
@@ -423,8 +426,23 @@ public class PlayerController : MonoBehaviour
 
     public void FinishGame() 
     {
-        if (finishedGame) 
-        {
+        finishedGame = true;    
+        if (score > highScore)
+            {
+                highScore = score;
+                PlayerPrefs.SetFloat("HighScore", highScore);
+                highScoreUpdated = true;
+            }
+            gameObject.SetActive(false);
+            PlayerPrefs.SetInt("GotWave1Award", 0);
+            PlayerPrefs.SetInt("GotWave2Award", 0);
+            PlayerPrefs.SetInt("GotWave3Award", 0);
+            PlayerPrefs.SetInt("GotWave4Award", 0);
+            SceneManager.LoadScene("GameOver");
+    }
+
+    public void FinishGameFromWaveHandler()
+    {
             if (score > highScore)
             {
                 highScore = score;
@@ -437,7 +455,6 @@ public class PlayerController : MonoBehaviour
             PlayerPrefs.SetInt("GotWave3Award", 0);
             PlayerPrefs.SetInt("GotWave4Award", 0);
             SceneManager.LoadScene("GameOver");
-        }
     }
 
     public void TakeDamage(float damage) 
@@ -648,7 +665,11 @@ public class PlayerController : MonoBehaviour
     public void IncreaseWaveNumber(int number) 
     {
         inWave += number;
-        DisplayWaveText();
+        if (inWave == 6)
+        {
+            FinishGame();
+        }
+        else { DisplayWaveText(); }    
     }
 
     public float GetScore() 

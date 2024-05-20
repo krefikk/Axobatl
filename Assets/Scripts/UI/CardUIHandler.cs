@@ -45,14 +45,14 @@ public class CardUIHandler : MonoBehaviour
     public void DisplayChosenCards()
     {
         int[] IDArray = ChosenCards();
-        leftTitle.text = cards[IDArray[0]].Title;
-        leftDesc.text = cards[IDArray[0]].Description;
+        leftTitle.text = FindCardWithSpecificID(IDArray[0]).Title;
+        leftDesc.text = FindCardWithSpecificID(IDArray[0]).Description;
         leftCardPerkID = IDArray[0];
-        middleTitle.text = cards[IDArray[1]].Title;
-        middleDesc.text = cards[IDArray[1]].Description;
+        middleTitle.text = FindCardWithSpecificID(IDArray[1]).Title;
+        middleDesc.text = FindCardWithSpecificID(IDArray[1]).Description;
         middleCardPerkID = IDArray[1];
-        rightTitle.text = cards[IDArray[2]].Title;
-        rightDesc.text = cards[IDArray[2]].Description;
+        rightTitle.text = FindCardWithSpecificID(IDArray[2]).Title;
+        rightDesc.text = FindCardWithSpecificID(IDArray[2]).Description;
         rightCardPerkID = IDArray[2];
         Debug.Log(leftCardPerkID);
         Debug.Log(middleCardPerkID);
@@ -165,5 +165,20 @@ public class CardUIHandler : MonoBehaviour
         else if (ID == 13) { PlayerController.player.SawBullets(); }
         else if (ID == 14) { PlayerController.player.LetItBeBullet(); }
         else if (ID == 15) { PlayerController.player.DashAirlines(); }
+    }
+
+    Card FindCardWithSpecificID(int ID) 
+    {
+        if (cards is not null)
+        {
+            foreach (Card card in cards)
+            {
+                if (card.UniqueID == ID)
+                {
+                    return card;
+                }
+            }
+        }
+        return null;
     }
 }

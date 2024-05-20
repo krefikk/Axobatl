@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
     public LayerMask unwalkableLayer;
 
     [Header("Combat")]
-    float damage = 5;
+    float damage = 2.5f;
     public float damageRadius; // Only for melee attacker enemies
     public float timeBetweenMeleeAttacks;
     float timeSinceLastMeleeAttack = 0;
@@ -363,7 +363,7 @@ public class Enemy : MonoBehaviour
         {
             bullet.SetDirection(bulletDirection.normalized);
             bullet.SetSpeed(10f);
-            bullet.SetDamage(15f);
+            bullet.SetDamage(7.5f);
             bullet.SetParent(gameObject);
         }
     }
@@ -380,7 +380,7 @@ public class Enemy : MonoBehaviour
         {
             bullet.SetDirection(bulletDirection.normalized);
             bullet.SetSpeed(10f);
-            bullet.SetDamage(20f);
+            bullet.SetDamage(12.5f);
             bullet.SetParent(gameObject);
         }
     }
@@ -419,7 +419,7 @@ public class Enemy : MonoBehaviour
                     bullet.SetDirection(bulletDirection.normalized);
                 }
                 bullet.SetSpeed(10f);
-                bullet.SetDamage(15f);
+                bullet.SetDamage(7.5f);
                 bullet.SetParent(gameObject);
             }
         }
