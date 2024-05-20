@@ -4,7 +4,7 @@ You can reach the game's itch.io page by clicking: [Axobatl](https://krefikk.itc
 The active repository of game is "real", if you want to look at the source code.
 
 # Contributors
-krefikk -> Programming
-MoltenNaut -> Art
-mikelBresko -> SFX
+krefikk -> Programming<br>
+MoltenNaut -> Art<br>
+mikelBresko -> SFX<br>
 Also endless thanks for [Himeko Katagiri](https://seifukusound.bandcamp.com) for her incredible musics.
