@@ -1,6 +1,8 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+//using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.U2D;
@@ -60,6 +62,11 @@ public class Enemy : MonoBehaviour
     // Components
     Rigidbody2D rb;
     Animator anim;
+
+    // Audio
+    public EventReference necromancerSpawn;
+    public EventReference gunGuyDeath;
+    public EventReference zombieDeath;
 
     private void Start()
     {
@@ -264,6 +271,8 @@ public class Enemy : MonoBehaviour
         if (damage >= health)
         {
             Destroy(gameObject);
+            Die();
+
             // Play some animations or sounds here
         }
         // If damage is not enough to kill the enemy, just decrease their health
@@ -276,6 +285,18 @@ public class Enemy : MonoBehaviour
 
     public void Die() 
     {
+        if (meleeEnemy)
+        {
+                RuntimeManager.PlayOneShotAttached(zombieDeath, gameObject);
+        }
+
+        if (canShoot)
+        {
+
+                RuntimeManager.PlayOneShotAttached(gunGuyDeath, gameObject);
+            
+        }
+
     }
 
     void GiveDamage()

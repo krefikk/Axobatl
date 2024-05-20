@@ -584,7 +584,6 @@ MonoBehaviour:
   maxHealth: 10
   health: 10
   healthBar: {fileID: 1521094832098743377}
-  moveSpeed: 2
   unwalkableLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -604,6 +603,27 @@ MonoBehaviour:
   canShoot: 1
   meleeEnemy: 0
   healthBarOffset: {x: 0, y: 0.75, z: 0}
+  necromancerSpawn:
+    Guid:
+      Data1: -1784938206
+      Data2: 1167103080
+      Data3: -1049400446
+      Data4: 1190410950
+    Path: event:/Necromancer Spawn
+  gunGuyDeath:
+    Guid:
+      Data1: 903315949
+      Data2: 1258793823
+      Data3: -1718873461
+      Data4: 1314195256
+    Path: event:/Gun Guy Death
+  zombieDeath:
+    Guid:
+      Data1: 733243515
+      Data2: 1259516100
+      Data3: 44625852
+      Data4: 1445274292
+    Path: event:/Zombie Death
 --- !u!1 &8215651074281236514
 GameObject:
   m_ObjectHideFlags: 0

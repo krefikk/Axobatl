@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class Bullet : MonoBehaviour
     public bool IsBoomerang;
     bool moveback = false;
     float aliveTime = 0;
+
+    public EventReference enemyHit;
 
     private void FixedUpdate()
     {
@@ -80,6 +83,8 @@ public class Bullet : MonoBehaviour
                 Enemy enemy = other.GetComponent<Enemy>();
                 Debug.Log("Hit Enemy");
                 enemy.TakeDamage(damage);
+
+                RuntimeManager.PlayOneShotAttached(enemyHit, gameObject);
             }
             PlayerController.player.SetScore(PlayerController.player.GetScore() + 10);
         }

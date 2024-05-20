@@ -172,3 +172,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsBoomerang: 0
+  enemyHit:
+    Guid:
+      Data1: -189943903
+      Data2: 1318872492
+      Data3: 1920066974
+      Data4: 1579624855
+    Path: event:/Enemy Hit

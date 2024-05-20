@@ -98,8 +98,9 @@ public class PlayerController : MonoBehaviour
     // Audio
     public EventReference audioHandgun;
     public EventReference audioRevolver;
-
+    public EventReference audioShotgun;
     public EventReference audioPlayerDeath;
+    public EventReference audioPlayerDamage;
 
     private void Awake()
     {
@@ -173,6 +174,7 @@ public class PlayerController : MonoBehaviour
 
     public void ReturnToMainMenu() 
     {
+        AudioManager.audioManager.EndMusic();
         Restart();
         SceneManager.LoadScene("MainMenu");
         Destroy(this.gameObject);
@@ -230,6 +232,8 @@ public class PlayerController : MonoBehaviour
                 anim.SetTrigger("Attacking");
                 ShootShotgunBullets();
                 timeSinceLastShoot = 0;
+
+                RuntimeManager.PlayOneShot(audioShotgun);
             }
         }
     }
@@ -440,7 +444,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!dashing) // Can't take damage while dashing
         {
-            // If damage taken is greater than enemy's current health points, kill the enemy
+            // If damage taken is greater than enemy's current health points, kill the player
             if (damage >= health)
             {
                 Die();
@@ -453,6 +457,8 @@ public class PlayerController : MonoBehaviour
                 health -= damage;
                 Debug.Log("Took damage");
                 // Play some animations or sounds here
+
+                RuntimeManager.PlayOneShot(audioPlayerDamage);
             }
         }
     }

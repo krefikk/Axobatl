@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public bool gamePaussed = false;
     private float elapsedTime = 0f;
 
-    public EventReference musicMain;
+    //public EventReference musicMain;
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        RuntimeManager.PlayOneShot(musicMain);
+        //RuntimeManager.PlayOneShot(musicMain);
     }
 
     private void Update()

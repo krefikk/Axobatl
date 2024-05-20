@@ -110,6 +110,7 @@ public class WholeGameManager : MonoBehaviour
                 inMenu = false;
                 introManager = FindAnyObjectByType<IntroManager>();
 
+                AudioManager.audioManager.EndMusic();
                 RuntimeManager.PlayOneShot(musicIntro);
 
                 break;

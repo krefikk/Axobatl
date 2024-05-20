@@ -1338,6 +1338,13 @@ MonoBehaviour:
       Data3: -1042563393
       Data4: -1126922626
     Path: event:/Revolver
+  audioShotgun:
+    Guid:
+      Data1: -1554734989
+      Data2: 1098405426
+      Data3: 735969180
+      Data4: 859005842
+    Path: event:/Shotgun
   audioPlayerDeath:
     Guid:
       Data1: 946575839
@@ -1345,6 +1352,13 @@ MonoBehaviour:
       Data3: 1144118719
       Data4: -246550537
     Path: event:/Player Death
+  audioPlayerDamage:
+    Guid:
+      Data1: 490202882
+      Data2: 1167076187
+      Data3: 2036856975
+      Data4: -2064593694
+    Path: event:/Player Hit
 --- !u!50 &1001629143
 Rigidbody2D:
   serializedVersion: 4
@@ -2116,13 +2130,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamePaussed: 0
-  musicMain:
-    Guid:
-      Data1: -1731564525
-      Data2: 1251230249
-      Data3: 1994149517
-      Data4: -1056471929
-    Path: event:/Music Main
 --- !u!4 &1636041250
 Transform:
   m_ObjectHideFlags: 0

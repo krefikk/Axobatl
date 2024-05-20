@@ -5,7 +5,7 @@
 			<value>Handgun</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{95e2ef2e-6ed0-4d16-aa68-3f0efa3b07cb}</destination>
@@ -56,7 +56,7 @@
 			<destination>{e4aae9fa-e0ab-4d66-b539-55d42708da94}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{d172b598-fc8f-4866-ba1b-4dd10ac1e492}</destination>
+			<destination>{70fa222b-9059-464c-a933-89804fcddef5}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{da044c6c-a74c-44a9-80f4-9ce27d73122e}" />
@@ -72,6 +72,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{74c7621d-3aa1-4667-91d8-080795d56065}">
+		<property name="volume">
+			<value>1.5</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{00676236-fd85-4c50-85fb-78f89a9f15fa}</destination>
 		</relationship>
@@ -95,6 +98,9 @@
 	<object class="MixerBusPanner" id="{e4aae9fa-e0ab-4d66-b539-55d42708da94}" />
 	<object class="MixerBusEffectChain" id="{00676236-fd85-4c50-85fb-78f89a9f15fa}">
 		<relationship name="effects">
+			<destination>{ff092ae6-5df0-420f-b5c5-de6d2bebd4d7}</destination>
+			<destination>{1ca94414-de4c-4d03-ba8f-9c46d544401e}</destination>
+			<destination>{a8f8baf3-099c-417c-b582-18ed59bcb454}</destination>
 			<destination>{2ca849ab-5413-4da8-b9e3-8bf031f69027}</destination>
 		</relationship>
 	</object>
@@ -105,5 +111,35 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{81267fdf-98e0-40cc-9d66-dce100d96154}" />
+	<object class="CompressorEffect" id="{ff092ae6-5df0-420f-b5c5-de6d2bebd4d7}">
+		<property name="threshold">
+			<value>-5.5</value>
+		</property>
+		<property name="ratio">
+			<value>26</value>
+		</property>
+		<property name="attackTime">
+			<value>0.600000024</value>
+		</property>
+		<property name="releaseTime">
+			<value>70</value>
+		</property>
+	</object>
+	<object class="ChorusEffect" id="{1ca94414-de4c-4d03-ba8f-9c46d544401e}">
+		<property name="rate">
+			<value>0.340000004</value>
+		</property>
+		<property name="depth">
+			<value>91.5</value>
+		</property>
+		<property name="mix">
+			<value>56</value>
+		</property>
+	</object>
+	<object class="PannerEffect" id="{a8f8baf3-099c-417c-b582-18ed59bcb454}">
+		<property name="overridingOutputFormat">
+			<value>0</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{2ca849ab-5413-4da8-b9e3-8bf031f69027}" />
 </objects>
